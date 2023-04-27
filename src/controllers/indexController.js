@@ -1,5 +1,9 @@
+const db = require('../models/database')
+
 module.exports = {
-    index: (req,res) => {
-        res.send("Hola mundo desde index controller")
+    index: async (req,res) => {
+        //prueba de la bd
+        console.log(await db.index())
+        res.send("Hola mundo desde index controller.")
     }
 }
