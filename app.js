@@ -1,11 +1,12 @@
 //imports
 const express = require('express');
 const path = require('path');
+require("dotenv").config();
 
 
 //inicializacion
 const app = express();
-const port = 3000;
+const port = process.env.PORT;
 
 
 //routers
