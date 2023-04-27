@@ -10,6 +10,7 @@ const port = process.env.PORT;
 
 
 //routers
+const indexRoutes = require('./src/routes/indexRoutes');
 
 
 //indicar a la app lo que debe usar
@@ -23,9 +24,7 @@ app.set('views',path.resolve(__dirname,'./src/views'));
 
 
 //rutas
-app.get('/', (req,res) => {
-    res.send("Hola mundo");
-});
+app.use('/', indexRoutes);
 
 
 
