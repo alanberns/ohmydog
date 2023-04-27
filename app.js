@@ -20,7 +20,7 @@ app.use(express.static('public'));
 
 //view engine
 app.set('views',path.resolve(__dirname,'./src/views'));
-//app.set('view engine', 'pug');
+app.set('view engine', 'pug');
 
 
 //rutas
