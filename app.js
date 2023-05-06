@@ -2,6 +2,7 @@
 const express = require('express');
 const path = require('path');
 require("dotenv").config();
+const errorHandler = require('./src/helpers/handlers/errorHandler');
 
 
 //inicializacion
@@ -27,6 +28,8 @@ app.set('view engine', 'pug');
 app.use('/', indexRoutes);
 
 
+//error handler
+app.use(errorHandler);
 
 app.listen(port, () => {
     console.log(`Escuchando puerto ${port}`)
