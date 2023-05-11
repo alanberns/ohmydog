@@ -43,5 +43,13 @@ module.exports = {
                 }
             }
         })
+    },
+
+    buscarClienteById: async function buscarClienteById(id) {
+        return await prisma.clientes.findUnique({
+            where: {
+                id: id
+            }
+        })
     }
 }

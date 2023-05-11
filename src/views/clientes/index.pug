@@ -36,7 +36,7 @@ div(class="container-fluid")
           td #{cliente.nombre} #{cliente.apellido}
           td #{cliente.email}
           td 
-            a
+            a(href="/clientes/"+cliente.id)
               button(type="button" class="btn btn-info") Ver 
           td 
             a 

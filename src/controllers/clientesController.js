@@ -138,5 +138,28 @@ module.exports = {
             info: "Resultados de la busqueda",
             nombre: nombre,
         })
+    },
+
+    verCliente: async (req,res) => {
+        /*
+        1 obtener id del parametro. validar?
+        2 buscar id en la BBDD
+        3 devolver los datos
+        */
+        // 1
+        var id = req.params.id;
+        var idCliente = parseInt(id);
+        if (isNaN(idCliente)){
+            res.redirect('/clientes');
+        }
+        else{
+            // 3 
+            var cliente = await db.buscarClienteById(idCliente);
+            res.render('clientes/cliente', {
+                title: 'Cliente', 
+                message: 'Perfil del cliente',
+                cliente: cliente
+            });
+        }
     }
 }
