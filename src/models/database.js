@@ -6,8 +6,4 @@ const prisma = new PrismaClient()
 //se le hagan a la bd en total
 
 module.exports = {
-    //prueba de la bd
-    index: async function consulta() {
-        return await prisma.cliente.findMany()        
-    }
 }
