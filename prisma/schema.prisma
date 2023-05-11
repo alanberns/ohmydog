@@ -8,7 +8,22 @@ datasource db {
 }
 
 model clientes {
-  id     Int     @id @default(autoincrement())
-  nombre String
-  apellido String
+  id        Int     @id @default(autoincrement())
+  nombre    String  @db.VarChar(255)
+  apellido  String  @db.VarChar(255)
+  dni       Int     @unique
+  telefono  Int
+  email     String  @unique @db.VarChar(255)
+  password  String  @db.VarChar(255)
+
+}
+
+model perros{
+  id                Int            @id @default(autoincrement())
+  nombre            String         @db.VarChar(255)
+  raza              String         @db.VarChar(255)
+  color             String         @db.VarChar(255)
+  fecha_nacimiento  DateTime       @db.Timestamp(6)
+  observaciones     String         @db.VarChar(255)
+  link_foto         String?        @db.VarChar(255)
 }

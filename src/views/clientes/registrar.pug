@@ -1,0 +1,36 @@
+include ../partials/head.pug
+include ../partials/header.pug
+div(class="container-fluid")
+  //- aca va la pagina hasta footer. inicia con 1 tab
+  h1= message
+
+  br
+  br
+
+  include ../partials/info.pug
+
+  div(class="")
+    form(method="post" action="/clientes/registrar" id="formulario")
+      div(class="mb-3")
+        label(for="email" class="form-label") Email 
+        input(type="email" class="form-control" name="email" id="email" required value=cliente.email) 
+      div(class="mb-3")
+        label(for="nombre" class="form-label") Nombre
+        input(type="text" class="form-control" name="nombre" id="nombre" required value=cliente.nombre)
+      div(class="mb-3")
+        label(for="apellido" class="form-label") Apellido
+        input(type="text" class="form-control" name="apellido" id="apellido" required value=cliente.apellido)
+      div(class="mb-3")
+        label(for="dni" class="form-label") DNI
+        input(type="number" class="form-control" name="dni" id="dni" required value=cliente.dni)
+      div(class="mb-3")
+        label(for="telefono" class="form-label") Teléfono
+        input(type="text" class="form-control" name="telefono" id="telefono" required value=cliente.telefono)
+      input(type="submit" class="btn btn-info" value="Registrar cliente") 
+
+    br
+    a(href="/clientes")
+      button(type="button" class="btn btn-info") Cancelar
+ 
+script(src="/js/validacionRegistroCliente.js")
+include ../partials/footer.pug

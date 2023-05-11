@@ -12,10 +12,16 @@ const port = process.env.PORT;
 
 //routers
 const indexRoutes = require('./src/routes/indexRoutes');
+const clientesRoutes = require('./src/routes/clientesRoutes');
 
 
 //indicar a la app lo que debe usar
 app.use(express.static('public'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+app.use('/ajax', express.static(__dirname + '/node_modules/ajax/lib/'));
+app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist/'));
 
 
 
@@ -26,6 +32,7 @@ app.set('view engine', 'pug');
 
 //rutas
 app.use('/', indexRoutes);
+app.use('/clientes',clientesRoutes);
 
 
 //error handler
