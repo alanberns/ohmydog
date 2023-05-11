@@ -9,7 +9,15 @@ module.exports = {
         2 pasar la variable clientes a la vista
         3 chequear permiso de admin para acceder a la ruta(clientesRouter)
         */
-        res.render('clientes/index', { title: 'Clientes', message: 'Inicio clientes' });
+        
+        var clientes = await db.buscarCliente("");
+        if (clientes.length === 0){
+            clientes = null;
+        }
+        res.render('clientes/index', { 
+            title: 'Clientes',
+            message: 'Inicio clientes',
+            clientes: clientes });
     },
 
     registrarGet: async (req,res) => {
@@ -96,5 +104,39 @@ module.exports = {
             res.redirect('/clientes');
             }
         }
+    },
+
+    busqueda: async (req,res) => {
+        /*
+        1 validar busqueda
+        2 hacer busqueda
+        3 enviar busqueda a template
+        */
+        //1 validaciones.validarBusquedaNombre(nombre); enviar error si no valida
+        var nombre = req.body.nombre;
+        var result = validaciones.validarBusquedaCliente(nombre);
+        if (result != "válido"){
+            res.render('clientes/index', {
+                title: 'Clientes', 
+                message: 'Inicio clientes',
+                clientes: null,
+                error: result
+            })
+        }
+        console.log(nombre);
+        //2 buscar en la bd
+        var clientes = await db.buscarCliente(nombre);
+        if (clientes.length === 0){
+            clientes = null;
+        }
+        console.log(clientes);
+        //3 render basico
+        res.render('clientes/index', {
+            title: 'Clientes', 
+            message: 'Inicio clientes',
+            clientes: clientes,
+            info: "Resultados de la busqueda",
+            nombre: nombre,
+        })
     }
 }

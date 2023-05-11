@@ -32,5 +32,16 @@ module.exports = {
             }
         })
         return result != null;
+    },
+
+    buscarCliente: async function buscarCliente(nombre) {
+        return await prisma.clientes.findMany({
+            where: {
+                nombre: {
+                    contains: nombre,
+                    mode: 'insensitive'
+                }
+            }
+        })
     }
 }

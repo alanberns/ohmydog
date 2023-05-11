@@ -14,5 +14,15 @@ module.exports = {
         else if(!regexTelefono.test(cliente.telefono)) validez = "Ingrese un telefono válido";
 
         return validez;
+    },
+
+    validarBusquedaCliente: function(nombre){
+        //expresion regular
+        var regexNombre = /^[a-zA-Z ]{1,50}$/;
+
+        var validez = "válido";
+        if(!regexNombre.test(nombre)) validez = "Ingrese un nombre válido.";
+
+        return validez;
     }
 }
