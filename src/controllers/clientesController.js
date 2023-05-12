@@ -52,7 +52,7 @@ module.exports = {
             email: req.body.email,
             nombre: req.body.nombre,
             apellido: req.body.apellido,
-            telefono: parseInt(req.body.telefono),
+            telefono: req.body.telefono,
             dni: parseInt(req.body.dni),
             password: ""
         }
@@ -101,7 +101,11 @@ module.exports = {
             db.agregarCliente(newCliente);
             // 6 enviar contraseña al mail del cliente
             // mailer.sendMail('newCliente.email','titulo',"cuerpo del mensaje + newCliente.password");
-            res.redirect('/clientes');
+            res.render('exito', {
+                title: "Éxito",
+                message: "Éxito",
+                info: "El cliente se registró con éxito"
+            });
             }
         }
     },

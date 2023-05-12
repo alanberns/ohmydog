@@ -13,6 +13,7 @@ const port = process.env.PORT;
 //routers
 const indexRoutes = require('./src/routes/indexRoutes');
 const clientesRoutes = require('./src/routes/clientesRoutes');
+const perrosRoutes = require('./src/routes/perrosRoutes');
 
 
 //indicar a la app lo que debe usar
@@ -33,6 +34,7 @@ app.set('view engine', 'pug');
 //rutas
 app.use('/', indexRoutes);
 app.use('/clientes',clientesRoutes);
+app.use('/perros',perrosRoutes);
 
 
 //error handler

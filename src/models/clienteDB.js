@@ -48,7 +48,7 @@ module.exports = {
     buscarClienteById: async function buscarClienteById(id) {
         return await prisma.clientes.findUnique({
             where: {
-                id: id
+                id: parseInt(id)
             }
         })
     }

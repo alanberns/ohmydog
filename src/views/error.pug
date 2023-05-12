@@ -1,9 +1,10 @@
-include partials/head.pug 
+include partials/head.pug
 
 div(class="container-fluid")
   h1=error.status
   h2=error.name
   h3=error.message
-  p Volver al inicio
+  a(href="/")
+    button(type="button" class="btn btn-info") Volver al inicio
 
 include partials/footer.pug
