@@ -10,7 +10,7 @@ module.exports = {
         3 chequear permiso de admin para acceder a la ruta(clientesRouter)
         */
         
-        var clientes = await db.buscarCliente("");
+        var clientes = await db.listarClientes();
         if (clientes.length === 0){
             clientes = null;
         }

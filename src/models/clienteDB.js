@@ -17,9 +17,12 @@ module.exports = {
     },
 
     existeEmail: async function existeEmail(email) {
-        var result = await prisma.clientes.findUnique({
+        var result = await prisma.clientes.findMany({
             where: {
-                email: email
+                email: {
+                    equals: email,
+                    mode: 'insensitive'
+                }
             }
         })
         return result != null;
@@ -43,6 +46,10 @@ module.exports = {
                 }
             }
         })
+    },
+
+    listarClientes: async function listarClientes(){
+        return await prisma.clientes.findMany()
     },
 
     buscarClienteById: async function buscarClienteById(id) {
