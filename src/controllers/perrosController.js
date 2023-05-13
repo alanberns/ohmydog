@@ -7,8 +7,15 @@ module.exports = {
         /*
         1 listar perros
         */
-
-        res.send('perros');
+        var perros = await db.listarPerros();
+        if(perros.length === 0){
+            perros = null
+        }
+        res.render('perros/index', {
+            title: "Mascotas",
+            message: "Mascotas",
+            perros: perros
+        });
     },
 
     registrarGet: async (req,res) => {
@@ -93,6 +100,40 @@ module.exports = {
                 info: "La mascota se registró con éxito"
             });
             }
+        }
+    },
+
+    busqueda: async (req,res) => {
+        /*
+        1 validar busqueda
+        2 hacer busqueda
+        3 enviar busqueda a template
+        */
+        //1 validaciones.validarBusquedaNombre(nombre); enviar error si no valida
+        var nombre = req.body.nombre;
+        var result = validaciones.validarBusquedaPerro(nombre);
+        if (result != "válido"){
+            res.render('perros/index', {
+                title: "Mascotas",
+                message: "Mascotas",
+                perros: null,
+                error: result
+            })
+        }
+        else{
+            //2 buscar en la bd
+            var perros = await db.buscarPerro(nombre);
+            if (perros.length === 0){
+                perros = null;
+            }
+            //3 render basico
+            res.render('perros/index', {
+                title: 'Mascotas', 
+                message: 'Mascotas',
+                perros: perros,
+                info: "Resultados de la busqueda",
+                nombre: nombre,
+            });
         }
     }
 }

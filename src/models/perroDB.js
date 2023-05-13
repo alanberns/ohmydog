@@ -32,5 +32,27 @@ module.exports = {
             },
         })
         return (! result.length == 0);
-    }    
+    },
+    
+    buscarPerro: async function buscarPerro(nombre) {
+        return await prisma.perros.findMany({
+            where: {
+                nombre: {
+                    contains: nombre,
+                    mode: 'insensitive'
+                }
+            },
+            include: {
+                cliente: true
+            }
+        })
+    },
+
+    listarPerros: async function listarPerros(){
+        return await prisma.perros.findMany({
+            include: {
+                cliente: true
+            }
+        });
+    }
 }

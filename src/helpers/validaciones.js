@@ -55,5 +55,15 @@ module.exports = {
         else if(hoy < perro.fecha_nacimiento) validez = "No puede ingresar fechas futuras.";  
 
         return validez;
-    }
+    },
+
+    validarBusquedaPerro: function(nombre){
+        //expresion regular
+        var regexNombre = /^[a-zA-Z ]{1,50}$/;
+
+        var validez = "válido";
+        if(!regexNombre.test(nombre)) validez = "Ingrese un nombre válido.";
+
+        return validez;
+    },
 }

@@ -9,7 +9,7 @@ div(class="container-fluid")
 
   include ../partials/info.pug
 
-  a(href="/perro/registrar")
+  a(href="/clientes")
     button(type="button" class="btn btn-info") Nuevo perro
 
   br
@@ -34,9 +34,9 @@ div(class="container-fluid")
       each perro in perros
         tr  
           td #{perro.nombre}
-          td #{cliente.email}
+          td #{perro.cliente.email}
           td 
-            a(href="/clientes/"+perro.id)
+            a(href="/perros/"+perro.id)
               button(type="button" class="btn btn-info") Ver 
           td 
             a 
@@ -48,4 +48,5 @@ div(class="container-fluid")
         td 
         td
 
+script(src="/js/validacionBusquedaPerro.js") 
 include ../partials/footer.pug
