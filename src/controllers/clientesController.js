@@ -1,4 +1,5 @@
-const db = require('../models/clienteDB')
+const db = require('../models/clienteDB');
+const db_perros = require('../models/perroDB');
 const validaciones = require('../helpers/validaciones');
 const mailer = require('../../mail');
 
@@ -164,6 +165,38 @@ module.exports = {
                 message: 'Perfil del cliente',
                 cliente: cliente
             });
+        }
+    },
+
+    mascotas: async (req,res) => {
+        /*
+        1 obtener la lista de mascotas del cliente
+        */
+        var id = req.params.id;
+        var idCliente = parseInt(id);
+        if (isNaN(idCliente)){
+            res.redirect('/clientes');
+        }
+        else{
+            var clienteInfo = await db_perros.mascotasCliente(idCliente);
+            var mascotas = clienteInfo.perros;
+            if (mascotas.length < 1){
+                res.render('clientes/mascotas', {
+                    title: 'Mascotas',
+                    message: 'Mascotas de '+ clienteInfo.nombre,
+                    mascotas: null,
+                    error: "No se encontraron mascotas ",
+                    idCliente:idCliente
+                });
+            }
+            else{
+                res.render('clientes/mascotas', {
+                    title: 'Mascotas',
+                    message: 'Mascotas de '+ clienteInfo.nombre,
+                    mascotas: mascotas,
+                    idCliente:idCliente
+                });
+            }
         }
     }
 }

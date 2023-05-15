@@ -54,5 +54,16 @@ module.exports = {
                 cliente: true
             }
         });
+    },
+
+    mascotasCliente: async function mascotasCliente(id_cliente){
+        return await prisma.clientes.findUnique({
+            where:{
+                id: parseInt(id_cliente),
+            },
+            include: {
+                perros: true
+            }
+        })
     }
 }

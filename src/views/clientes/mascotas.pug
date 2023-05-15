@@ -1,0 +1,48 @@
+include ../partials/head.pug
+include ../partials/header.pug
+div(class="container-fluid")
+  //- aca va la pagina hasta footer. inicia con 1 tab
+  h1= message
+
+  br
+  br
+
+  include ../partials/info.pug
+  br
+  br
+
+  if(mascotas)
+    each mascota in mascotas
+
+      div(="text-center")
+        div(class="card" style="width: 18rem;")
+          if(mascota.link_foto)
+            img(src="..." class="card-img-top" alt="...")
+            div(class="card-body")
+                h5(class="card-title") #{mascota.nombre}
+                p(class="card-text") Raza:  #{mascota.raza} 
+                p(class="card-text") Color:  #{mascota.color}
+                p(class="card-text") Observaciones: #{mascota.observaciones}
+                a(src="/perros/"+mascota.id)
+                  button(type="button" class="btn btn-info") Ver detalles
+            
+          else
+            div(class="card-body")
+                h5(class="card-title") #{mascota.nombre}
+                p(class="card-text") Raza:  #{mascota.raza} 
+                p(class="card-text") Color:  #{mascota.color}
+                p(class="card-text") Observaciones: #{mascota.observaciones}
+                a(href="/perros/"+mascota.id)
+                  button(type="button" class="btn btn-info") Ver detalles
+      br
+
+  
+  a(href="/clientes/"+idCliente)
+    button(type="button" class="btn btn-info") Volver
+  
+
+  br
+
+
+
+include ../partials/footer.pug
