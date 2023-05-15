@@ -12,7 +12,7 @@ module.exports = {
                 fecha_nacimiento: perro.fecha_nacimiento,
                 observaciones: perro.observaciones,
                 link_foto: perro.link_foto,
-                cliente: { connect: { id: parseInt(perro.id_cliente) } },
+                cliente: { connect: { id: parseInt(perro.clienteId) } },
             }
         })
     },
@@ -20,7 +20,7 @@ module.exports = {
     existePerroDeCliente: async function existePerroDeCliente(perro){
         var result = await prisma.clientes.findMany({
             where: {
-                id: parseInt(perro.id_cliente),
+                id: parseInt(perro.clienteId),
                 perros:{
                     some:{
                         nombre: {
@@ -56,10 +56,10 @@ module.exports = {
         });
     },
 
-    mascotasCliente: async function mascotasCliente(id_cliente){
+    mascotasCliente: async function mascotasCliente(clienteId){
         return await prisma.clientes.findUnique({
             where:{
-                id: parseInt(id_cliente),
+                id: parseInt(clienteId),
             },
             include: {
                 perros: true
@@ -67,10 +67,25 @@ module.exports = {
         })
     },
 
-    buscarPerroById: async function buscarPerroById(idPerro) {
+    buscarPerroById: async function buscarPerroById(perroId) {
         return await prisma.perros.findUnique({
             where: {
-                id:idPerro
+                id: parseInt(perroId)
+            }
+        })
+    },
+
+    modificarPerro: async function modificarPerro(perro) {
+        return await prisma.perros.update({
+            where:{
+                id: parseInt(perro.id)
+            },
+            data: {
+                nombre: perro.nombre,
+                raza: perro.raza,
+                color: perro.color,
+                observaciones: perro.observaciones,
+                fecha_nacimiento: perro.fecha_nacimiento
             }
         })
     }

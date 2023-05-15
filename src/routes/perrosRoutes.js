@@ -10,5 +10,7 @@ router.get('/registrar/:id',perrosController.registrarGet);
 router.post('/registrar',perrosController.registrarPost);
 router.post('/',perrosController.busqueda);
 router.get('/:id',perrosController.verPerro);
+router.get('/:id/modificar',perrosController.modificarPerroGet);
+router.post('/:id/modificar',perrosController.modificarPerroPost);
 
 module.exports = router;

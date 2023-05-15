@@ -29,9 +29,9 @@ module.exports = {
             observaciones: "",
             color: "",
             fecha_nacimiento: null,
-            id_cliente: parseInt(req.params.id)
+            clienteId: req.params.id
         }
-        var cliente = await db_clientes.buscarClienteById(perro.id_cliente);
+        var cliente = await db_clientes.buscarClienteById(perro.clienteId);
         res.render('perros/registrar', {
             title: 'Registrar perro',
             message: 'Registrar perro',
@@ -49,7 +49,7 @@ module.exports = {
         y enviar el error.
         */
        
-        var cliente = await db_clientes.buscarClienteById(req.body.id_cliente);
+        var cliente = await db_clientes.buscarClienteById(req.body.clienteId);
         var newPerro = {
             nombre: req.body.nombre,
             raza: req.body.raza,
@@ -57,7 +57,7 @@ module.exports = {
             color: req.body.color,
             fecha_nacimiento: req.body.fecha_nacimiento,
             link_foto: "",
-            id_cliente: req.body.id_cliente
+            clienteId: req.body.clienteId
         }
         
 
@@ -83,7 +83,7 @@ module.exports = {
                     title: 'Registrar perros',
                     message: 'Registrar perros',
                     perro: newPerro,
-                    error: "El cliente ya tiene un perro registrado con ese nombre",
+                    error: "El cliente ya tiene un perro registrado con el nombre ingresado",
                     cliente: cliente
                 });
             }
@@ -147,12 +147,85 @@ module.exports = {
             res.redirect('/clientes');
         }
         else{
-            var perro = await db.buscarPerroById(idPerro);
+            var perro = await db.buscarPerroById(id);
             res.render('perros/perro', {
                 title: 'Mascota', 
                 message: 'Datos de la mascota',
                 perro: perro
             });
         }
-    }
+    },
+
+    modificarPerroGet: async(req,res) => {
+        /*
+        1 obtener datos del perro y enviar a la vista
+        */
+        var perroId = req.params.id;
+        var perro = await db.buscarPerroById(perroId);
+        perro.fecha_nacimiento = perro.fecha_nacimiento.toISOString().slice(0,10);
+        res.render('perros/modificarPerro', {
+            title: "Modificar mascota",
+            message: "Modificar mascota",
+            perro: perro
+        })
+    },
+
+    modificarPerroPost: async(req,res) => {
+        /*
+        1 obtener cuerpo post
+        2 si el nombre fue modificado, no puede repetirse con otro
+        perro del mismo dueño
+        3 modificar los datos del perro
+        */
+        var perroMod = {
+            id: req.body.id,
+            nombre: req.body.nombre,
+            raza: req.body.raza,
+            color: req.body.color,
+            observaciones: req.body.observaciones,
+            fecha_nacimiento: req.body.fecha_nacimiento,
+            clienteId: req.body.clienteId
+        }
+
+        // 2 helpers.validaciones.js 
+        var result = validaciones.validarNuevoPerro(perroMod);
+        if (result != "valido"){
+            
+            //validacion fallida
+            // 4 volver a registro con los datos ingresados
+            res.render('perros/modificarPerro', {
+                title: "Modificar mascota",
+                message: "Modificar mascota",
+                perro: perroMod,
+                error: result,
+            });
+        }
+        else {
+            var perroAModificar = await db.buscarPerroById(perroMod.id);
+            console.log(perroMod.nombre +"   "+perroAModificar.nombre)
+            //Validacion exitosa. Comprobar que si se modifico el nombre, no se haya elegido uno en uso para el mismo cliente
+            if( perroMod.nombre != perroAModificar.nombre){
+                if (await db.existePerroDeCliente(perroMod)){
+                    res.render('perros/modificarPerro', {
+                        title: "Modificar mascota",
+                        message: "Modificar mascota",
+                        perro: perroMod,
+                        error: "El cliente ya tiene un perro registrado con el nombre ingresado",
+                    });
+                }
+            }
+            else{
+            // no modifico el nombre o el nuevo nombre estaba disponible
+            // 3 dar el alta en la BBDD
+            perroMod.fecha_nacimiento = new Date(req.body.fecha_nacimiento);
+            await db.modificarPerro(perroMod);
+            
+            res.render('exito', {
+                title: "Éxito",
+                message: "Éxito",
+                info: "Los datos de la mascota se modificaron exitosamente"
+            });
+            }
+        }
+    },
 }

@@ -10,16 +10,7 @@ div(class="container-fluid")
   include ../partials/info.pug
 
   div(class="")
-    form(method="post" action="/perros/registrar" id="formulario")
-      div(class="mb-3")
-        label(for="clienteNombre" class="form-label") Nombre del dueño
-        input(type="text" class="form-control" name="clienteNombre" id="clienteNombre", value=cliente.nombre readonly)
-      div(class="mb-3")
-        label(for="clienteApellido" class="form-label") Apellido del dueño
-        input(type="text" class="form-control" name="clienteApellido" id="clienteApellido", value=cliente.apellido readonly)
-      div(class="mb-3")
-        label(for="clienteEmail" class="form-label") Email del dueño
-        input(type="text" class="form-control" name="clienteEmail" id="clienteEmail", value=cliente.email readonly)
+    form(method="post" action="/perros/"+perro.id+"/modificar" id="formulario")
       div(class="mb-3")
         label(for="nombre" class="form-label") Nombre
         input(type="text" class="form-control" name="nombre" id="nombre" required value=perro.nombre)
@@ -38,11 +29,17 @@ div(class="container-fluid")
       div(class="mb-3")
         label(for="clienteId" class="form-label") 
         input(type="hidden" class="form-control" name="clienteId" id="clienteId", value=perro.clienteId)
-      input(type="submit" class="btn btn-info" value="Registrar perro") 
+      div(class="mb-3")
+        label(for="id" class="form-label") 
+        input(type="hidden" class="form-control" name="id" id="id", value=perro.id)
+      input(type="submit" class="btn btn-info" value="Modificar") 
 
+    
     br
-    a(href="/clientes")
-      button(type="button" class="btn btn-info") Cancelar
+    div(class="container-fluid")
+      a(href="/perros")
+        button(type="button" class="btn btn-info") Cancelar 
 
-script(src="/js/validacionRegistroPerro.js") 
+
+
 include ../partials/footer.pug
