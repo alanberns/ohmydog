@@ -135,5 +135,24 @@ module.exports = {
                 nombre: nombre,
             });
         }
+    },
+
+    verPerro: async (req,res) => {
+        /*
+        1 Obtener id y validar
+        */
+        var id = req.params.id;
+        var idPerro = parseInt(id);
+        if (isNaN(idPerro)){
+            res.redirect('/clientes');
+        }
+        else{
+            var perro = await db.buscarPerroById(idPerro);
+            res.render('perros/perro', {
+                title: 'Mascota', 
+                message: 'Datos de la mascota',
+                perro: perro
+            });
+        }
     }
 }

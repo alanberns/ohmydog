@@ -65,5 +65,13 @@ module.exports = {
                 perros: true
             }
         })
+    },
+
+    buscarPerroById: async function buscarPerroById(idPerro) {
+        return await prisma.perros.findUnique({
+            where: {
+                id:idPerro
+            }
+        })
     }
 }
