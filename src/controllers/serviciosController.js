@@ -15,6 +15,12 @@ module.exports = {
         else{
             var info = null;
         }
+        if(req.query.e){
+            var error = "ID inválida";
+        }
+        else{
+            var error = null;
+        }
         var servicios = await db.listarServicios();
         if (servicios.length === 0){
             servicios = null;
@@ -23,7 +29,8 @@ module.exports = {
             title: "Servicios",
             message: "Servicios",
             servicios: servicios,
-            info: info
+            info: info,
+            error:error
         });
     },
 
@@ -92,7 +99,40 @@ module.exports = {
                 db.agregarServicio(newServicio);
                 res.redirect('/servicios?i=u');
             };
-        }
-        
+        }  
     },
+
+    verServicio: async (req,res,next) => {
+        /*
+        1 obtener id del parametro. validar?
+        2 buscar id en la BBDD
+        3 devolver los datos
+        */
+        // 1
+        var id = req.params.id;
+        var idServicio = parseInt(id);
+        if (isNaN(idServicio)){
+            res.redirect('/servicios?e=u');
+        }
+        else{
+            // 2 validar que existe el servicio
+            var servicio = await db.buscarServicioById(idServicio);
+            if (servicio == null){
+                try{
+                    throw new NotFoundError();
+                }
+                catch(err){
+                    next(err);
+                }
+            }
+            // 3
+            else{
+                res.render('servicios/servicio',{
+                    title: "Servicio",
+                    message: "Información del servicio",
+                    servicio: servicio
+                })
+            }
+        } 
+    }
 }

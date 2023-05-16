@@ -7,5 +7,6 @@ router = express.Router();
 router.get('/', serviciosController.index);
 router.get('/nuevo',serviciosController.registrarServGet);
 router.post('/nuevo',serviciosController.registrarServPost);
+router.get('/:id',serviciosController.verServicio);
 
 module.exports = router;

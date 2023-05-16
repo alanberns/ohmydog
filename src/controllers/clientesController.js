@@ -167,7 +167,7 @@ module.exports = {
             res.redirect('/clientes?e=u');
         }
         else{
-            // 3 
+            // 2 validar que existe el cliente
             var cliente = await db.buscarClienteById(idCliente);
             if (cliente == null){
                 try{
@@ -177,6 +177,7 @@ module.exports = {
                     next(err);
                 }
             }
+            // 3
             else{
                 res.render('clientes/cliente', {
                     title: 'Cliente', 

@@ -1,0 +1,40 @@
+include ../partials/head.pug
+include ../partials/header.pug
+div(class="container-fluid")
+  //- aca va la pagina hasta footer. inicia con 1 tab
+  h1= message
+
+  br
+  br
+
+  include ../partials/info.pug
+
+  div(class="")
+    form(action="#")
+      div(class="mb-3")
+        label(for="servicio" class="form-label") Servicio 
+        input(type="text" class="form-control" name="servicio" id="servicio" required readonly value=servicio.servicio) 
+      div(class="mb-3")
+        label(for="nombre" class="form-label") Nombre
+        input(type="text" class="form-control" name="nombre" id="nombre" required readonly value=servicio.nombre)
+      div(class="mb-3")
+        label(for="apellido" class="form-label") Apellido
+        input(type="text" class="form-control" name="apellido" id="apellido" required readonly value=servicio.apellido)
+      div(class="mb-3")
+        label(for="zona" class="form-label") Zona
+        input(type="text" class="form-control" name="zona" id="zona" required readonly value=servicio.zona)
+      div(class="mb-3")
+        label(for="horario" class="form-label") Horario
+        input(type="text" class="form-control" name="horario" id="horario" required readonly value=servicio.horario)
+
+    br
+    div(class="container-fluid")
+      a(href="/servicios")
+        button(type="button" class="btn btn-info") Atrás 
+      span 
+      a(href="#")
+        button(type="button" class="btn btn-info") Contactar servicio 
+
+
+
+include ../partials/footer.pug

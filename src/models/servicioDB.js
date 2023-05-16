@@ -45,5 +45,13 @@ module.exports = {
                 estado: "Publicado"
             }
         })
-    }
+    },
+
+    buscarServicioById: async function buscarServicioById(servicioId) {
+        return await prisma.publicacion_servicios.findUnique({
+            where: {
+                id: parseInt(servicioId)
+            }
+        })
+    },
 }
