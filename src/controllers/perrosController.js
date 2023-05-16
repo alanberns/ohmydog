@@ -1,12 +1,21 @@
 const db = require('../models/perroDB');
 const db_clientes = require('../models/clienteDB');
 const validaciones = require('../helpers/validaciones');
+const NotFoundError = require('../helpers/errors/NotFoundError');
+
+
 
 module.exports = {
-    index: async (req,res) => {
+    index: async (req,res,next) => {
         /*
         1 listar perros
         */
+        if (req.query.e){
+            var error = "ID inválida"
+        }
+        else{
+            var error = null
+        }
         var perros = await db.listarPerros();
         if(perros.length === 0){
             perros = null
@@ -14,7 +23,8 @@ module.exports = {
         res.render('perros/index', {
             title: "Mascotas",
             message: "Mascotas",
-            perros: perros
+            perros: perros,
+            error: error
         });
     },
 
@@ -137,37 +147,65 @@ module.exports = {
         }
     },
 
-    verPerro: async (req,res) => {
+    verPerro: async (req,res,next) => {
         /*
         1 Obtener id y validar
         */
         var id = req.params.id;
         var idPerro = parseInt(id);
         if (isNaN(idPerro)){
-            res.redirect('/clientes');
+            res.redirect('/perros?e=u');
         }
         else{
+            // verificar que el id esta registrado en la bd
             var perro = await db.buscarPerroById(id);
-            res.render('perros/perro', {
-                title: 'Mascota', 
-                message: 'Datos de la mascota',
-                perro: perro
-            });
+            if (perro == null){
+                try{
+                    throw new NotFoundError();
+                }
+                catch(err){
+                    next(err);
+                }
+            }
+            else{
+                res.render('perros/perro', {
+                    title: 'Mascota', 
+                    message: 'Datos de la mascota',
+                    perro: perro
+                });
+            }
         }
     },
 
-    modificarPerroGet: async(req,res) => {
+    modificarPerroGet: async(req,res,next) => {
         /*
         1 obtener datos del perro y enviar a la vista
         */
-        var perroId = req.params.id;
-        var perro = await db.buscarPerroById(perroId);
-        perro.fecha_nacimiento = perro.fecha_nacimiento.toISOString().slice(0,10);
-        res.render('perros/modificarPerro', {
-            title: "Modificar mascota",
-            message: "Modificar mascota",
-            perro: perro
-        })
+        var id = req.params.id;
+        var idPerro = parseInt(id);
+        if (isNaN(idPerro)){
+            res.redirect('/perros?e=u');
+        }
+        else{
+            // verificar que el id esta registrado en la bd
+            var perro = await db.buscarPerroById(id);
+            if (perro == null){
+                try{
+                    throw new NotFoundError();
+                }
+                catch(err){
+                    next(err);
+                }
+            }
+            else{
+                perro.fecha_nacimiento = perro.fecha_nacimiento.toISOString().slice(0,10);
+                res.render('perros/modificarPerro', {
+                    title: "Modificar mascota",
+                    message: "Modificar mascota",
+                    perro: perro
+                })
+            }
+        }
     },
 
     modificarPerroPost: async(req,res) => {

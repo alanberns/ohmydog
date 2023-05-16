@@ -3,7 +3,6 @@ const express = require('express');
 const path = require('path');
 require("dotenv").config();
 const errorHandler = require('./src/helpers/handlers/errorHandler');
-const NotFoundError = require('./src/helpers/errors/NotFoundError');
 
 
 //inicializacion
@@ -38,10 +37,6 @@ app.use('/clientes',clientesRoutes);
 app.use('/perros',perrosRoutes);
 
 
-app.use(function(req, res, next) {
-  throw new NotFoundError();
-  // respond with html page
-});
 
 //error handler
 app.use(errorHandler);

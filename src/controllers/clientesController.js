@@ -2,6 +2,8 @@ const db = require('../models/clienteDB');
 const db_perros = require('../models/perroDB');
 const validaciones = require('../helpers/validaciones');
 const mailer = require('../../mail');
+const NotFoundError = require('../helpers/errors/NotFoundError');
+
 
 module.exports = {
     index: async (req,res) => {
@@ -10,7 +12,12 @@ module.exports = {
         2 pasar la variable clientes a la vista
         3 chequear permiso de admin para acceder a la ruta(clientesRouter)
         */
-        
+        if(req.query.e){
+            var error = "ID inválida";
+        }
+        else{
+            var error = null;
+        }
         var clientes = await db.listarClientes();
         if (clientes.length === 0){
             clientes = null;
@@ -18,7 +25,9 @@ module.exports = {
         res.render('clientes/index', { 
             title: 'Clientes',
             message: 'Inicio clientes',
-            clientes: clientes });
+            clientes: clientes,
+            error: error
+         });
     },
 
     registrarGet: async (req,res) => {
@@ -145,7 +154,7 @@ module.exports = {
         })
     },
 
-    verCliente: async (req,res) => {
+    verCliente: async (req,res,next) => {
         /*
         1 obtener id del parametro. validar?
         2 buscar id en la BBDD
@@ -155,47 +164,67 @@ module.exports = {
         var id = req.params.id;
         var idCliente = parseInt(id);
         if (isNaN(idCliente)){
-            res.redirect('/clientes');
+            res.redirect('/clientes?e=u');
         }
         else{
             // 3 
             var cliente = await db.buscarClienteById(idCliente);
-            res.render('clientes/cliente', {
-                title: 'Cliente', 
-                message: 'Perfil del cliente',
-                cliente: cliente
-            });
+            if (cliente == null){
+                try{
+                    throw new NotFoundError();
+                }
+                catch(err){
+                    next(err);
+                }
+            }
+            else{
+                res.render('clientes/cliente', {
+                    title: 'Cliente', 
+                    message: 'Perfil del cliente',
+                    cliente: cliente
+                });
+            }
         }
     },
 
-    mascotas: async (req,res) => {
+    mascotas: async (req,res,next) => {
         /*
         1 obtener la lista de mascotas del cliente
         */
         var id = req.params.id;
         var idCliente = parseInt(id);
         if (isNaN(idCliente)){
-            res.redirect('/clientes');
+            res.redirect('/clientes?e=u');
         }
         else{
             var clienteInfo = await db_perros.mascotasCliente(idCliente);
-            var mascotas = clienteInfo.perros;
-            if (mascotas.length < 1){
-                res.render('clientes/mascotas', {
-                    title: 'Mascotas',
-                    message: 'Mascotas de '+ clienteInfo.nombre,
-                    mascotas: null,
-                    error: "No se encontraron mascotas ",
-                    idCliente:idCliente
-                });
+            if (clienteInfo == null){
+                try{
+                    throw new NotFoundError();
+                }
+                catch(err){
+                    next(err);
+                }
             }
             else{
-                res.render('clientes/mascotas', {
-                    title: 'Mascotas',
-                    message: 'Mascotas de '+ clienteInfo.nombre,
-                    mascotas: mascotas,
-                    idCliente:idCliente
-                });
+                var mascotas = clienteInfo.perros;
+                if (mascotas.length < 1){
+                    res.render('clientes/mascotas', {
+                        title: 'Mascotas',
+                        message: 'Mascotas de '+ clienteInfo.nombre,
+                        mascotas: null,
+                        error: "No se encontraron mascotas ",
+                        idCliente:idCliente
+                    });
+                }
+                else{
+                    res.render('clientes/mascotas', {
+                        title: 'Mascotas',
+                        message: 'Mascotas de '+ clienteInfo.nombre,
+                        mascotas: mascotas,
+                        idCliente:idCliente
+                    });
+                }
             }
         }
     }
