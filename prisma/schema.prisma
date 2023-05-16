@@ -29,3 +29,14 @@ model perros{
   clienteId         Int?
   cliente           clientes?      @relation(fields: [clienteId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
+
+model publicacion_servicios{
+  id              Int       @id @default(autoincrement())
+  servicio        String    @db.VarChar(255)
+  nombre          String    @db.VarChar(255)
+  apellido        String    @db.VarChar(255)
+  zona            String    @db.VarChar(255)
+  horario         String    @db.VarChar(255)
+  email_contacto  String    @db.VarChar(255)
+  estado          String    @db.VarChar(255)
+}

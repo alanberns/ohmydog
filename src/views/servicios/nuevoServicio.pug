@@ -1,0 +1,39 @@
+include ../partials/head.pug
+include ../partials/header.pug
+div(class="container-fluid")
+  //- aca va la pagina hasta footer. inicia con 1 tab
+  h1= message
+
+  br
+  br
+
+  include ../partials/info.pug
+
+  div(class="")
+    form(method="post" action="/servicios/nuevo" id="formulario")
+      div(class="mb-3")
+        label(for="servicio" class="form-label") Servicio a ofrecer
+        input(type="text" class="form-control" name="servicio" id="servicio" required value=servicio.servicio)
+      div(class="mb-3")
+        label(for="nombre" class="form-label") Nombre
+        input(type="text" class="form-control" name="nombre" id="nombre" required value=servicio.nombre)
+      div(class="mb-3")
+        label(for="apellido" class="form-label") Apellido
+        input(type="text" class="form-control" name="apellido" id="apellido" required value=servicio.apellido)
+      div(class="mb-3")
+        label(for="zona" class="form-label") Zona
+        input(type="text" class="form-control" name="zona" id="zona" required value=servicio.zona)
+      div(class="mb-3")
+        label(for="horario" class="form-label") Horario
+        input(type="text" class="form-control" name="horario" id="horario" required value=servicio.horario)
+      div(class="mb-3")
+        label(for="email_contacto" class="form-label") Email
+        input(type="text" class="form-control" name="email_contacto" id="email_contacto", value=servicio.email_contacto)
+      input(type="submit" class="btn btn-info" value="Solicitar") 
+
+    br
+    a(href="/servicios")
+      button(type="button" class="btn btn-info") Cancelar
+
+script(src="/js/validacionNuevoServicio.js") 
+include ../partials/footer.pug
