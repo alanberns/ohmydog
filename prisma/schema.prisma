@@ -7,8 +7,44 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model administradores {
+  id        Int       @id @default(autoincrement())
+  nombre    String    @db.VarChar(255)
+  apellido  String    @db.VarChar(255)
+  email     String    @unique @db.VarChar(255)
+  password  String    @db.VarChar(255)
+}
+
 model clientes {
-  id     Int     @id @default(autoincrement())
-  nombre String
-  apellido String
+  id        Int       @id @default(autoincrement())
+  nombre    String    @db.VarChar(255)
+  apellido  String    @db.VarChar(255)
+  dni       Int       @unique
+  telefono  String    @db.VarChar(255)
+  email     String    @unique @db.VarChar(255)
+  password  String    @db.VarChar(255)
+  perros    perros[]
+}
+
+model perros{
+  id                Int            @id @default(autoincrement())
+  nombre            String         @db.VarChar(255)
+  raza              String         @db.VarChar(255)
+  color             String         @db.VarChar(255)
+  fecha_nacimiento  DateTime       @db.Timestamp(6)
+  observaciones     String         @db.VarChar(255)
+  link_foto         String?        @db.VarChar(255)
+  clienteId         Int?
+  cliente           clientes?      @relation(fields: [clienteId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model publicacion_servicios{
+  id              Int       @id @default(autoincrement())
+  servicio        String    @db.VarChar(255)
+  nombre          String    @db.VarChar(255)
+  apellido        String    @db.VarChar(255)
+  zona            String    @db.VarChar(255)
+  horario         String    @db.VarChar(255)
+  email_contacto  String    @db.VarChar(255)
+  estado          String    @db.VarChar(255)
 }
