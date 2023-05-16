@@ -37,5 +37,13 @@ module.exports = {
                 estado: servicio.estado
             }
         });
+    },
+
+    listarServicios: async function listarServicios() {
+        return await prisma.publicacion_servicios.findMany({
+            where:{
+                estado: "Publicado"
+            }
+        })
     }
 }

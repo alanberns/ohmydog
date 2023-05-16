@@ -15,9 +15,14 @@ module.exports = {
         else{
             var info = null;
         }
+        var servicios = await db.listarServicios();
+        if (servicios.length === 0){
+            servicios = null;
+        }
         res.render('servicios/index', {
             title: "Servicios",
             message: "Servicios",
+            servicios: servicios,
             info: info
         });
     },
