@@ -9,8 +9,12 @@ div(class="container-fluid")
 
   include ../partials/info.pug
 
-  a(href="/adopciones/nuevo")
-    button(type="button" class="btn btn-info") Publicar adopcion
+  div(class="container")
+    a(href="/adopciones/nuevo")
+      button(type="button" class="btn btn-info") Publicar adopcion
+    span 
+    a
+      button(type="button" disabled class="btn btn-info") Mis publicaciones
 
 
   br

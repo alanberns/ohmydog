@@ -7,7 +7,7 @@ const NotFoundError = require('../helpers/errors/NotFoundError');
 module.exports = {
     index: async (req,res) => {
         /*
-        1 listar adopciones
+        1 listar adopciones en estado "Activo"
         2 pasar la variable adopciones a la vista
         3 chequear permiso de cliente para acceder a la ruta(adopcionesRouter)
         */
@@ -134,7 +134,7 @@ module.exports = {
 
     buscarPorEstado: async (req,res) => {
         /*
-        
+        1 Obtener el estado que se busca
         */
         var adopciones = await db.buscarByEstado(req.body.estado);
         if (adopciones.length === 0){
@@ -147,5 +147,13 @@ module.exports = {
             adopciones: adopciones,
             estado: req.body.estado
          });
+    },
+
+    confirmarAdopcion: async (req,res) => {
+        /*
+        obtener id del dueño de la publi
+        obtener id de la publi
+        db.confirmarAdopcion(adopcion)
+        */
     }
 }

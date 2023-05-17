@@ -26,7 +26,7 @@ module.exports = {
     buscarAdopcionById: async function buscarAdopcionById(adopcionId){
         return await prisma.publicacion_adopcion.findUnique({
             where:{
-                id: adopcionId
+                id: parseInt(adopcionId)
             }
         })
     },
@@ -35,6 +35,17 @@ module.exports = {
         return await prisma.publicacion_adopcion.findMany({
             where:{
                 estado: estado
+            }
+        })
+    },
+
+    confirmarAdopcion: async function confirmarAdopcion(adopcion){
+        return await prisma.publicacion_adopcion.update({
+            where:{
+                id: parseInt(adopcion.id)
+            },
+            data:{
+                estado: "Adoptado"
             }
         })
     }
