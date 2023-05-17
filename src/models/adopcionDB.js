@@ -29,5 +29,13 @@ module.exports = {
                 id: adopcionId
             }
         })
+    },
+
+    buscarByEstado: async function buscarByEstado(estado){
+        return await prisma.publicacion_adopcion.findMany({
+            where:{
+                estado: estado
+            }
+        })
     }
 }

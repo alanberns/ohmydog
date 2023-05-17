@@ -8,6 +8,7 @@ router.get('/', adopcionesController.index);
 router.get('/nuevo',adopcionesController.registrarGet);
 router.post('/nuevo',adopcionesController.registrarPost);
 router.get('/:id',adopcionesController.verAdopcion);
+router.post('/',adopcionesController.buscarPorEstado);
 
 
 module.exports = router;

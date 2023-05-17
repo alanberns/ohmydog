@@ -89,7 +89,7 @@ module.exports = {
     validarNuevaAdopcion: function(adopcion){
     // Expresiones regulares
     var regexNombre = /^[a-zA-Z ]{1,50}$/;
-    var regexEdad = /^[a-zA-Z0-9 ]{1,255}$/;
+    var regexEdad = /^[a-zA-Z0-9ñ ]{1,255}$/;
 
     var validez = "valido";
     if(!regexNombre.test(adopcion.origen)) validez = "Ingrese un origen válido.";

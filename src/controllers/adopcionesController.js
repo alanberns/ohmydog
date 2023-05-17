@@ -17,7 +17,8 @@ module.exports = {
         else{
             var error = null;
         }
-        var adopciones = await db.listarAdopciones();
+        estado = "Activo";
+        var adopciones = await db.buscarByEstado(estado);
         if (adopciones.length === 0){
             adopciones = null;
         }
@@ -25,7 +26,8 @@ module.exports = {
             title: 'Adopciones',
             message: 'Inicio adopciones',
             adopciones: adopciones,
-            error:error
+            error:error,
+            estado: estado
          });
     },
 
@@ -80,7 +82,7 @@ module.exports = {
             res.render('adopciones/nuevaAdopcion', {
                 title: 'Publicar adopcion',
                 message: 'Publicar adopcion',
-                adopcion: adopcion,
+                adopcion: newAdopcion,
                 error: result
             });
         }
@@ -129,4 +131,21 @@ module.exports = {
             }
         }
     },
+
+    buscarPorEstado: async (req,res) => {
+        /*
+        
+        */
+        var adopciones = await db.buscarByEstado(req.body.estado);
+        if (adopciones.length === 0){
+            adopciones = null;
+        }
+        console.log(req.body.estado)
+        res.render('adopciones/index', { 
+            title: 'Adopciones',
+            message: 'Inicio adopciones',
+            adopciones: adopciones,
+            estado: req.body.estado
+         });
+    }
 }

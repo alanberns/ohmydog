@@ -5,7 +5,7 @@
 
     // Expresiones regulares
     var regexNombre = /^[a-zA-Z ]{1,50}$/;
-    var regexEdad = /^[a-zA-Z0-9 ]{1,255}$/;
+    var regexEdad = /^[a-zA-Z0-9ñ ]{1,255}$/;
 
     // Se prueba la expresión regular con el string del input
     if(!regexNombre.test($("#origen").val())) validez = "Ingrese un origen válido.";
