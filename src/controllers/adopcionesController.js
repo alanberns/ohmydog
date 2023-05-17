@@ -11,6 +11,12 @@ module.exports = {
         2 pasar la variable adopciones a la vista
         3 chequear permiso de cliente para acceder a la ruta(adopcionesRouter)
         */
+        if(req.query.e){
+            var error = "ID inválida";
+        }
+        else{
+            var error = null;
+        }
         var adopciones = await db.listarAdopciones();
         if (adopciones.length === 0){
             adopciones = null;
@@ -19,6 +25,7 @@ module.exports = {
             title: 'Adopciones',
             message: 'Inicio adopciones',
             adopciones: adopciones,
+            error:error
          });
     },
 
@@ -87,6 +94,39 @@ module.exports = {
                 info: "La publicacion se registró con éxito"
             });
         }
+    },
 
-    }
+    verAdopcion: async (req,res,next) => {
+        /*
+        1 obtener id del parametro. validar
+        2 buscar id en la BBDD
+        3 devolver los datos
+        */
+        // 1
+        var id = req.params.id;
+        var idAdopcion = parseInt(id);
+        if (isNaN(idAdopcion)){
+            res.redirect('/adopciones?e=u');
+        }
+        else{
+            // 2 validar que existe el adopcion
+            var adopcion = await db.buscarAdopcionById(idAdopcion);
+            if (adopcion == null){
+                try{
+                    throw new NotFoundError();
+                }
+                catch(err){
+                    next(err);
+                }
+            }
+            // 3
+            else{
+                res.render('adopciones/adopcion', {
+                    title: 'Adopción', 
+                    message: 'Adopción',
+                    adopcion: adopcion
+                });
+            }
+        }
+    },
 }

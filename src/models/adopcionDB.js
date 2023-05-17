@@ -22,4 +22,12 @@ module.exports = {
     listarAdopciones: async function listarAdopciones(){
         return await prisma.publicacion_adopcion.findMany();
     },
+
+    buscarAdopcionById: async function buscarAdopcionById(adopcionId){
+        return await prisma.publicacion_adopcion.findUnique({
+            where:{
+                id: adopcionId
+            }
+        })
+    }
 }

@@ -1,0 +1,46 @@
+include ../partials/head.pug
+include ../partials/header.pug
+div(class="container-fluid")
+  //- aca va la pagina hasta footer. inicia con 1 tab
+  h1= message
+
+  br
+  br
+
+  include ../partials/info.pug
+
+  div(class="")
+    form(action="#")
+      div(class="mb-3")
+        label(for="nombre" class="form-label") Nombre
+        input(type="text" class="form-control" name="nombre" id="nombre" required readonly value=adopcion.nombre)
+      div(class="mb-3")
+        label(for="edad" class="form-label") Edad
+        input(type="text" class="form-control" name="edad" id="edad" required readonly value=adopcion.edad)
+      div(class="mb-3")
+        label(for="raza" class="form-label") Raza
+        input(type="text" class="form-control" name="raza" id="raza" required readonly value=adopcion.raza)
+      div(class="mb-3")
+        label(for="color" class="form-label") Color
+        input(type="text" class="form-control" name="color" id="color" required readonly value=adopcion.color)
+      div(class="mb-3")
+        label(for="sexo" class="form-label") Sexo
+        input(type="text" class="form-control" name="sexo" id="sexo" required readonly value=adopcion.sexo)
+      div(class="mb-3")
+        label(for="observaciones" class="form-label") Observaciones
+        input(type="text" class="form-control" name="observaciones" id="observaciones" required readonly value=adopcion.observaciones)
+      div(class="mb-3")
+        label(for="origen" class="form-label") Origen
+        input(type="text" class="form-control" name="origen" id="origen" required readonly value=adopcion.origen)
+
+    br
+    div(class="container-fluid")
+      a(href="/adopciones")
+        button(type="button" class="btn btn-info") Atrás 
+      span 
+      a(href="#")
+        button(type="button" class="btn btn-info") Contactar adopcion 
+
+
+
+include ../partials/footer.pug
