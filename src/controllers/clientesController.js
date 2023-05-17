@@ -80,7 +80,8 @@ module.exports = {
             });
         }
         else {
-            
+            var r = await db.existeEmail(newCliente.email);
+            console.log(r)
             //validacion exitosa, validar que no exista el email y el dni
             if (await db.existeEmail(newCliente.email)){
                 res.render('clientes/registrar', {

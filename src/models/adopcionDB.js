@@ -13,10 +13,13 @@ module.exports = {
                 sexo: adopcion.sexo,
                 observaciones: adopcion.observaciones,
                 origen: adopcion.origen,
+                estado: adopcion.estado,
                 cliente: { connect: { id: parseInt(adopcion.clienteId) } },
             }
         })
     },
 
-    
+    listarAdopciones: async function listarAdopciones(){
+        return await prisma.publicacion_adopcion.findMany();
+    },
 }

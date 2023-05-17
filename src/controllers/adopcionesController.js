@@ -7,9 +7,19 @@ const NotFoundError = require('../helpers/errors/NotFoundError');
 module.exports = {
     index: async (req,res) => {
         /*
-        1 buscar servicios en estado "publicado"
+        1 listar adopciones
+        2 pasar la variable adopciones a la vista
+        3 chequear permiso de cliente para acceder a la ruta(adopcionesRouter)
         */
-        res.send('index adopciones');
+        var adopciones = await db.listarAdopciones();
+        if (adopciones.length === 0){
+            adopciones = null;
+        }
+        res.render('adopciones/index', { 
+            title: 'Adopciones',
+            message: 'Inicio adopciones',
+            adopciones: adopciones,
+         });
     },
 
     registrarGet: async (req,res) => {
@@ -51,6 +61,7 @@ module.exports = {
             sexo: req.body.sexo,
             observaciones: req.body.observaciones,
             origen: req.body.origen,
+            estado: "Activo",
             clienteId: req.body.clienteId    
         }
         // 2 helpers.validaciones.js 

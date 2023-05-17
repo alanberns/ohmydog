@@ -51,6 +51,7 @@ model publicacion_adopcion{
   sexo            String      @db.VarChar(255)
   observaciones   String      @db.VarChar(255)
   origen          String      @db.VarChar(255)
+  estado          String      @db.VarChar(255)
   clienteId       Int?
   cliente         clientes?   @relation(fields: [clienteId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
