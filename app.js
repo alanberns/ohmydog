@@ -15,6 +15,7 @@ const indexRoutes = require('./src/routes/indexRoutes');
 const clientesRoutes = require('./src/routes/clientesRoutes');
 const perrosRoutes = require('./src/routes/perrosRoutes');
 const serviciosRoutes = require('./src/routes/serviciosRoutes');
+const adopcionesRoutes = require('./src/routes/adopcionesRoutes');
 
 
 //indicar a la app lo que debe usar
@@ -37,6 +38,7 @@ app.use('/', indexRoutes);
 app.use('/clientes',clientesRoutes);
 app.use('/perros',perrosRoutes);
 app.use('/servicios',serviciosRoutes);
+app.use('/adopciones',adopcionesRoutes);
 
 
 //error handler

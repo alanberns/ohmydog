@@ -1,0 +1,47 @@
+include ../partials/head.pug
+include ../partials/header.pug
+div(class="container-fluid")
+  //- aca va la pagina hasta footer. inicia con 1 tab
+  h1= message
+
+  br
+  br
+
+  include ../partials/info.pug
+
+  div(class="")
+    form(method="post" action="/adopciones/nuevo" id="formulario")
+      div(class="mb-3")
+        label(for="nombre" class="form-label") Nombre
+        input(type="text" class="form-control" name="nombre" id="nombre" required value=adopcion.nombre)
+      div(class="mb-3")
+        label(for="edad" class="form-label") Edad
+        input(type="text" class="form-control" name="edad" id="edad" required value=adopcion.edad)
+      div(class="mb-3")
+        label(for="raza" class="form-label") Raza
+        input(type="text" class="form-control" name="raza" id="raza" required value=adopcion.raza)
+      div(class="mb-3")
+        label(for="color" class="form-label") Color
+        input(type="text" class="form-control" name="color" id="color" required value=adopcion.color)
+      div(class="mb-3")
+        label(for="sexo" class="form-label") Sexo
+        input(type="text" class="form-control" name="sexo" id="sexo" required value=adopcion.sexo)
+      div(class="mb-3")
+        label(for="origen" class="form-label") Origen
+        input(type="text" class="form-control" name="origen" id="origen" required value=adopcion.origen)
+      div(class="mb-3")
+        label(for="observaciones" class="form-label") Observaciones
+        input(type="text" class="form-control" name="observaciones" id="observaciones" required value=adopcion.observaciones)
+      div(class="mb-3")
+        label(for="clienteId" class="form-label")
+        input(type="hidden" class="form-control" name="clienteId" id="clienteId" required value=adopcion.clienteId)
+    
+
+      input(type="submit" class="btn btn-info" value="Publicar") 
+
+    br
+    a(href="/adopciones")
+      button(type="button" class="btn btn-info") Cancelar
+
+script(src="/js/validacionNuevaAdopcions.js") 
+include ../partials/footer.pug

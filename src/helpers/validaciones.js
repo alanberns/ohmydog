@@ -84,5 +84,22 @@ module.exports = {
         else if(!regexEmail.test(servicio.email_contacto)) validez = "Ingrese un email válido.";
 
         return validez;
+    },
+
+    validarNuevaAdopcion: function(adopcion){
+    // Expresiones regulares
+    var regexNombre = /^[a-zA-Z ]{1,50}$/;
+    var regexEdad = /^[a-zA-Z0-9 ]{1,255}$/;
+
+    var validez = "valido";
+    if(!regexNombre.test(adopcion.origen)) validez = "Ingrese un origen válido.";
+    else if(!regexNombre.test(adopcion.nombre)) validez = "Ingrese un nombre válido.";
+    else if(!regexNombre.test(adopcion.raza)) validez = "Ingrese una raza válida.";
+    else if(!regexNombre.test(adopcion.color)) validez = "Ingrese un color válido.";
+    else if(!regexEdad.test(adopcion.edad)) validez = "Ingrese una edad válida.";
+    else if(!regexNombre.test(adopcion.sexo)) validez = "Ingrese una sexo válida.";
+    else if(!regexNombre.test(adopcion.observaciones)) validez = "Ingrese un texto de observaciones válido.";
+
+    return validez;
     }
 }
