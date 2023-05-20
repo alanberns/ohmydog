@@ -21,7 +21,8 @@ module.exports = {
         else{
             var error = null;
         }
-        var servicios = await db.listarServicios();
+        var servicios = await db.buscarServicioByEstado("Publicado");
+        console.log(servicios)
         if (servicios.length === 0){
             servicios = null;
         }

@@ -14,7 +14,8 @@ $("#formulario").submit(function(event){
   else if(!regexNombre.test($("#apellido").val())) validez = "Ingrese un apellido válido.";
   else if(!regexDni.test($("#dni").val())) validez = "Ingrese un DNI válido.";
   else if(!regexEmail.test($("#email").val())) validez = "Ingrese un email válido.";
-  else if(!regexTelefono.test($("#telefono").val())) validez = "Ingrese un telefono válido";
+  else if($("#telefono").val() != "") {if(!regexTelefono.test($("#telefono").val())) validez = "Ingrese un teléfono válido";}
+  
 
   /* Si validez se mantiene en "true" el formulario es correcto y se envía,
       caso contrario se muestra un mensaje y se cancela el envío. */

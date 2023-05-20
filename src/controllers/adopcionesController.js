@@ -45,7 +45,7 @@ module.exports = {
             sexo: "",
             observaciones: "",
             origen: "",
-            clienteId: 1
+            clienteId: 4
         }
         res.render('adopciones/nuevaAdopcion', {
             title: 'Publicar adopcion',
@@ -153,7 +153,7 @@ module.exports = {
         /*
         obtener id del dueño de la publi
         obtener id de la publi
-        db.confirmarAdopcion(adopcion)
+        db.confirmarAdopcion(adopcion) -> estado="Adoptado"
         */
     }
 }

@@ -34,7 +34,7 @@ module.exports = {
                 dni: dni
             }
         })
-        return result.length > 0;
+        return result != null;
     },
 
     buscarCliente: async function buscarCliente(nombre) {

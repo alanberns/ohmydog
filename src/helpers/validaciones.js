@@ -11,8 +11,7 @@ module.exports = {
         else if(!regexNombre.test(cliente.apellido)) validez = "Ingrese un apellido válido.";
         else if(!regexDni.test(cliente.dni)) validez = "Ingrese un DNI válido.";
         else if(!regexEmail.test(cliente.email)) validez = "Ingrese un email válido.";
-        else if(!regexTelefono.test(cliente.telefono)) validez = "Ingrese un telefono válido";
-
+        else if(cliente.telefono != ""){if(!regexTelefono.test(cliente.telefono)) validez = "Ingrese un telefono válido";}
         return validez;
     },
 

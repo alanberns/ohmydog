@@ -54,4 +54,12 @@ module.exports = {
             }
         })
     },
+
+    buscarServicioByEstado: async function buscarServicioByEstado(estado){
+        return await prisma.publicacion_servicios.findMany({
+            where:{
+                estado: estado
+            }
+        })
+    }
 }
