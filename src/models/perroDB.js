@@ -88,5 +88,16 @@ module.exports = {
                 fecha_nacimiento: perro.fecha_nacimiento
             }
         })
+    },
+
+    cambiarLink_foto: async function cambiarLink_foto(perroId,link_foto){
+        return await prisma.perros.update({
+            where:{
+                id: parseInt(perroId)
+            },
+            data:{
+                link_foto: link_foto
+            }
+        })
     }
 }

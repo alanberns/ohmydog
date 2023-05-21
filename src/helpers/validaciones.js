@@ -100,5 +100,16 @@ module.exports = {
     else if(!regexNombre.test(adopcion.observaciones)) validez = "Ingrese un texto de observaciones válido.";
 
     return validez;
+    },
+
+    validarExtensionFoto: function(directorio){
+        var validez = "valido";
+        var extensiones = ["jpg","jpeg","png"];
+
+        var extension = directorio.slice((directorio.lastIndexOf(".") - 1 >>> 0) + 2);
+
+        if(!extensiones.includes(extension)) validez = "Ingrese un archivo con extension: 'jpeg' 'jpg' 'png'";
+
+        return validez;
     }
 }

@@ -10,6 +10,8 @@ div(class="container-fluid")
   include ../partials/info.pug
 
   div(class="")
+    if(perro.link_foto)
+      img(src=perro.link_foto width="100vw")
     form(action="#")
       div(class="mb-3")
         label(for="nombre" class="form-label") Nombre
@@ -31,7 +33,9 @@ div(class="container-fluid")
     div(class="container-fluid")
       a(href="/perros/"+perro.id+"/modificar")
         button(type="button" class="btn btn-info") Modificar datos
-
+      span  
+      a(href="/perros/"+perro.id+"/agregarFoto")
+        button(type="button" class="btn btn-info") Añadir foto
 
 
 include ../partials/footer.pug

@@ -2,7 +2,7 @@ const db = require('../models/perroDB');
 const db_clientes = require('../models/clienteDB');
 const validaciones = require('../helpers/validaciones');
 const NotFoundError = require('../helpers/errors/NotFoundError');
-
+const fs = require('fs');
 
 
 module.exports = {
@@ -266,4 +266,71 @@ module.exports = {
             }
         }
     },
+
+    agregarFotoGet: async(req,res) => {
+        /*
+        
+        */
+        res.render('perros/agregarFoto',{
+            title: "Añadir foto",
+            message: "Añadir foto a mascota",
+            perroId: req.params.id 
+        })
+    },
+
+    agregarFotoPost: async(req,res,next) => {
+        /*
+        1 obtener file
+
+        2 validar extension
+            var extensiones = ["jpg","jpeg","png"];
+            var extension = perro.link_foto.slice((perro.link_foto.lastIndexOf(".") - 1 >>> 0) + 2);
+            else if(!extensiones.includes(extension)) validez = "Ingrese un archivo con extension: 'jpeg' 'jpg' 'png'";
+        
+        3 Guardar file en: "/img/perros/"+perro.id;
+          GUARDAR EN LA DB:  perro.link_foto = "/img/perros/"+perro.id;
+        */
+        console.log(req.file)
+        var file = req.file;
+
+        // Comprobamos que el fichero es de tipo imagen
+        if (req.file.mimetype.indexOf('image')==-1){
+            res.render('perros/agregarFoto',{
+                title: "Añadir foto",
+                message: "Añadir foto a mascota",
+                perroId: req.params.id,
+                error: "El archivo que deseas subir no es una imagen",
+            });
+        } 
+        else {
+            var result = validaciones.validarExtensionFoto(file.originalname);
+            if (result != "valido"){
+                res.render('perros/agregarFoto',{
+                    title: "Añadir foto",
+                    message: "Añadir foto a mascota",
+                    perroId: req.params.id,
+                    error: result,
+                });
+            }
+            else{
+                // la foto se guarda en public/img/perros/nuevo.extension
+                var tmp_path = req.file.path;
+                // Ruta donde colocaremos la imagen:  "/img/perros/"+perro.id+.extension;        
+                var nuevoNombre = req.params.id+ "." + req.file.originalname.slice((req.file.originalname.lastIndexOf(".") - 1 >>> 0) + 2);
+                var link_foto = "/img/perros/"+nuevoNombre;
+                var target_path = file.destination+ '\\' + nuevoNombre;
+                // Renombrar el archivo en tmp_path al directorio que hemos elegido en target_path
+                fs.rename(tmp_path, target_path, (err) => {
+                        if (err) throw err;
+                    })
+                // 3 guardar link en la BD
+                await db.cambiarLink_foto(req.params.id,link_foto);
+                res.render('exito',{
+                    title: "Éxito",
+                    message: "Foto añadida",
+                    info: "Añadiste la foto exitosamente"
+                });
+            }
+        }
+    }
 }

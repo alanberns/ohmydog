@@ -14,16 +14,16 @@ div(class="container-fluid")
   if(mascotas)
     each mascota in mascotas
 
-      div(="text-center")
+      div(class="text-center" style="width: 20vw;")
         div(class="card")
           if(mascota.link_foto)
-            img(src="..." class="card-img-top" alt="...")
+            img(src= mascota.link_foto class="card-img-top" alt="...")
             div(class="card-body")
                 h5(class="card-title") #{mascota.nombre}
                 p(class="card-text") Raza:  #{mascota.raza} 
                 p(class="card-text") Color:  #{mascota.color}
                 p(class="card-text") Observaciones: #{mascota.observaciones}
-                a(src="/perros/"+mascota.id)
+                a(href="/perros/"+mascota.id)
                   button(type="button" class="btn btn-info") Ver detalles
             
           else

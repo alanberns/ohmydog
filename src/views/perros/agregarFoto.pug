@@ -1,0 +1,27 @@
+include ../partials/head.pug
+include ../partials/header.pug
+div(class="container-fluid")
+  //- aca va la pagina hasta footer. inicia con 1 tab
+  h1= message
+
+  br
+  br
+
+  include ../partials/info.pug
+
+  div(class="")
+    form(method="post" action="/perros/"+perroId+"/agregarFoto" id="formulario" enctype="multipart/form-data")
+      div(class="mb-3")
+        label(for="perroId" class="form-label")
+        input(type="hidden" class="form-control" name="perroId" id="perroId")
+      div(class="mb-3")
+        label(for="link_foto" class="form-label") Seleccionar imagen (formatos: "jpg", "jpeg" y "png")
+        input(type="file" class="form-control" name="link_foto" id="link_foto")
+      input(type="submit" class="btn btn-info" value="Añadir foto") 
+
+    br
+    a(href="/perros/"+perroId)
+      button(type="button" class="btn btn-info") Cancelar
+
+script(src="/js/validarExtensionFoto.js") 
+include ../partials/footer.pug
