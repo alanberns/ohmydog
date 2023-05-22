@@ -7,8 +7,6 @@ div(class="container-fluid")
   br
   br
 
-  include ../partials/info.pug
-
   div(class="")
     form(method="post" action="/sesion/intento" id="formulario")
       div(class="mb-3")
@@ -17,10 +15,10 @@ div(class="container-fluid")
       div(class="mb-3")
         label(for="nombre" class="form-label") Contrase&ntilde;a
         input(type="text" class="form-control" name="password" id="password" required value=datos.password)
-      input(type="submit" class="btn btn-info" value="Iniciar Sesi&oacute;n") 
+      input(type="submit" class="btn btn-info" value="Iniciar Sesión") 
 
     br
-    a(href="/clientes")
+    a(href="/")
       button(type="button" class="btn btn-info") Cancelar
  
 script(src="/js/validacionSesion.js")

@@ -3,8 +3,9 @@ const express = require('express');
 const path = require('path');
 require("dotenv").config();
 const errorHandler = require('./src/helpers/handlers/errorHandler');
-var session = require('express-session');
 
+var session = require('express-session');
+const nocache = require('nocache');
 
 
 //inicializacion
@@ -18,14 +19,17 @@ const indexRoutes = require('./src/routes/indexRoutes');
 const sesionRoutes = require('./src/routes/sesionRoutes');
 
 
-
 //indicar a la app lo que debe usar
 app.use(express.static('public'));
+
 app.use(session({
     secret: 'OhMyDog',
     saveUninitialized: true,
     resave: true
 }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(nocache());
 
 
 

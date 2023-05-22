@@ -3,10 +3,10 @@ const prisma = new PrismaClient();
 
 module.exports = {
     intentoCliente: async function intentoSesion(datos){
-        var result = await prisma.clientes.findOne({
+        var result = await prisma.clientes.findMany({
             where:{
                 AND:{
-                    usuario:{
+                    email:{
                         equals: datos.email,
                         mode: 'insensitive'
                     },
@@ -20,10 +20,10 @@ module.exports = {
     },
 
     intentoAdmin: async function intentoSesion(datos){
-        var result = await prisma.administradores.findOne({
+        var result = await prisma.administradores.findMany({
             where:{
                 AND:{
-                    usuario:{
+                    email:{
                         equals: datos.email,
                         mode: 'insensitive'
                     },

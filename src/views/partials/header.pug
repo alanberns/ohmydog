@@ -1,25 +1,41 @@
 nav(class="navbar navbar-expand-lg bg-body-tertiary" style={padding:'0px'})
   div(class="container-fluid", style={background: '#FDAC60'})
-    a(class="navbar-brand" href="#")
-      img(src="logos/Logo1.png" alt="Logo" width="50vw" height="40vh" class="d-inline-block align-text-top")
-    a(class="navbar-brand" href="#") Navbar
-    button(class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation")
-      span(class="navbar-toggler-icon")
+    a(class="navbar-brand" href="/")
+      img(src="/logos/Logo1.png" alt="Logo" width="50vw" height="40vh" class="d-inline-block align-text-top")
     div(class="collapse navbar-collapse" id="navbarNavDropdown")
       ul(class="navbar-nav")
         li(class="nav-item")
-          a(class="nav-link active" aria-current="page" href="#") Home
-        li(class="nav-item")
-          a(class="nav-link" href="./sesion/iniciar") Iniciar Sesi&oacute;n
-        li(class="nav-item")
-          a(class="nav-link" href="#") Pricing
+          a(class="nav-link active" aria-current="page" href="/") Home
         li(class="nav-item dropdown")
-          a(class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false") Dropdown link
+          a(class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false") Mi Cuenta
+          ul(class="dropdown-menu")
+            if !usuario.nombre
+              li
+                a(class="dropdown-item" href="/sesion/iniciar") Iniciar Sesi&oacute;n
+            else
+              li
+                a(class="dropdown-item" href="/sesion/cerrar") Cerrar Sesi&oacute;n
+        li(class="nav-item")
+          a(class="nav-link" href="/clientes") Clientes
+        li(class="nav-item")
+          a(class="nav-link" href="/perros") Perros
+        li(class="nav-item dropdown")
+          a(class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false") Publicaciones
           ul(class="dropdown-menu")
             li
-              a(class="dropdown-item" href="#") Action
+              a(class="dropdown-item" href="/servicios") Servicios
             li
-              a(class="dropdown-item" href="#") Another action
+              a(class="dropdown-item" href="/adopciones") Adopciones
+        li(class="nav-item dropdown")
+          a(class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false") Turnos
+          ul(class="dropdown-menu")
             li
-              a(class="dropdown-item" href="#") Something else here
-    p #{nombre}
+              a(class="dropdown-item" href="#") Solicitudes
+            li
+              a(class="dropdown-item" href="#") Próximos
+    if usuario.nombre
+      p= usuario.nombre+" "+usuario.apellido
+    else
+      p An&oacute;nimo
+br
+br

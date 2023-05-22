@@ -5,7 +5,7 @@ const permisos = require('../helpers/permisos')
 router = express.Router();
 
 router.get('/iniciar', sesionController.iniciar);
-router.get('/intento', sesionController.intento);
-router.post('/cerrar', sesionController.cerrar);
+router.post('/intento', sesionController.intento);
+router.get('/cerrar', sesionController.cerrar);
 
 module.exports = router;
