@@ -150,7 +150,7 @@ module.exports = {
             title: 'Clientes', 
             message: 'Inicio clientes',
             clientes: clientes,
-            info: "Resultados de la busqueda",
+            info: "Resultados de la búsqueda",
             nombre: nombre,
         })
     },

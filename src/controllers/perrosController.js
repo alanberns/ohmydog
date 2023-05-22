@@ -141,7 +141,7 @@ module.exports = {
                 title: 'Mascotas', 
                 message: 'Mascotas',
                 perros: perros,
-                info: "Resultados de la busqueda",
+                info: "Resultados de la búsqueda",
                 nombre: nombre,
             });
         }
@@ -328,7 +328,7 @@ module.exports = {
                 res.render('exito',{
                     title: "Éxito",
                     message: "Foto añadida",
-                    info: "Añadiste la foto exitosamente"
+                    info: "Se añadió la foto exitosamente"
                 });
             }
         }
