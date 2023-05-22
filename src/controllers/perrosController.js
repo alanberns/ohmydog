@@ -283,11 +283,9 @@ module.exports = {
         1 obtener file
 
         2 validar extension
-            var extensiones = ["jpg","jpeg","png"];
-            var extension = perro.link_foto.slice((perro.link_foto.lastIndexOf(".") - 1 >>> 0) + 2);
-            else if(!extensiones.includes(extension)) validez = "Ingrese un archivo con extension: 'jpeg' 'jpg' 'png'";
         
-        3 Guardar file en: "/img/perros/"+perro.id;
+        3 El archivo se guarda en nuevo.extension -> se renombra a perro.id+.+extension
+          Guardar file en: "/img/perros/"+perro.id;
           GUARDAR EN LA DB:  perro.link_foto = "/img/perros/"+perro.id;
         */
         console.log(req.file)
