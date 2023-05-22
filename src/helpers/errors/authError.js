@@ -1,8 +1,8 @@
 class AuthError extends Error {
     constructor() {
-        super("No estás logueado");
+        super("No tienes permitido acceder a esta página");
 
-        this.name = "AuthError";
+        this.name = "Error de Autenticación";
         this.status = 403;
     }
 

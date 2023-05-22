@@ -5,8 +5,7 @@ module.exports = {
         res.render('sesion/iniciar', {
             title: 'OhMyDog | Iniciar Sesión',
             message: 'Iniciar Sesión',
-            datos: req.query,
-            usuario: req.session
+            datos: req.query
         });
     },
 
@@ -20,8 +19,7 @@ module.exports = {
             req.session.apellido = sesion.apellido;
             res.render('index', {
                 title: 'OhMyDog',
-                message: 'Inicio',
-                usuario: req.session
+                message: 'Inicio'
             });
         }else{
             sesion = await db.intentoAdmin(req.body);
@@ -33,30 +31,30 @@ module.exports = {
                 req.session.apellido = sesion.apellido;
                 res.render('index', {
                     title: 'OhMyDog',
-                    message: 'Inicio',
-                    usuario: req.session
+                    message: 'Inicio'
                 });
             }else{
                 req.session.nivel = 0;
-                req.session.nombre = "";
-                req.session.apellido = "";
+                req.session.usuario = null;
+                req.session.nombre = null;
+                req.session.apellido = null;
                 res.render('sesion/iniciar', {
                     title: 'OhMyDog',
                     message: 'Iniciar Sesion',
-                    datos: req.body,
-                    usuario: req.session
+                    datos: req.body
                 });
             }
         }
     },
 
     cerrar: async (req,res) => {
-        req.session.destroy();
-        var usuario = [];
-        res.render('index', {
-            title: 'OhMyDog',
-            message: 'Inicio',
-            usuario: usuario
+        req.session.nivel = 0;
+        req.session.usuario = null;
+        req.session.nombre = null;
+        req.session.apellido = null;
+        req.session.save(function(err){
+            if(err) return next(err)
+            res.redirect('/');
         });
     }
 }

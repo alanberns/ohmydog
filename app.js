@@ -17,6 +17,8 @@ const port = process.env.PORT;
 //routers
 const indexRoutes = require('./src/routes/indexRoutes');
 const sesionRoutes = require('./src/routes/sesionRoutes');
+const turnoRoutes = require('./src/routes/turnoRoutes');
+
 
 
 //indicar a la app lo que debe usar
@@ -31,6 +33,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(nocache());
 
+app.use((req, res, next) => {
+  res.locals.sesion = req.session;
+  next();
+});
 
 
 //view engine
@@ -41,6 +47,7 @@ app.set('view engine', 'pug');
 //rutas
 app.use('/', indexRoutes);
 app.use('/sesion', sesionRoutes);
+app.use('/turno', turnoRoutes);
 
 
 

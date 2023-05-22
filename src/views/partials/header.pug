@@ -9,7 +9,7 @@ nav(class="navbar navbar-expand-lg bg-body-tertiary" style={padding:'0px'})
         li(class="nav-item dropdown")
           a(class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false") Mi Cuenta
           ul(class="dropdown-menu")
-            if !usuario.nombre
+            if !sesion.nombre
               li
                 a(class="dropdown-item" href="/sesion/iniciar") Iniciar Sesi&oacute;n
             else
@@ -30,11 +30,11 @@ nav(class="navbar navbar-expand-lg bg-body-tertiary" style={padding:'0px'})
           a(class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false") Turnos
           ul(class="dropdown-menu")
             li
-              a(class="dropdown-item" href="#") Solicitudes
+              a(class="dropdown-item" href="/turno/solicitar") Solicitar Turno
             li
               a(class="dropdown-item" href="#") Próximos
-    if usuario.nombre
-      p= usuario.nombre+" "+usuario.apellido
+    if sesion.nombre
+      p= sesion.nombre+" "+sesion.apellido
     else
       p An&oacute;nimo
 br
