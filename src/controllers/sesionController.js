@@ -17,6 +17,7 @@ module.exports = {
             req.session.usuario = sesion.id;
             req.session.nombre = sesion.nombre;
             req.session.apellido = sesion.apellido;
+            req.session.email = sesion.email;
             res.render('index', {
                 title: 'OhMyDog',
                 message: 'Inicio'
@@ -29,6 +30,7 @@ module.exports = {
                 req.session.usuario = sesion.id;
                 req.session.nombre = sesion.nombre;
                 req.session.apellido = sesion.apellido;
+                req.session.email = sesion.email;
                 res.render('index', {
                     title: 'OhMyDog',
                     message: 'Inicio'

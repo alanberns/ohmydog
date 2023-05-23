@@ -135,5 +135,51 @@ module.exports = {
                 })
             }
         } 
+    },
+
+    contactarServicio: async (req,res) => {
+        /*
+        1 si hay session obtener info de la session
+        2 si era por formulario obtener el body
+        3 obtener los datos del anuncio
+        4 enviar el mail
+        */
+        //if (req.session.username) hay session
+        if(req.session.nombre){
+            var nombre = req.session.nombre;
+            var email = req.session.email;
+            console.log(req.session)
+        }
+        else{
+            var nombre = req.body.nombre;
+            var email = req.body.email;
+            var result = validaciones.validarContacto(nombre,email);
+            if(result != "valido"){
+                var servicio = await db.buscarServicioById(req.body.id)
+                res.render('servicios/servicio',{
+                    title: "Servicio",
+                    message: "Información del servicio",
+                    servicio: servicio,
+                    error: result,
+                    nombre: nombre,
+                    email: email
+                })
+            }
+        }
+        var email_contacto = req.body.email_contacto;
+        var nombre_anuncio = req.body.servicio;
+        var zona = req.body.zona;
+        var horario = req.body.horario;
+
+        var mensaje = "Hola, "+nombre+" quiere contactarse con vos, su email es: "+
+        email+" por tu anuncio en OhMyDog: "+nombre_anuncio+" "+zona+" "+horario;
+        
+        console.log(mensaje)
+        //mailer.sendMail(email_contacto,"Quieren contactarte",mensaje)
+        res.render('exito', {
+            title: "Éxito",
+            message: "Contacto realizado",
+            info: "Enviamos tu email para que se contacten con vos"
+        });
     }
 }

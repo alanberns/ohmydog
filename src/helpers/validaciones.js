@@ -111,5 +111,18 @@ module.exports = {
         if(!extensiones.includes(extension)) validez = "Ingrese un archivo con extension: 'jpeg' 'jpg' 'png'";
 
         return validez;
+    },
+
+    validarContacto: function(nombre,email){
+        // Expresiones regulares
+        var regexNombre = /^[a-zA-Z ]{1,50}$/;
+        var regexEmail = /^[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}$/;
+
+        var validez = "valido";
+
+        if(!regexNombre.test(nombre)) validez = "Ingrese un nombre válido.";
+        else if(!regexEmail.test(email)) validez = "Ingrese un email válido.";
+
+        return validez;
     }
 }
