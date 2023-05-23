@@ -144,7 +144,6 @@ module.exports = {
         3 obtener los datos del anuncio
         4 enviar el mail
         */
-        //if (req.session.username) hay session
         if(req.session.nombre){
             var nombre = req.session.nombre;
             var email = req.session.email;
@@ -166,7 +165,9 @@ module.exports = {
                 })
             }
         }
-        var email_contacto = req.body.email_contacto;
+        var servicioId = req.body.id;
+        var servicioInfo = await db.buscarServicioById(servicioId);
+        var email_contacto = servicioInfo.email_contacto;
         var nombre_anuncio = req.body.servicio;
         var zona = req.body.zona;
         var horario = req.body.horario;
@@ -175,7 +176,9 @@ module.exports = {
         email+" por tu anuncio en OhMyDog: "+nombre_anuncio+" "+zona+" "+horario;
         
         console.log(mensaje)
-        //mailer.sendMail(email_contacto,"Quieren contactarte",mensaje)
+        console.log(email_contacto)
+        console.log("contactador"+email)
+        mailer.sendMail(email_contacto,"Quieren contactarte",mensaje)
         res.render('exito', {
             title: "Éxito",
             message: "Contacto realizado",

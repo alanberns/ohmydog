@@ -111,7 +111,7 @@ module.exports = {
             // 3 dar el alta en la BBDD
             db.agregarCliente(newCliente);
             // 6 enviar contraseña al mail del cliente
-            // mailer.sendMail('newCliente.email','titulo',"cuerpo del mensaje + newCliente.password");
+            mailer.sendMail(newCliente.email,'Tenes tu cuenta en OhMyDog',"Esta es tu contraseña:  "+ newCliente.password);
             res.render('exito', {
                 title: "Éxito",
                 message: "Éxito",

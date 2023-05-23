@@ -194,7 +194,6 @@ module.exports = {
         3 obtener los datos del anuncio
         4 enviar el mail
         */
-        //if (req.session.username) hay session
         var adopcionId = req.body.id;
         if(req.session.nombre){
             var nombre = req.session.nombre;
@@ -225,7 +224,7 @@ module.exports = {
         email+" por tu anuncio en OhMyDog: Adopción de: "+perro;
         console.log(mensaje);
         console.log(email_contacto)
-        //mailer.sendMail(email_contacto,"Quieren contactarte",mensaje)
+        mailer.sendMail(email_contacto,"Quieren contactarte",mensaje)
         res.render('exito', {
             title: "Éxito",
             message: "Contacto realizado",
