@@ -15,12 +15,14 @@ nav(class="navbar navbar-expand-lg bg-body-tertiary" style={padding:'0px'})
             else
               li
                 a(class="dropdown-item" href="/sesion/cerrar") Cerrar Sesi&oacute;n
-              li 
-                a(class="dropdown-item" href="/usuario/misMascotas") Mis mascotas
-        li(class="nav-item")
-          a(class="nav-link" href="/clientes") Clientes
-        li(class="nav-item")
-          a(class="nav-link" href="/perros") Perros
+              if sesion.nivel == 1
+                li 
+                  a(class="dropdown-item" href="/usuario/misMascotas") Mis mascotas
+        if sesion.nivel == 2
+          li(class="nav-item")
+            a(class="nav-link" href="/clientes") Clientes
+          li(class="nav-item")
+            a(class="nav-link" href="/perros") Perros
         li(class="nav-item dropdown")
           a(class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false") Publicaciones
           ul(class="dropdown-menu")

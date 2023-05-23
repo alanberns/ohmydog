@@ -5,6 +5,6 @@ const permisos = require('../helpers/permisos');
 
 router = express.Router();
 
-router.get('/misMascotas', usuariosController.misMascotas);
+router.get('/misMascotas', permisos.esCliente, usuariosController.misMascotas);
 
 module.exports = router;

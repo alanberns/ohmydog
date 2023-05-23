@@ -1,8 +1,9 @@
 const AuthError = require('./errors/authError');
 
 module.exports = {
-    isAuth: function isAuth(){
-        throw new AuthError();
+    isAuth: function isAuth(req, res, next){
+        if (!req.session.nombre) throw new AuthError();
+        else next();
     },
     
     esCliente: function esCliente(req, res, next){

@@ -17,14 +17,14 @@ const storage = multer.diskStorage({
 
 router = express.Router();
 
-router.get('/', perrosController.index);
-router.get('/registrar/:id',perrosController.registrarGet);
-router.post('/registrar',perrosController.registrarPost);
-router.post('/',perrosController.busqueda);
-router.get('/ver/:id',perrosController.verPerro);
-router.get('/:id/modificar',perrosController.modificarPerroGet);
-router.post('/:id/modificar',perrosController.modificarPerroPost);
-router.get('/:id/agregarFoto',perrosController.agregarFotoGet);
-router.post('/:id/agregarFoto', upload.single('link_foto'),perrosController.agregarFotoPost);
+router.get('/',  permisos.esAdmin, perrosController.index);
+router.get('/registrar/:id', permisos.esAdmin, perrosController.registrarGet);
+router.post('/registrar', permisos.esAdmin, perrosController.registrarPost);
+router.post('/', permisos.esAdmin, perrosController.busqueda);
+router.get('/ver/:id', permisos.esAdmin, perrosController.verPerro);
+router.get('/:id/modificar', permisos.esAdmin, perrosController.modificarPerroGet);
+router.post('/:id/modificar', permisos.esAdmin, perrosController.modificarPerroPost);
+router.get('/:id/agregarFoto', permisos.esAdmin, perrosController.agregarFotoGet);
+router.post('/:id/agregarFoto', upload.single('link_foto'), permisos.esAdmin, perrosController.agregarFotoPost);
 
 module.exports = router;
