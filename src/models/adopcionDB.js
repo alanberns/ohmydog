@@ -48,5 +48,16 @@ module.exports = {
                 estado: "Adoptado"
             }
         })
+    },
+
+    buscarAdopcionesByClienteId: async function buscarAdopcionesByClienteId(clienteId){
+        return await prisma.clientes.findUnique({
+            where: {
+                id: parseInt(clienteId),
+            },
+            include: {
+                adopciones: true
+            },
+        })
     }
 }

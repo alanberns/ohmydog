@@ -9,30 +9,6 @@ div(class="container-fluid")
 
   include ../partials/info.pug
 
-  div(class="container")
-    a(href="/adopciones/nuevo")
-      button(type="button" class="btn btn-info") Publicar adopcion
-    span 
-    a(href="/adopciones/misPublicaciones")
-      button(type="button" class="btn btn-info") Mis publicaciones
-
-
-  br
-  br
-  
-  form(class="d-flex" role="search" method="post" action="/adopciones/" id="formulario")
-    select(class="form-select" aria-label="Default select example", name="estado")
-      if(estado == "Activo")
-        option(selected value="Activo") En adopción
-        option(value="Adoptado") Adopciones concretadas
-      else 
-        option(value="Activo") En adopción
-        option(selected value="Adoptado") Adopciones concretadas
-    input(class="btn btn-info" type="submit" value="Buscar") 
-  
-  br
-  br
-
   table(class="table table-striped table-info table-hover")
     thead 
       tr 
@@ -40,6 +16,7 @@ div(class="container-fluid")
         th Raza
         th Origen
         th Ver detalles
+        th Confirmar adopción
     tbody 
     if(adopciones)
       each adopcion in adopciones
@@ -50,6 +27,13 @@ div(class="container-fluid")
           td 
             a(href="/adopciones/ver/"+adopcion.id)
               button(type="button" class="btn btn-info") Ver 
+          td 
+            if(adopcion.estado == "Activo")
+              a(href="/adopciones/confirmar/"+adopcion.id)
+                button(type="button" class="btn btn-info") Confirmar
+            else 
+              a
+                button(type="button" disabled class="btn btn-info") Adoptado
     else 
       tr 
         td

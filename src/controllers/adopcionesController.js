@@ -155,5 +155,23 @@ module.exports = {
         obtener id de la publi
         db.confirmarAdopcion(adopcion) -> estado="Adoptado"
         */
-    }
+    },
+
+    misPublicaciones: async (req,res) => {
+        /*
+        1 obtener email de la session
+        2 pedir a la db las publicaciones de adopcion del email
+        3 render
+        */
+        var result = await db.buscarAdopcionesByClienteId(req.session.usuario);
+        var adopciones = result.adopciones
+        if (adopciones.length === 0){
+            adopciones = null;
+        }
+        res.render('adopciones/mispublicaciones', { 
+            title: 'Adopciones',
+            message: 'Mis adopciones',
+            adopciones: adopciones
+        })
+    },
 }
