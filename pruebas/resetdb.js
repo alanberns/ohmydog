@@ -27,6 +27,10 @@ async function admins() {
 
 
 async function delete_all() {
+    await prisma.publicacion_adopcion.deleteMany();
+    await prisma.publicacion_servicios.deleteMany();
+    await prisma.perros.deleteMany();
+    await prisma.administradores.deleteMany();
     await prisma.clientes.deleteMany();
 }
 

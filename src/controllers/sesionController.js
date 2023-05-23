@@ -43,7 +43,8 @@ module.exports = {
                 res.render('sesion/iniciar', {
                     title: 'OhMyDog',
                     message: 'Iniciar Sesion',
-                    datos: req.body
+                    datos: req.body,
+                    error: "Email y/o contraseña incorrecto"
                 });
             }
         }

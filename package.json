@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js",
-    "resetdb": "node resetdb.js"
+    "resetdb": "node pruebas/resetdb.js",
+    "soloAdmin": "node pruebas/soloAdmin.js"
   },
   "keywords": [],
   "author": "",
