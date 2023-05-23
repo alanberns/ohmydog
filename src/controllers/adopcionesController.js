@@ -36,7 +36,6 @@ module.exports = {
         1 chequear permiso de cliente para acceder a la ruta(adopcionesRoutes)
         2 obtener datos de la adopcion a registrar y el cliente que la realiza
         */
-        // CLIENTEID SE DEBE OBTENER DE LA SESION, hardcodeo 1
         var adopcion = {
             nombre: "",
             edad: "",
@@ -45,8 +44,9 @@ module.exports = {
             sexo: "",
             observaciones: "",
             origen: "",
-            clienteId: 4
+            clienteId: req.session.usuario
         }
+        console.log(req.session)
         res.render('adopciones/nuevaAdopcion', {
             title: 'Publicar adopcion',
             message: 'Publicar adopcion',
@@ -71,7 +71,7 @@ module.exports = {
             observaciones: req.body.observaciones,
             origen: req.body.origen,
             estado: "Activo",
-            clienteId: req.body.clienteId    
+            clienteId: req.session.usuario  
         }
         // 2 helpers.validaciones.js 
         var result = validaciones.validarNuevaAdopcion(newAdopcion);
@@ -88,7 +88,7 @@ module.exports = {
         }
         else{
             // 3 dar el alta en la BD
-            db.agregarAdopcion(newAdopcion);
+            await db.agregarAdopcion(newAdopcion);
             
             res.render('exito', {
                 title: "Éxito",
