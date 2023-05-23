@@ -39,10 +39,10 @@ module.exports = {
         })
     },
 
-    confirmarAdopcion: async function confirmarAdopcion(adopcion){
+    confirmarAdopcion: async function confirmarAdopcion(adopcionId){
         return await prisma.publicacion_adopcion.update({
             where:{
-                id: parseInt(adopcion.id)
+                id: parseInt(adopcionId)
             },
             data:{
                 estado: "Adoptado"

@@ -151,10 +151,22 @@ module.exports = {
 
     confirmarAdopcion: async (req,res) => {
         /*
-        obtener id del dueño de la publi
-        obtener id de la publi
+        obtener id de la publicacion
         db.confirmarAdopcion(adopcion) -> estado="Adoptado"
         */
+        var adopcionId = req.params.id;
+        await db.confirmarAdopcion(adopcionId);
+        var result = await db.buscarAdopcionesByClienteId(req.session.usuario);
+        var adopciones = result.adopciones
+        if (adopciones.length === 0){
+            adopciones = null;
+        }
+        res.render('adopciones/mispublicaciones', { 
+            title: 'Adopciones',
+            message: 'Mis adopciones',
+            adopciones: adopciones,
+            info: "Adopción confirmada exitosamente"
+        })
     },
 
     misPublicaciones: async (req,res) => {

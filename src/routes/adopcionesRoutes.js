@@ -10,6 +10,7 @@ router.post('/nuevo',adopcionesController.registrarPost);
 router.get('/ver/:id',adopcionesController.verAdopcion);
 router.post('/',adopcionesController.buscarPorEstado);
 router.get('/misPublicaciones', adopcionesController.misPublicaciones);
+router.get('/confirmar/:id',adopcionesController.confirmarAdopcion);
 
 
 module.exports = router;
