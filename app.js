@@ -22,6 +22,7 @@ const serviciosRoutes = require('./src/routes/serviciosRoutes');
 const adopcionesRoutes = require('./src/routes/adopcionesRoutes');
 const sesionRoutes = require('./src/routes/sesionRoutes');
 const turnoRoutes = require('./src/routes/turnoRoutes');
+const usuariosRoutes = require('./src/routes/usuariosRoutes');
 
 
 
@@ -61,7 +62,7 @@ app.use('/servicios',serviciosRoutes);
 app.use('/adopciones',adopcionesRoutes);
 app.use('/sesion', sesionRoutes);
 app.use('/turno', turnoRoutes);
-
+app.use('/usuario',usuariosRoutes);
 
 
 //error handler
