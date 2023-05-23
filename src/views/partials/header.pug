@@ -6,6 +6,15 @@ nav(class="navbar navbar-expand-lg bg-body-tertiary" style={padding:'0px'})
       ul(class="navbar-nav")
         li(class="nav-item")
           a(class="nav-link active" aria-current="page" href="/") Home
+        li(class="nav-item dropdown")
+          a(class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false") Mi Cuenta
+          ul(class="dropdown-menu")
+            if !sesion.nombre
+              li
+                a(class="dropdown-item" href="/sesion/iniciar") Iniciar Sesi&oacute;n
+            else
+              li
+                a(class="dropdown-item" href="/sesion/cerrar") Cerrar Sesi&oacute;n
         li(class="nav-item")
           a(class="nav-link" href="/clientes") Clientes
         li(class="nav-item")
@@ -23,7 +32,12 @@ nav(class="navbar navbar-expand-lg bg-body-tertiary" style={padding:'0px'})
             li
               a(class="dropdown-item" href="#") Solicitudes
             li
+              a(class="dropdown-item" href="/turno/solicitar") Solicitar Turno
+            li
               a(class="dropdown-item" href="#") Próximos
-    p user
+    if sesion.nombre
+      p= sesion.nombre+" "+sesion.apellido
+    else
+      p An&oacute;nimo
 br
 br

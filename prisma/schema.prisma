@@ -19,6 +19,14 @@ model clientes {
   adopciones  publicacion_adopcion[]
 }
 
+model administradores {
+  id        Int       @id @default(autoincrement())
+  nombre    String    @db.VarChar(255)
+  apellido  String    @db.VarChar(255)
+  email     String    @unique @db.VarChar(255)
+  password  String    @db.VarChar(255)
+}
+
 model perros{
   id                Int            @id @default(autoincrement())
   nombre            String         @db.VarChar(255)
