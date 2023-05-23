@@ -7,7 +7,7 @@ router = express.Router();
 router.get('/', adopcionesController.index);
 router.get('/nuevo',adopcionesController.registrarGet);
 router.post('/nuevo',adopcionesController.registrarPost);
-router.get('/:id',adopcionesController.verAdopcion);
+router.get('/ver/:id',adopcionesController.verAdopcion);
 router.post('/',adopcionesController.buscarPorEstado);
 
 
