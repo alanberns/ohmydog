@@ -59,5 +59,16 @@ module.exports = {
                 adopciones: true
             },
         })
+    },
+
+    buscarAdopcionYClienteById: async function buscarAdopcionYClienteById(adopcionId){
+        return await prisma.publicacion_adopcion.findUnique({
+            where:{
+                id: parseInt(adopcionId)
+            },
+            include:{
+                cliente: true
+            }
+        })
     }
 }
