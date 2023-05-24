@@ -8,58 +8,58 @@ datasource db {
 }
 
 model clientes {
-  id          Int                       @id @default(autoincrement())
-  nombre      String                    @db.VarChar(255)
-  apellido    String                    @db.VarChar(255)
-  dni         Int                       @unique
-  telefono    String?                   @db.VarChar(255)
-  email       String                    @unique @db.VarChar(255)
-  password    String                    @db.VarChar(255)
-  perros      perros[]
-  adopciones  publicacion_adopcion[]
+  id         Int                    @id @default(autoincrement())
+  nombre     String                 @db.VarChar(255)
+  apellido   String                 @db.VarChar(255)
+  dni        Int                    @unique
+  telefono   String?                @db.VarChar(255)
+  email      String                 @unique @db.VarChar(255)
+  password   String                 @db.VarChar(255)
+  perros     perros[]
+  adopciones publicacion_adopcion[]
 }
 
 model administradores {
-  id        Int       @id @default(autoincrement())
-  nombre    String    @db.VarChar(255)
-  apellido  String    @db.VarChar(255)
-  email     String    @unique @db.VarChar(255)
-  password  String    @db.VarChar(255)
+  id       Int    @id @default(autoincrement())
+  nombre   String @db.VarChar(255)
+  apellido String @db.VarChar(255)
+  email    String @unique @db.VarChar(255)
+  password String @db.VarChar(255)
 }
 
-model perros{
-  id                Int            @id @default(autoincrement())
-  nombre            String         @db.VarChar(255)
-  raza              String         @db.VarChar(255)
-  color             String         @db.VarChar(255)
-  fecha_nacimiento  DateTime       @db.Timestamp(6)
-  observaciones     String         @db.VarChar(255)
-  link_foto         String?        @db.VarChar(255)
-  clienteId         Int?
-  cliente           clientes?      @relation(fields: [clienteId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+model perros {
+  id               Int       @id @default(autoincrement())
+  nombre           String    @db.VarChar(255)
+  raza             String    @db.VarChar(255)
+  color            String    @db.VarChar(255)
+  fecha_nacimiento DateTime  @db.Timestamp(6)
+  observaciones    String    @db.VarChar(255)
+  link_foto        String?   @db.VarChar(255)
+  clienteId        Int?
+  cliente          clientes? @relation(fields: [clienteId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
-model publicacion_servicios{
-  id              Int       @id @default(autoincrement())
-  servicio        String    @db.VarChar(255)
-  nombre          String    @db.VarChar(255)
-  apellido        String    @db.VarChar(255)
-  zona            String    @db.VarChar(255)
-  horario         String    @db.VarChar(255)
-  email_contacto  String    @db.VarChar(255)
-  estado          String    @db.VarChar(255)
+model publicacion_servicios {
+  id             Int    @id @default(autoincrement())
+  servicio       String @db.VarChar(255)
+  nombre         String @db.VarChar(255)
+  apellido       String @db.VarChar(255)
+  zona           String @db.VarChar(255)
+  horario        String @db.VarChar(255)
+  email_contacto String @db.VarChar(255)
 }
 
-model publicacion_adopcion{
-  id              Int         @id @default(autoincrement())
-  nombre          String      @db.VarChar(255)
-  edad            String      @db.VarChar(255)
-  raza            String      @db.VarChar(255)
-  color           String      @db.VarChar(255)
-  sexo            String      @db.VarChar(255)
-  observaciones   String      @db.VarChar(255)
-  origen          String      @db.VarChar(255)
-  estado          String      @db.VarChar(255)
-  clienteId       Int?
-  cliente         clientes?   @relation(fields: [clienteId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+model publicacion_adopcion {
+  id            Int       @id @default(autoincrement())
+  nombre        String    @db.VarChar(255)
+  edad          String    @db.VarChar(255)
+  raza          String    @db.VarChar(255)
+  color         String    @db.VarChar(255)
+  sexo          String    @db.VarChar(255)
+  observaciones String    @db.VarChar(255)
+  origen        String    @db.VarChar(255)
+  estado        String    @db.VarChar(255)
+  tamanio       String    @db.VarChar(255)
+  clienteId     Int?
+  cliente       clientes? @relation(fields: [clienteId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }

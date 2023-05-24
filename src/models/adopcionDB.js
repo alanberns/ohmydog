@@ -14,6 +14,7 @@ module.exports = {
                 observaciones: adopcion.observaciones,
                 origen: adopcion.origen,
                 estado: adopcion.estado,
+                tamanio: adopcion.tamanio,
                 cliente: { connect: { id: parseInt(adopcion.clienteId) } },
             }
         })

@@ -44,6 +44,7 @@ module.exports = {
             sexo: "",
             observaciones: "",
             origen: "",
+            tamanio: "",
             clienteId: req.session.usuario
         }
         console.log(req.session)
@@ -71,6 +72,7 @@ module.exports = {
             observaciones: req.body.observaciones,
             origen: req.body.origen,
             estado: "Activo",
+            tamanio: req.body.tamanio,
             clienteId: req.session.usuario  
         }
         // 2 helpers.validaciones.js 
