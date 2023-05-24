@@ -111,7 +111,7 @@ module.exports = {
                 res.render('servicios/nuevoServicio', {
                     title: 'Publicar servicio',
                     message: 'Publicar servicio',
-                    servicio: newServicio,
+                    servicio: servicio,
                     error: "El servicio ya está registrado para esa persona",
                 });
             }
@@ -148,10 +148,12 @@ module.exports = {
             }
             // 3
             else{
+                var esPropia = req.session.email == servicio.email_contacto;
                 res.render('servicios/servicio',{
                     title: "Servicio",
                     message: "Información del servicio",
-                    servicio: servicio
+                    servicio: servicio,
+                    esPropia: esPropia
                 })
             }
         } 

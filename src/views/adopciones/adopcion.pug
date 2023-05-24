@@ -36,24 +36,24 @@ div(class="container-fluid")
         label(for="color" class="form-label") Tamaño
         input(type="text" class="form-control" name="color" id="color" required readonly value=adopcion.tamanio)
 
-
-    br
-    div(class="container-fluid")
-      form(action="/adopciones/contactar" method="post" id="contacto") 
-        h4 Contactate!
-        if !sesion.nombre
-          div(class="mb-3")
-            label(for="nombre" class="form-label") Nombre
-            input(type="text" class="form-control" name="nombre" id="nombre" required value=nombre)
-          div(class="mb-3")
-            label(for="email" class="form-label") Email
-            input(type="email" class="form-control" name="email" id="email" required value=email)
-          label(for="id" class="form-label") 
-        input(type="hidden" class="form-control" name="id" id="id" required value=adopcion.id)
-        input(type="submit" class="btn btn-info" value="Contactar adopcion ")  
+    if !esPropia
       br
-      a(href="/adopciones")
-        button(type="button" class="btn btn-info") Atrás 
+      div(class="container-fluid")
+        form(action="/adopciones/contactar" method="post" id="contacto") 
+          h4 Contactate!
+          if !sesion.nombre
+            div(class="mb-3")
+              label(for="nombre" class="form-label") Nombre
+              input(type="text" class="form-control" name="nombre" id="nombre" required value=nombre)
+            div(class="mb-3")
+              label(for="email" class="form-label") Email
+              input(type="email" class="form-control" name="email" id="email" required value=email)
+            label(for="id" class="form-label") 
+          input(type="hidden" class="form-control" name="id" id="id" required value=adopcion.id)
+          input(type="submit" class="btn btn-info" value="Contactar adopcion ")  
+    br
+    a(href="/adopciones")
+      button(type="button" class="btn btn-info") Atrás 
 
 
 

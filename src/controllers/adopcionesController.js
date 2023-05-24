@@ -114,7 +114,7 @@ module.exports = {
         }
         else{
             // 2 validar que existe el adopcion
-            var adopcion = await db.buscarAdopcionById(idAdopcion);
+            var adopcion = await db.buscarAdopcionYClienteById(idAdopcion);
             if (adopcion == null){
                 try{
                     throw new NotFoundError();
@@ -125,10 +125,12 @@ module.exports = {
             }
             // 3
             else{
+                var esPropia = req.session.email == adopcion.cliente.email;
                 res.render('adopciones/adopcion', {
                     title: 'Adopción', 
                     message: 'Adopción',
-                    adopcion: adopcion
+                    adopcion: adopcion,
+                    esPropia: esPropia
                 });
             }
         }
