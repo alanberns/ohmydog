@@ -59,8 +59,6 @@ module.exports = {
     validarBusquedaPerro: function(nombre){
         //expresion regular
         var regexNombre = /^[a-zA-Z ]{1,50}$/;
-        var regexHorario = /^[a-zA-Z0-9-:/ ]{1,255}$/;
-        var regexEmail = /^[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}$/;
 
         var validez = "válido";
         if(!regexNombre.test(nombre)) validez = "Ingrese un nombre válido.";
@@ -68,19 +66,18 @@ module.exports = {
         return validez;
     },
 
-    validarNuevoServicio: function(servicio){
+    validarNuevoServicio: function(servicio, dias_seleccionados, horario_inicio, horario_fin){
         // Expresiones regulares
         var regexNombre = /^[a-zA-Z ]{1,50}$/;
-        var regexHorario = /^[a-zA-Z0-9-:/ ]{1,255}$/;
         var regexEmail = /^[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}$/;
 
         var validez = "valido";
         if(!regexNombre.test(servicio.servicio)) validez = "Ingrese un servicio válido.";
         else if(!regexNombre.test(servicio.nombre)) validez = "Ingrese un nombre válido.";
         else if(!regexNombre.test(servicio.apellido)) validez = "Ingrese un apellido válido.";
-        else if(!regexNombre.test(servicio.zona)) validez = "Ingrese una zona válido.";
-        else if(!regexHorario.test(servicio.hoario)) validez = "Ingrese un horario válido.";
         else if(!regexEmail.test(servicio.email_contacto)) validez = "Ingrese un email válido.";
+        else if(dias_seleccionados == 0) validez = "Seleccioná por lo menos un día";
+        else if(horario_inicio >= horario_fin) validez = "El horario de inicio es igual o posterior al horario de fin"
 
         return validez;
     },

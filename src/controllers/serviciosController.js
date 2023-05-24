@@ -67,11 +67,32 @@ module.exports = {
             nombre: req.body.nombre,
             apellido: req.body.apellido,
             zona: req.body.zona,
-            horario: req.body.horario,
+            horario: "",
             email_contacto: req.body.email_contacto,
         }
+        var servicio = {
+            servicio: req.body.servicio,
+            nombre: req.body.nombre,
+            apellido: req.body.apellido,
+            zona: req.body.zona,
+            horario_inicio: req.body.horario_inicio,
+            horario_fin: req.body.horario_fin,
+            Lunes: req.body.Lunes,
+            Martes: req.body.Martes,
+            Miercoles: req.body.Miercoles,
+            Jueves: req.body.Jueves,
+            Viernes: req.body.Jueves,
+            Sabado: req.body.Sabado,
+            Domingo: req.body.Domingo,
+            email_contacto: req.body.email_contacto,
+        }
+
+        var dias = [req.body.Lunes,req.body.Martes,req.body.Miercoles,req.body.Jueves,req.body.Viernes,req.body.Sabado,req.body.Domingo];
+        var dias_seleccionados = dias.filter(dia => dia != undefined).toString();
+        newServicio.horario = req.body.horario_inicio+" a "+req.body.horario_fin+" los días: "+dias_seleccionados;
+
         // 2 helpers.validaciones.js validaciones.nombre, dni, telefono. email apellido. obtener error
-        var result = validaciones.validarNuevoServicio(newServicio);
+        var result = validaciones.validarNuevoServicio(newServicio, dias_seleccionados, servicio.horario_inicio, servicio.horario_fin);
         if (result != "valido"){
             
             //validacion fallida
@@ -79,7 +100,7 @@ module.exports = {
             res.render('servicios/nuevoServicio', {
                 title: 'Publicar servicio',
                 message: 'Publicar servicio',
-                servicio: newServicio,
+                servicio: servicio,
                 error: result
             });
         }

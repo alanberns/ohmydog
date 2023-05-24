@@ -22,10 +22,62 @@ div(class="container-fluid")
         input(type="text" class="form-control" name="apellido" id="apellido" required value=servicio.apellido)
       div(class="mb-3")
         label(for="zona" class="form-label") Zona
-        input(type="text" class="form-control" name="zona" id="zona" required value=servicio.zona)
+        select(class="form-select" aria-label="Default select example", name="zona" required value=servicio.zona)
+          if servicio.zona 
+            option(value=servicio.zona selected) #{servicio.zona}
+          option(value="La Plata") La Plata
+          option(value="Villa Elisa") Villa Elisa
+          option(value="Tolosa") Tolosa
+          option(value="City Bell") City Bell
+      div(class="mb-3") Días
+        div(class="form-check" style="width:16vw")
+          label(class="form-check-label" for="flexCheckDefault") Lunes
+          if servicio.Lunes != undefined
+            input(class="form-check-input" type="checkbox" value="Lunes" id="flexCheckDefault" name="Lunes"  checked )
+          else 
+            input(class="form-check-input" type="checkbox" value="Lunes" id="flexCheckDefault" name="Lunes"   )
+        div(class="form-check" style="width:16vw")  
+          label(class="form-check-label" for="flexCheckDefault") Martes
+          if servicio.Martes != undefined
+            input(class="form-check-input" type="checkbox" value="Martes" id="flexCheckDefault" name="Martes" checked ) 
+          else 
+            input(class="form-check-input" type="checkbox" value="Martes" id="flexCheckDefault" name="Martes") 
+        div(class="form-check" style="width:16vw")  
+          label(class="form-check-label" for="flexCheckDefault") Miércoles
+          if servicio.Miercoles != undefined
+            input(class="form-check-input" type="checkbox" value="Miércoles" id="flexCheckDefault" name="Miércoles" checked ) 
+          else 
+            input(class="form-check-input" type="checkbox" value="Miércoles" id="flexCheckDefault" name="Miércoles") 
+        div(class="form-check" style="width:16vw")  
+          label(class="form-check-label" for="flexCheckDefault") Jueves
+          if servicio.Jueves != undefined
+            input(class="form-check-input" type="checkbox" value="Jueves" id="flexCheckDefault" name="Jueves" checked ) 
+          else 
+            input(class="form-check-input" type="checkbox" value="Jueves" id="flexCheckDefault" name="Jueves") 
+        div(class="form-check" style="width:16vw")  
+          label(class="form-check-label" for="flexCheckDefault") Viernes
+          if servicio.Viernes != undefined
+            input(class="form-check-input" type="checkbox" value="Viernes" id="flexCheckDefault" name="Viernes" checked ) 
+          else 
+            input(class="form-check-input" type="checkbox" value="Viernes" id="flexCheckDefault" name="Viernes") 
+        div(class="form-check" style="width:16vw")  
+          label(class="form-check-label" for="flexCheckDefault") Sábado
+          if servicio.Sabado != undefined
+            input(class="form-check-input" type="checkbox" value="Sábado" id="flexCheckDefault" name="Sábado" checked ) 
+          else 
+            input(class="form-check-input" type="checkbox" value="Sábado" id="flexCheckDefault" name="Sábado") 
+        div(class="form-check" style="width:16vw")  
+          label(class="form-check-label" for="flexCheckDefault") Domingo
+          if servicio.Domingo != undefined
+            input(class="form-check-input" type="checkbox" value="Domingo" id="flexCheckDefault" name="Domingo" checked ) 
+          else 
+            input(class="form-check-input" type="checkbox" value="Domingo" id="flexCheckDefault" name="Domingo") 
       div(class="mb-3")
-        label(for="horario" class="form-label") Horario
-        input(type="text" class="form-control" name="horario" id="horario" required value=servicio.horario)
+        label(for="horario_inicio" class="form-label") Horario de inicio
+        input(type="time" class="form-control" name="horario_inicio" id="horario_inicio" required value=servicio.horario_inicio)
+      div(class="mb-3")
+        label(for="horario_fin" class="form-label") Horario de fin
+        input(type="time" class="form-control" name="horario_fin" id="horario_fin" required value=servicio.horario_fin)
       div(class="mb-3")
         label(for="email_contacto" class="form-label") Email
         input(type="email" class="form-control" name="email_contacto" id="email_contacto", value=servicio.email_contacto)
