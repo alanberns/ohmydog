@@ -9,8 +9,9 @@ div(class="container-fluid")
 
   include ../partials/info.pug
 
-  a(href="/servicios/nuevo")
-    button(type="button" class="btn btn-info") Publicar servicio
+  if (sesion.nivel == 2)
+    a(href="/servicios/nuevo")
+      button(type="button" class="btn btn-info") Publicar servicio
 
   br
   br

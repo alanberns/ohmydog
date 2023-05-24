@@ -34,17 +34,12 @@ module.exports = {
                 zona: servicio.zona,
                 horario: servicio.horario,
                 email_contacto: servicio.email_contacto,
-                estado: servicio.estado
             }
         });
     },
 
     listarServicios: async function listarServicios() {
-        return await prisma.publicacion_servicios.findMany({
-            where:{
-                estado: "Publicado"
-            }
-        })
+        return await prisma.publicacion_servicios.findMany()
     },
 
     buscarServicioById: async function buscarServicioById(servicioId) {
@@ -54,12 +49,4 @@ module.exports = {
             }
         })
     },
-
-    buscarServicioByEstado: async function buscarServicioByEstado(estado){
-        return await prisma.publicacion_servicios.findMany({
-            where:{
-                estado: estado
-            }
-        })
-    }
 }

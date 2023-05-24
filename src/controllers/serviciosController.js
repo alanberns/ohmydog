@@ -21,7 +21,7 @@ module.exports = {
         else{
             var error = null;
         }
-        var servicios = await db.buscarServicioByEstado("Publicado");
+        var servicios = await db.listarServicios();
         console.log(servicios)
         if (servicios.length === 0){
             servicios = null;
@@ -69,7 +69,6 @@ module.exports = {
             zona: req.body.zona,
             horario: req.body.horario,
             email_contacto: req.body.email_contacto,
-            estado: "Solicitado"
         }
         // 2 helpers.validaciones.js validaciones.nombre, dni, telefono. email apellido. obtener error
         var result = validaciones.validarNuevoServicio(newServicio);
