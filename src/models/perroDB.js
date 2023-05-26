@@ -71,6 +71,9 @@ module.exports = {
         return await prisma.perros.findUnique({
             where: {
                 id: parseInt(perroId)
+            },
+            include:{
+                cliente: true
             }
         })
     },

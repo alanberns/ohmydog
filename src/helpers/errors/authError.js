@@ -1,9 +1,9 @@
 class AuthError extends Error {
     constructor() {
-        super("No tienes permitido acceder a esta página");
+        super("Unauthorized, No estás logueado");
 
-        this.name = "Error de Autenticación";
-        this.status = 403;
+        this.name = "AuthError";
+        this.status = 401;
     }
 
     toJson(){

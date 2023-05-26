@@ -14,7 +14,10 @@ div(class="container-fluid")
       img(src=perro.link_foto width="100vw")
     form(action="#")
       div(class="mb-3")
-        label(for="nombre" class="form-label") Nombre
+        label(for="nya" class="form-label") Nombre y apellido del dueño
+        input(type="text" class="form-control" name="nya" id="nya" required readonly value=perro.cliente.nombre+" "+perro.cliente.apellido)
+      div(class="mb-3")
+        label(for="nombre" class="form-label") Nombre del perro
         input(type="text" class="form-control" name="nombre" id="nombre" required readonly value=perro.nombre)
       div(class="mb-3")
         label(for="raza" class="form-label") Raza
@@ -31,11 +34,8 @@ div(class="container-fluid")
 
     br
     div(class="container-fluid")
-      a(href="/perros/"+perro.id+"/modificar")
-        button(type="button" class="btn btn-info") Modificar datos
-      span  
-      a(href="/perros/"+perro.id+"/agregarFoto")
-        button(type="button" class="btn btn-info") Añadir foto
+      a(href="/usuario/misMascotas")
+        button(type="button" class="btn btn-info") Volver a mis mascotas
 
 
 include ../partials/footer.pug
