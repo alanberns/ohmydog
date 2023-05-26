@@ -251,9 +251,21 @@ module.exports = {
                         error: "El cliente ya tiene un perro registrado con el nombre ingresado",
                     });
                 }
+                else{
+                    // nuevo nombre estaba disponible
+                    // 3 dar el alta en la BBDD
+                    perroMod.fecha_nacimiento = new Date(req.body.fecha_nacimiento);
+                    await db.modificarPerro(perroMod);
+            
+            res.render('exito', {
+                title: "Éxito",
+                message: "Éxito",
+                info: "Los datos de la mascota se modificaron exitosamente"
+            });
+                }
             }
             else{
-            // no modifico el nombre o el nuevo nombre estaba disponible
+            // no modifico el nombre
             // 3 dar el alta en la BBDD
             perroMod.fecha_nacimiento = new Date(req.body.fecha_nacimiento);
             await db.modificarPerro(perroMod);
