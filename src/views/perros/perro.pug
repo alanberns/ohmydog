@@ -1,0 +1,44 @@
+include ../partials/head.pug
+include ../partials/header.pug
+div(class="container-fluid")
+  //- aca va la pagina hasta footer. inicia con 1 tab
+  h1= message
+
+  br
+  br
+
+  include ../partials/info.pug
+
+  div(class="")
+    if(perro.link_foto)
+      img(src=perro.link_foto width="100vw")
+    form(action="#")
+      div(class="mb-3")
+        label(for="nya" class="form-label") Nombre y apellido del dueño
+        input(type="text" class="form-control" name="nya" id="nya" required readonly value=perro.cliente.nombre+" "+perro.cliente.apellido)
+      div(class="mb-3")
+        label(for="nombre" class="form-label") Nombre del perro
+        input(type="text" class="form-control" name="nombre" id="nombre" required readonly value=perro.nombre)
+      div(class="mb-3")
+        label(for="raza" class="form-label") Raza
+        input(type="text" class="form-control" name="raza" id="raza" required readonly value=perro.raza)
+      div(class="mb-3")
+        label(for="color" class="form-label") Color
+        input(type="text" class="form-control" name="color" id="color" required readonly value=perro.color)
+      div(class="mb-3")
+        label(for="observaciones" class="form-label") Observaciones
+        input(type="text" class="form-control" name="observaciones" id="observaciones" required readonly value=perro.observaciones)
+      div(class="mb-3")
+        label(for="fecha_nacimiento" class="form-label") Fecha de nacimiento
+        input(type="date" class="form-control" name="fecha_nacimiento" id="fecha_nacimiento" required readonly value=perro.fecha_nacimiento.toISOString().slice(0,10))
+
+    br
+    div(class="container-fluid")
+      a(href="/perros/"+perro.id+"/modificar")
+        button(type="button" class="btn btn-info") Modificar datos
+      span  
+      a(href="/perros/"+perro.id+"/agregarFoto")
+        button(type="button" class="btn btn-info") Añadir foto
+
+
+include ../partials/footer.pug
