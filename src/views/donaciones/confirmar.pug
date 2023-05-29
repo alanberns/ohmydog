@@ -1,0 +1,38 @@
+include ../partials/head.pug
+include ../partials/header.pug
+div(class="container-fluid")
+  //- aca va la pagina hasta footer. inicia con 1 tab
+  h1= message
+
+  br
+  br
+
+  include ../partials/info.pug
+
+  div(class="")
+    form(action="/donaciones/donar/"+datos.id method="post")
+      div(class="mb-3")
+        label(for="Alias" class="form-label") Alias
+        input(type="text" class="form-control" name="Alias" id="Alias" required disabled value=datos.alias)
+      div(class="mb-3")
+        label(for="nombre" class="form-label") Nombre
+        input(type="text" class="form-control" name="nombre" id="nombre" required disabled value=datos.nombre)
+      div(class="mb-3")
+        label(for="monto_donacion" class="form-label") Monto a donar
+        input(type="number" class="form-control" id="monto_donacion" required disabled value=datos.monto)
+        input(type="hidden" class="form-control" name="monto_donacion" id="monto_donacion" value=datos.monto)
+      div(class="mb-3")
+        label(for="nombre" class="form-label") Nombre de la campaña de donación
+        input(type="text" class="form-control" name="nombre" id="nombre" required disabled value=datos.nombre_donacion)
+      div(class="mb-3")
+        label(for="id" class="form-label") 
+        input(type="hidden" class="form-control" name="id" id="id" value=datos.id)
+      
+      input(type="submit" class="btn btn-info" value="Confirmar donacion")
+
+    br
+    div(class="container-fluid")
+      a(href="/donaciones")
+        button(type="button" class="btn btn-info") Cancelar
+
+include ../partials/footer.pug

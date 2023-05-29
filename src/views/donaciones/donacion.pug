@@ -1,0 +1,45 @@
+include ../partials/head.pug
+include ../partials/header.pug
+div(class="container-fluid")
+  //- aca va la pagina hasta footer. inicia con 1 tab
+  h1= message
+
+  br
+  br
+
+  include ../partials/info.pug
+
+  div(class="")
+    form(action="/donaciones/donar/"+donacion.id+"/confirmarDonacion" method="post")
+      div(class="mb-3")
+        label(for="nombre" class="form-label") Nombre de la campaña de donación
+        input(type="text" class="form-control" id="nombre" required disabled value=donacion.nombre)
+        input(type="hidden" class="form-control" name="nombre" id="nombre" value=donacion.nombre)
+      div(class="mb-3")
+        label(for="monto" class="form-label") Monto a alcanzar
+        input(type="number" class="form-control"  id="monto" required disabled value=donacion.monto)
+      div(class="mb-3")
+        label(for="monto_actual" class="form-label") Monto conseguido
+        input(type="number" class="form-control" name="monto_actual" id="monto_actual" required disabled value=donacion.monto_actual)
+      div(class="mb-3")
+        label(for="fecha_fin" class="form-label") Fecha de finalización
+        input(type="date" class="form-control" name="fecha_fin" id="fecha_fin" required disabled value=donacion.fecha_fin.toISOString().slice(0,10))
+      div(class="mb-3")
+        label(for="id" class="form-label") 
+        input(type="hidden" class="form-control" name="id" id="id" value=donacion.id)
+      div(class="mb-3")
+        label(for="monto_donacion" class="form-label") Monto a donar
+        select(class="form-select" aria-label="Default select example", name="monto_donacion" required)
+          option(value="100") 100
+          option(value="500") 500
+          option(value="1000") 1000
+          option(value="2000") 2000
+          option(value="4000") 4000
+      input(type="submit" class="btn btn-info" value="Donar")
+
+    br
+    div(class="container-fluid")
+      a(href="/donaciones")
+        button(type="button" class="btn btn-info") Atrás
+
+include ../partials/footer.pug

@@ -15,6 +15,7 @@ model clientes {
   telefono   String?                @db.VarChar(255)
   email      String                 @unique @db.VarChar(255)
   password   String                 @db.VarChar(255)
+  descuento  Int
   perros     perros[]
   adopciones publicacion_adopcion[]
 }
@@ -62,4 +63,12 @@ model publicacion_adopcion {
   tamanio       String    @db.VarChar(255)
   clienteId     Int?
   cliente       clientes? @relation(fields: [clienteId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model publicacion_donacion {
+  id            Int       @id @default(autoincrement())
+  nombre        String    @db.VarChar(255)
+  monto         Int
+  fecha_fin     DateTime  @db.Timestamp(6)
+  monto_actual  Int
 }

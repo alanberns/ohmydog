@@ -1,0 +1,59 @@
+include ../partials/head.pug
+include ../partials/header.pug
+div(class="container-fluid")
+  //- aca va la pagina hasta footer. inicia con 1 tab
+  h1= message
+
+  br
+  br
+
+  include ../partials/info.pug
+  if sesion.nivel == 2
+    div(class="container")
+      a(href="/donaciones/nuevo")
+        button(type="button" class="btn btn-info") Publicar campaña
+
+  br
+  br
+  
+  form(class="d-flex" role="search" method="post" action="/donaciones/" id="formulario")
+    select(class="form-select" aria-label="Default select example", name="estado")
+      if(activas)
+        option(selected value=true) Campañas activas
+        option(value=false) Campañas finalizadas
+      else 
+        option(value=true) Campañas activas
+        option(selected value=false) Campañas finalizadas
+    input(class="btn btn-info" type="submit" disabled value="Buscar") 
+  
+  br
+  br
+
+  table(class="table table-striped table-info table-hover")
+    thead 
+      tr 
+        th Campaña
+        th Monto a conseguir 
+        th Monto conseguido
+        th Fecha de cierre
+        th Donar
+    tbody 
+    if(donaciones)
+      each donacion in donaciones
+        tr  
+          td #{donacion.nombre}
+          td $ #{donacion.monto}
+          td $ #{donacion.monto_actual}
+          td #{donacion.fecha_fin.toISOString().slice(0,10)}
+          td 
+            a(href="/donaciones/donar/"+donacion.id)
+              button(type="button" class="btn btn-info") Donar 
+    else 
+      tr 
+        td
+        td
+        td No se encontraron donaciones
+        td 
+        td
+
+include ../partials/footer.pug

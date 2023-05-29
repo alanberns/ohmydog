@@ -58,5 +58,18 @@ module.exports = {
                 id: parseInt(id)
             }
         })
-    }
+    },
+
+    sumarMontoDescuento: async function sumarMontoDescuento(clienteId,beneficio){
+        return await prisma.clientes.update({
+            where:{
+                id: parseInt(clienteId)
+            },
+            data:{
+                descuento:{
+                    increment: parseInt(beneficio),
+                }
+            }
+        })
+    },
 }

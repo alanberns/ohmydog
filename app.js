@@ -23,7 +23,7 @@ const adopcionesRoutes = require('./src/routes/adopcionesRoutes');
 const sesionRoutes = require('./src/routes/sesionRoutes');
 const turnoRoutes = require('./src/routes/turnoRoutes');
 const usuariosRoutes = require('./src/routes/usuariosRoutes');
-
+const donacionesRoutes = require('./src/routes/donacionesRoutes');
 
 
 //indicar a la app lo que debe usar
@@ -63,6 +63,7 @@ app.use('/adopciones',adopcionesRoutes);
 app.use('/sesion', sesionRoutes);
 app.use('/turno', turnoRoutes);
 app.use('/usuario',usuariosRoutes);
+app.use('/donaciones',donacionesRoutes);
 
 
 //error handler

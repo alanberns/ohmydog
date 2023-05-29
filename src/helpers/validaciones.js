@@ -121,5 +121,20 @@ module.exports = {
         else if(!regexEmail.test(email)) validez = "Ingrese un email válido.";
 
         return validez;
+    },
+
+    validarNuevaDonacion: function(donacion){
+        // Expresiones regulares
+        var regexNombre = /^[a-zA-Z ]{1,50}$/;
+        // Fecha de HOY en formato aaaa-mm-dd
+        var hoy = new Date().toISOString().slice(0, 10);
+
+        var validez = "valido";
+
+        if(!regexNombre.test(donacion.nombre)) validez = "Ingrese un nombre válido.";
+        else if(hoy >= donacion.fecha_fin) validez = "La fecha debe ser posterior a hoy";
+        else if(donacion.monto <= 0) validez = "El monto debe ser positivo";
+
+        return validez;
     }
 }

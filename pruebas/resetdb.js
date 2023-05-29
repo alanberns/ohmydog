@@ -11,6 +11,7 @@ async function index() {
             dni: 23888555,
             telefono: "2217770099",
             password: "12345",
+            descuento: 0,
         }
     })
 }
