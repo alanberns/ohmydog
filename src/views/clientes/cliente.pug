@@ -12,20 +12,30 @@ div(class="container-fluid")
   div(class="")
     form(action="#")
       div(class="mb-3")
-        label(for="email" class="form-label") Email 
-        input(type="email" class="form-control" name="email" id="email" required readonly value=cliente.email) 
+        label(for="email" class="form-label") 
+          b Email 
+        input(type="email" class="form-control" id="email" disabled value=cliente.email) 
+        input(type="hidden" class="form-control" name="email" id="email" value=cliente.email) 
       div(class="mb-3")
-        label(for="nombre" class="form-label") Nombre
-        input(type="text" class="form-control" name="nombre" id="nombre" required readonly value=cliente.nombre)
+        label(for="nombre" class="form-label") 
+          b Nombre
+        input(type="text" class="form-control" id="nombre" disabled value=cliente.nombre)
+        input(type="hidden" class="form-control" name="nombre" id="nombre" value=cliente.nombre)
       div(class="mb-3")
-        label(for="apellido" class="form-label") Apellido
-        input(type="text" class="form-control" name="apellido" id="apellido" required readonly value=cliente.apellido)
+        label(for="apellido" class="form-label") 
+          b Apellido
+        input(type="text" class="form-control" id="apellido" disabled value=cliente.apellido)
+        input(type="hidden" class="form-control" name="apellido" id="apellido" value=cliente.apellido)
       div(class="mb-3")
-        label(for="dni" class="form-label") DNI
-        input(type="number" class="form-control" name="dni" id="dni" required readonly value=cliente.dni)
+        label(for="dni" class="form-label") 
+          b DNI
+        input(type="number" class="form-control" id="dni" disabled value=cliente.dni)
+        input(type="hidden" class="form-control" name="dni" id="dni" value=cliente.dni)
       div(class="mb-3")
-        label(for="telefono" class="form-label") Teléfono
-        input(type="text" class="form-control" name="telefono" id="telefono" required readonly value=cliente.telefono)
+        label(for="telefono" class="form-label") 
+          b Teléfono
+        input(type="number" class="form-control" id="telefono" disabled value=cliente.telefono)
+        input(type="hidden" class="form-control" name="telefono" id="telefono" value=cliente.telefono)
 
     br
     div(class="container-fluid")

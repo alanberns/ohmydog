@@ -36,7 +36,8 @@ div(class="container-fluid")
         th Monto a conseguir 
         th Monto conseguido
         th Fecha de cierre
-        th Donar
+        if sesion.nivel == 1
+          th Donar
     tbody 
     if(donaciones)
       each donacion in donaciones
@@ -45,15 +46,17 @@ div(class="container-fluid")
           td $ #{donacion.monto}
           td $ #{donacion.monto_actual}
           td #{donacion.fecha_fin.toISOString().slice(0,10)}
-          td 
-            a(href="/donaciones/donar/"+donacion.id)
-              button(type="button" class="btn btn-info") Donar 
+          if sesion.nivel == 1
+            td 
+              a(href="/donaciones/donar/"+donacion.id)
+                button(type="button" class="btn btn-info") Donar 
     else 
       tr 
         td
         td
         td No se encontraron donaciones
         td 
-        td
+        if sesion.nivel == 1
+          td
 
 include ../partials/footer.pug

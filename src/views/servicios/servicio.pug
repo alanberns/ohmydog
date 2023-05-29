@@ -12,20 +12,30 @@ div(class="container-fluid")
   div(class="")
     form(action="#")
       div(class="mb-3")
-        label(for="servicio" class="form-label") Servicio 
-        input(type="text" class="form-control" name="servicio" id="servicio" required readonly value=servicio.servicio) 
+        label(for="servicio" class="form-label") 
+          b Servicio 
+        input(type="text" class="form-control" id="servicio" disabled value=servicio.servicio) 
+        input(type="hidden" class="form-control" name="servicio" id="servicio" value=servicio.servicio) 
       div(class="mb-3")
-        label(for="nombre" class="form-label") Nombre
-        input(type="text" class="form-control" name="nombre" id="nombre" required readonly value=servicio.nombre)
+        label(for="nombre" class="form-label") 
+          b Nombre
+        input(type="text" class="form-control" id="nombre" disabled value=servicio.nombre)
+        input(type="hidden" class="form-control" name="nombre" id="nombre" value=servicio.nombre)
       div(class="mb-3")
-        label(for="apellido" class="form-label") Apellido
-        input(type="text" class="form-control" name="apellido" id="apellido" required readonly value=servicio.apellido)
+        label(for="apellido" class="form-label") 
+          b Apellido
+        input(type="text" class="form-control" id="apellido" disabled value=servicio.apellido)
+        input(type="hidden" class="form-control" name="apellido" id="apellido" value=servicio.apellido)
       div(class="mb-3")
-        label(for="zona" class="form-label") Zona
-        input(type="text" class="form-control" name="zona" id="zona" required readonly value=servicio.zona)
+        label(for="zona" class="form-label") 
+          b Zona
+        input(type="text" class="form-control" id="zona" disabled value=servicio.zona)
+        input(type="hidden" class="form-control" name="zona" id="zona" value=servicio.zona)
       div(class="mb-3")
-        label(for="horario" class="form-label") Horario
-        input(type="text" class="form-control" name="horario" id="horario" required readonly value=servicio.horario)
+        label(for="horario" class="form-label") 
+          b Horario
+        input(type="text" class="form-control" id="horario" disabled value=servicio.horario)
+        input(type="hidden" class="form-control" name="horario" id="horario" value=servicio.horario)
 
     if !esPropia
       br

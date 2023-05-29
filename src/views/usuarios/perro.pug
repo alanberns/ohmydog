@@ -14,23 +14,35 @@ div(class="container-fluid")
       img(src=perro.link_foto width="100vw")
     form(action="#")
       div(class="mb-3")
-        label(for="nya" class="form-label") Nombre y apellido del dueño
-        input(type="text" class="form-control" name="nya" id="nya" required readonly value=perro.cliente.nombre+" "+perro.cliente.apellido)
+        label(for="nya" class="form-label") 
+          b Nombre y apellido del dueño
+        input(type="hidden" class="form-control" name="nya" id="nya" value=perro.cliente.nombre+" "+perro.cliente.apellido)
+        input(type="text" class="form-control" id="nya" disabled value=perro.cliente.nombre+" "+perro.cliente.apellido)
       div(class="mb-3")
-        label(for="nombre" class="form-label") Nombre del perro
-        input(type="text" class="form-control" name="nombre" id="nombre" required readonly value=perro.nombre)
+        label(for="nombre" class="form-label") 
+          b Nombre del perro
+        input(type="hidden" class="form-control" name="nombre" id="nombre" value=perro.nombre)
+        input(type="text" class="form-control" id="nombre" disabled value=perro.nombre)
       div(class="mb-3")
-        label(for="raza" class="form-label") Raza
-        input(type="text" class="form-control" name="raza" id="raza" required readonly value=perro.raza)
+        label(for="raza" class="form-label") 
+          b Raza
+        input(type="hidden" class="form-control" name="raza" id="raza" value=perro.raza)
+        input(type="text" class="form-control" id="raza" disabled value=perro.raza)
       div(class="mb-3")
-        label(for="color" class="form-label") Color
-        input(type="text" class="form-control" name="color" id="color" required readonly value=perro.color)
+        label(for="color" class="form-label") 
+          b Color
+        input(type="hidden" class="form-control" name="color" id="color" value=perro.color)
+        input(type="text" class="form-control" id="color" disabled value=perro.color)
       div(class="mb-3")
-        label(for="observaciones" class="form-label") Observaciones
-        input(type="text" class="form-control" name="observaciones" id="observaciones" required readonly value=perro.observaciones)
+        label(for="observaciones" class="form-label") 
+          b Observaciones
+        input(type="hidden" class="form-control" name="observaciones" id="observaciones" value=perro.observaciones)
+        input(type="text" class="form-control" id="observaciones" disabled value=perro.observaciones)
       div(class="mb-3")
-        label(for="fecha_nacimiento" class="form-label") Fecha de nacimiento
-        input(type="date" class="form-control" name="fecha_nacimiento" id="fecha_nacimiento" required readonly value=perro.fecha_nacimiento.toISOString().slice(0,10))
+        label(for="fecha_nacimiento" class="form-label") 
+          b Fecha de nacimiento
+        input(type="hidden" class="form-control" name="fecha_nacimiento" id="fecha_nacimiento" value=perro.fecha_nacimiento.toISOString().slice(0,10))
+        input(type="date" class="form-control" id="fecha_nacimiento" disabled value=perro.fecha_nacimiento.toISOString().slice(0,10))
 
     br
     div(class="container-fluid")
