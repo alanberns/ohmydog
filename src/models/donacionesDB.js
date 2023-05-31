@@ -28,7 +28,8 @@ module.exports = {
                 nombre: donacion.nombre,
                 monto: donacion.monto,
                 fecha_fin: donacion.fecha_fin,
-                monto_actual: donacion.monto_actual
+                monto_actual: donacion.monto_actual,
+                fecha_inicio: donacion.fecha_inicio,
             }
         })
     },

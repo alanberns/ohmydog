@@ -27,15 +27,21 @@ module.exports = {
         /*
         1 enviar el formato de objeto a la ruta
         */
+        let hoy = new Date();
+        let DIA_EN_MILISEGUNDOS = 24 * 60 * 60 * 1000;
+        let mañana_date = new Date(hoy.getTime() + DIA_EN_MILISEGUNDOS);
+        let mañana = mañana_date.toISOString().slice(0, 10);
         var donacion = {
             nombre: "",
             monto: 0,
             fecha_fin: null,
+            fecha_inicio: new Date(Date.now())
         }
         res.render('donaciones/nuevo', {
             title: "Nueva donación",
             message: "Nueva Donación",
-            donacion: donacion
+            donacion: donacion,
+            mañana: mañana
         });
     },
 

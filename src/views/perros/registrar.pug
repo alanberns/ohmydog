@@ -28,24 +28,24 @@ div(class="container-fluid")
         input(type="hidden" class="form-control" name="clienteEmail" id="clienteEmail", value=cliente.email)
       div(class="mb-3")
         label(for="nombre" class="form-label") 
-          b Nombre
-        input(type="text" class="form-control" name="nombre" id="nombre" required value=perro.nombre)
+          b Nombre *
+        input(type="text" class="form-control" name="nombre" id="nombre", minlength=1, maxlenght=50, required value=perro.nombre)
       div(class="mb-3")
         label(for="raza" class="form-label") 
-          b Raza
-        input(type="text" class="form-control" name="raza" id="raza" required value=perro.raza)
+          b Raza *
+        input(type="text" class="form-control" name="raza" id="raza"  minlength=1, maxlenght=50, required value=perro.raza)
       div(class="mb-3")
         label(for="color" class="form-label") 
-          b Color
-        input(type="text" class="form-control" name="color" id="color" required value=perro.color)
+          b Color *
+        input(type="text" class="form-control" name="color" id="color", minlength=1, maxlenght=50, required value=perro.color)
       div(class="mb-3")
         label(for="observaciones" class="form-label") 
-          b Observaciones
-        input(type="text" class="form-control" name="observaciones" id="observaciones" required value=perro.observaciones)
+          b Observaciones *
+        input(type="text" class="form-control" name="observaciones" id="observaciones",  minlength=1, maxlenght=50, required value=perro.observaciones)
       div(class="mb-3")
         label(for="fecha_nacimiento" class="form-label") 
-          b Fecha de nacimiento
-        input(type="date" class="form-control" name="fecha_nacimiento" id="fecha_nacimiento" required value=perro.fecha_nacimiento)
+          b Fecha de nacimiento *
+        input(type="date" class="form-control" name="fecha_nacimiento" id="fecha_nacimiento", max=hoy, required value=perro.fecha_nacimiento)
       div(class="mb-3")
         label(for="clienteId" class="form-label") 
         input(type="hidden" class="form-control" name="clienteId" id="clienteId", value=perro.clienteId)

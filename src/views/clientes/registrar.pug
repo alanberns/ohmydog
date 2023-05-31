@@ -12,20 +12,25 @@ div(class="container-fluid")
   div(class="")
     form(method="post" action="/clientes/registrar" id="formulario")
       div(class="mb-3")
-        label(for="email" class="form-label") Email 
-        input(type="email" class="form-control" name="email" id="email" required value=cliente.email) 
+        label(for="email" class="form-label")
+          b Email *
+        input(type="email" class="form-control" name="email" id="email", minlength=7, maxlenght=100, required value=cliente.email) 
       div(class="mb-3")
-        label(for="nombre" class="form-label") Nombre
-        input(type="text" class="form-control" name="nombre" id="nombre" required value=cliente.nombre)
+        label(for="nombre" class="form-label")
+          b Nombre *
+        input(type="text" class="form-control" name="nombre" id="nombre", minlength=1, maxlenght=50, required value=cliente.nombre)
       div(class="mb-3")
-        label(for="apellido" class="form-label") Apellido
-        input(type="text" class="form-control" name="apellido" id="apellido" required value=cliente.apellido)
+        label(for="apellido" class="form-label")
+          b Apellido *
+        input(type="text" class="form-control" name="apellido" id="apellido", minlength=1, maxlenght=50, required value=cliente.apellido)
       div(class="mb-3")
-        label(for="dni" class="form-label") DNI
-        input(type="number" class="form-control" name="dni" id="dni" required value=cliente.dni)
+        label(for="dni" class="form-label")
+          b DNI *
+        input(type="number" class="form-control" name="dni" id="dni" min=1000000, max=100000000 required value=cliente.dni)
       div(class="mb-3")
-        label(for="telefono" class="form-label") Teléfono
-        input(type="number" class="form-control" name="telefono" id="telefono" value=cliente.telefono)
+        label(for="telefono" class="form-label")
+          b Teléfono (Cod. área sin 0 + número)
+        input(type="number" class="form-control" name="telefono" id="telefono" min=1100000000 max=4000000000 value=cliente.telefono)
       input(type="submit" class="btn btn-info" value="Registrar cliente") 
 
     br

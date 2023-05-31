@@ -12,30 +12,38 @@ div(class="container-fluid")
   div(class="")
     form(method="post" action="/adopciones/nuevo" id="formulario")
       div(class="mb-3")
-        label(for="nombre" class="form-label") Nombre
-        input(type="text" class="form-control" name="nombre" id="nombre" required value=adopcion.nombre)
+        label(for="nombre" class="form-label")
+          b Nombre *
+        input(type="text" class="form-control" name="nombre" id="nombre", minlength=1, maxlenght=50, required value=adopcion.nombre)
       div(class="mb-3")
-        label(for="edad" class="form-label") Edad
-        input(type="text" class="form-control" name="edad" id="edad" required value=adopcion.edad)
+        label(for="edad" class="form-label")
+          b Edad *
+        input(type="text" class="form-control" name="edad" id="edad", minlength=1, maxlenght=50, required value=adopcion.edad)
       div(class="mb-3")
-        label(for="raza" class="form-label") Raza
-        input(type="text" class="form-control" name="raza" id="raza" required value=adopcion.raza)
+        label(for="raza" class="form-label")
+          b Raza *
+        input(type="text" class="form-control" name="raza" id="raza", minlength=1, maxlenght=50, required value=adopcion.raza)
       div(class="mb-3")
-        label(for="color" class="form-label") Color
-        input(type="text" class="form-control" name="color" id="color" required value=adopcion.color)
+        label(for="color" class="form-label")
+          b Color *
+        input(type="text" class="form-control" name="color" id="color", minlength=1, maxlenght=50, required value=adopcion.color)
       div(class="mb-3")
-        label(for="sexo" class="form-label") Sexo
+        label(for="sexo" class="form-label")
+          b Sexo *
         select(class="form-select" aria-label="Default select example", name="sexo" required value=adopcion.sexo)
           option(value="Macho") Macho
           option(value="Hembra") Hembra
       div(class="mb-3")
-        label(for="origen" class="form-label") Origen
-        input(type="text" class="form-control" name="origen" id="origen" required value=adopcion.origen)
+        label(for="origen" class="form-label")
+          b Origen *
+        input(type="text" class="form-control" name="origen" id="origen", minlength=1, maxlenght=50, required value=adopcion.origen)
       div(class="mb-3")
-        label(for="observaciones" class="form-label") Observaciones
-        input(type="text" class="form-control" name="observaciones" id="observaciones" required value=adopcion.observaciones)
+        label(for="observaciones" class="form-label")
+          b Observaciones *
+        input(type="text" class="form-control" name="observaciones" id="observaciones", minlength=1, maxlenght=250, required value=adopcion.observaciones)
       div(class="mb-3")
-        label(for="tamanio" class="form-label") Tamaño
+        label(for="tamanio" class="form-label")
+          b Tamaño *
         select(class="form-select" aria-label="Default select example", name="tamanio" required value=adopcion.tamanio)
           option(value="Chico") Chico
           option(value="Grande") Grande

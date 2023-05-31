@@ -70,5 +70,6 @@ model publicacion_donacion {
   nombre        String    @db.VarChar(255)
   monto         Int
   fecha_fin     DateTime  @db.Timestamp(6)
+  fecha_inicio  DateTime  @db.Timestamp(6)
   monto_actual  Int
 }

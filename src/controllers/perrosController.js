@@ -46,7 +46,8 @@ module.exports = {
             title: 'Registrar perro',
             message: 'Registrar perro',
             perro: perro,
-            cliente: cliente
+            cliente: cliente,
+            hoy: new Date().toISOString().slice(0, 10)
         });
     },
 
@@ -202,7 +203,8 @@ module.exports = {
                 res.render('perros/modificarPerro', {
                     title: "Modificar mascota",
                     message: "Modificar mascota",
-                    perro: perro
+                    perro: perro,
+                    hoy: new Date().toISOString().slice(0, 10)
                 })
             }
         }

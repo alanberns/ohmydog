@@ -12,14 +12,17 @@ div(class="container-fluid")
   div(class="")
     form(method="post" action="/donaciones/nuevo" id="formulario")
       div(class="mb-3")
-        label(for="nombre" class="form-label") Nombre de la campaña de donación
-        input(type="text" class="form-control" name="nombre" id="nombre" required value=donacion.nombre)
+        label(for="nombre" class="form-label")
+          b Nombre de la campaña de donación *
+        input(type="text" class="form-control" name="nombre" id="nombre" minlegth=1, maxlength=100 required value=donacion.nombre)
       div(class="mb-3")
-        label(for="monto" class="form-label") Monto a alcanzar
-        input(type="number" class="form-control" name="monto" id="monto" required value=donacion.monto)
+        label(for="monto" class="form-label")
+          b Monto a alcanzar *
+        input(type="number" class="form-control" name="monto" id="monto" min=1 required value=donacion.monto)
       div(class="mb-3")
-        label(for="fecha_fin" class="form-label") Fecha de finalización
-        input(type="date" class="form-control" name="fecha_fin" id="fecha_fin" required value=donacion.fecha_fin)
+        label(for="fecha_fin" class="form-label")
+          b Fecha de finalización *
+        input(type="date" class="form-control" name="fecha_fin" id="fecha_fin" min=mañana required value=donacion.fecha_fin)
       
       input(type="submit" class="btn btn-info" value="Publicar") 
 

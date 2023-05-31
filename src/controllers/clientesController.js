@@ -12,11 +12,13 @@ module.exports = {
         2 pasar la variable clientes a la vista
         3 chequear permiso de admin para acceder a la ruta(clientesRouter)
         */
+        var error = null;
+        var info = null;
         if(req.query.e){
             var error = "ID inválida";
         }
-        else{
-            var error = null;
+        if(req.query.i){
+            var info = "Seleccione el botón '\+' de la columna 'Añadir mascota' para añadir una mascota al cliente"
         }
         var clientes = await db.listarClientes();
         if (clientes.length === 0){
@@ -26,7 +28,8 @@ module.exports = {
             title: 'Clientes',
             message: 'Inicio clientes',
             clientes: clientes,
-            error: error
+            error: error,
+            info: info
          });
     },
 
