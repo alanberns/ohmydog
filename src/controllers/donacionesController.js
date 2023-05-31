@@ -35,7 +35,6 @@ module.exports = {
             nombre: "",
             monto: 0,
             fecha_fin: null,
-            fecha_inicio: new Date(Date.now())
         }
         res.render('donaciones/nuevo', {
             title: "Nueva donación",
@@ -58,7 +57,8 @@ module.exports = {
             nombre: req.body.nombre,
             monto: parseInt(req.body.monto),
             fecha_fin: req.body.fecha_fin,
-            monto_actual: 0
+            monto_actual: 0,
+            fecha_inicio: new Date(Date.now())
         }
 
         // 2

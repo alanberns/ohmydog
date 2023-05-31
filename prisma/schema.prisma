@@ -8,16 +8,17 @@ datasource db {
 }
 
 model clientes {
-  id         Int                    @id @default(autoincrement())
-  nombre     String                 @db.VarChar(255)
-  apellido   String                 @db.VarChar(255)
-  dni        Int                    @unique
-  telefono   String?                @db.VarChar(255)
-  email      String                 @unique @db.VarChar(255)
-  password   String                 @db.VarChar(255)
+  id         Int                        @id @default(autoincrement())
+  nombre     String                     @db.VarChar(255)
+  apellido   String                     @db.VarChar(255)
+  dni        Int                        @unique
+  telefono   String?                    @db.VarChar(255)
+  email      String                     @unique @db.VarChar(255)
+  password   String                     @db.VarChar(255)
   descuento  Int
   perros     perros[]
-  adopciones publicacion_adopcion[]
+  adopciones publicacion_adopciones[]
+  donaciones donaciones[]
 }
 
 model administradores {
@@ -50,7 +51,7 @@ model publicacion_servicios {
   email_contacto String @db.VarChar(255)
 }
 
-model publicacion_adopcion {
+model publicacion_adopciones {
   id            Int       @id @default(autoincrement())
   nombre        String    @db.VarChar(255)
   edad          String    @db.VarChar(255)
@@ -65,11 +66,22 @@ model publicacion_adopcion {
   cliente       clientes? @relation(fields: [clienteId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
-model publicacion_donacion {
-  id            Int       @id @default(autoincrement())
-  nombre        String    @db.VarChar(255)
+model publicacion_donaciones {
+  id            Int           @id @default(autoincrement())
+  nombre        String        @db.VarChar(255)
   monto         Int
-  fecha_fin     DateTime  @db.Timestamp(6)
-  fecha_inicio  DateTime  @db.Timestamp(6)
+  fecha_fin     DateTime      @db.Timestamp(6)
+  fecha_inicio  DateTime      @db.Timestamp(6)
   monto_actual  Int
+  donaciones    donaciones[]
+}
+
+model donaciones{
+  id                      Int       @id @default(autoincrement())
+  monto                   Int
+  fecha                   DateTime  @db.Timestamp(6)
+  clienteId               Int?
+  cliente                 clientes? @relation(fields: [clienteId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  publicacion_donacionId  Int?
+  publicacion_donacion    publicacion_donaciones? @relation(fields: [publicacion_donacionId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }

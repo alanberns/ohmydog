@@ -4,7 +4,7 @@ const prisma = new PrismaClient()
 
 module.exports = {
     listarDonacionesActivas: async function listarDonacionesActivas(hoy){
-        return await prisma.publicacion_donacion.findMany({
+        return await prisma.publicacion_donaciones.findMany({
             where:{
                 fecha_fin:{
                     gte: hoy
@@ -14,7 +14,7 @@ module.exports = {
     },
 
     existeDonacion: async function existeDonacion(donacion){
-        var result = await prisma.publicacion_donacion.findMany({
+        var result = await prisma.publicacion_donaciones.findMany({
             where:{
                 nombre: donacion.nombre
             }
@@ -23,7 +23,7 @@ module.exports = {
     },
 
     agregarDonacion: async function agregarDonacion(donacion){
-        return await prisma.publicacion_donacion.create({
+        return await prisma.publicacion_donaciones.create({
             data:{
                 nombre: donacion.nombre,
                 monto: donacion.monto,
@@ -35,7 +35,7 @@ module.exports = {
     },
 
     buscarDonacionById: async function buscarDonacionById(donacionId){
-        return await prisma.publicacion_donacion.findUnique({
+        return await prisma.publicacion_donaciones.findUnique({
             where:{
                 id: parseInt(donacionId)
             }
@@ -43,7 +43,7 @@ module.exports = {
     },
 
     sumarMontoDonacion: async function sumarMontoDonacion(donacionId, monto_donacion){
-        return await prisma.publicacion_donacion.update({
+        return await prisma.publicacion_donaciones.update({
             where:{
                 id: parseInt(donacionId)
             },

@@ -4,7 +4,7 @@ const prisma = new PrismaClient()
 
 module.exports = {
     agregarAdopcion: async function agregarAdopcion(adopcion) {
-        return await prisma.publicacion_adopcion.create({
+        return await prisma.publicacion_adopciones.create({
             data:{
                 nombre: adopcion.nombre,        
                 edad: adopcion.edad,
@@ -21,11 +21,11 @@ module.exports = {
     },
 
     listarAdopciones: async function listarAdopciones(){
-        return await prisma.publicacion_adopcion.findMany();
+        return await prisma.publicacion_adopciones.findMany();
     },
 
     buscarAdopcionById: async function buscarAdopcionById(adopcionId){
-        return await prisma.publicacion_adopcion.findUnique({
+        return await prisma.publicacion_adopciones.findUnique({
             where:{
                 id: parseInt(adopcionId)
             }
@@ -33,7 +33,7 @@ module.exports = {
     },
 
     buscarByEstado: async function buscarByEstado(estado){
-        return await prisma.publicacion_adopcion.findMany({
+        return await prisma.publicacion_adopciones.findMany({
             where:{
                 estado: estado
             }
@@ -41,7 +41,7 @@ module.exports = {
     },
 
     confirmarAdopcion: async function confirmarAdopcion(adopcionId){
-        return await prisma.publicacion_adopcion.update({
+        return await prisma.publicacion_adopciones.update({
             where:{
                 id: parseInt(adopcionId)
             },
@@ -63,7 +63,7 @@ module.exports = {
     },
 
     buscarAdopcionYClienteById: async function buscarAdopcionYClienteById(adopcionId){
-        return await prisma.publicacion_adopcion.findUnique({
+        return await prisma.publicacion_adopciones.findUnique({
             where:{
                 id: parseInt(adopcionId)
             },
