@@ -1,4 +1,5 @@
-const db = require('../models/donacionesDB');
+const db = require('../models/publicacionDonacionesDB');
+const db_donaciones = require('../models/donacionesDB');
 const db_cliente = require('../models/clienteDB');
 const validaciones = require('../helpers/validaciones');
 
@@ -81,7 +82,7 @@ module.exports = {
                     title: 'Nueva donacion',
                     message: 'Nueva donacion',
                     donacion: newDonacion,
-                    error: "El nombre de la donación ya está en uso"
+                    error: "Ya existe una campaña de donación  registrada con el nombre ingresado"
                 });
             }
             else{
@@ -91,7 +92,7 @@ module.exports = {
                 res.render('exito', {
                     title: 'Éxito',
                     message: 'Éxito',
-                    info: 'Donación registrada'
+                    info: 'Campaña de donación creada'
                 });
             }
         }
@@ -99,7 +100,7 @@ module.exports = {
 
     donarGet: async (req, res) => {
         /*
-        1 obtener el id de la donacion
+        1 obtener el id de la donacion y el id del cliente
         2 enviar la informacion de la donacion a la ruta
         */
         var donacion = await db.buscarDonacionById(req.params.id);
@@ -134,6 +135,7 @@ module.exports = {
         1 Obtener id de la donacion, id del cliente y el monto
         2 sumar el monto donado al monto actual de la donacion
         3 calcular el 20% para sumar a favor del cliente
+        4 registrar la donacion en la tabla donaciones
         */
         var donacionId = req.body.id;
         var monto_donacion = parseInt(req.body.monto_donacion);
@@ -142,6 +144,14 @@ module.exports = {
 
         await db.sumarMontoDonacion(donacionId,monto_donacion);
         await db_cliente.sumarMontoDescuento(clienteId,beneficio);
+
+        var newDonacion = {
+            monto: monto_donacion,
+            fecha: new Date(Date.now()),
+            clienteId: clienteId,
+            donacionId: donacionId
+        }
+        await db_donaciones.registrarDonacion(newDonacion);
 
         res.render('exito',{
             title: 'Éxito',

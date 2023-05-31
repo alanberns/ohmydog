@@ -103,7 +103,7 @@ module.exports = {
                 // fecha a Date: var fecha = new Date(newPerro.fecha_nacimiento);
                 // Date a fecha: fecha.toISOString().slice(0,10)
                 newPerro.fecha_nacimiento = new Date(newPerro.fecha_nacimiento);
-                db.agregarPerro(newPerro);
+                await db.agregarPerro(newPerro);
                 
                 res.render('exito', {
                     title: "Éxito",
