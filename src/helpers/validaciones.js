@@ -148,8 +148,8 @@ module.exports = {
         var validez = "valido";
 
         if(!regexNombre.test(tarjeta.nombre_tarjeta)) validez = "Ingrese un nombre válido.";
-        else if(!regexCodigoTarjeta.test(tarjeta.codigo)) validez = "Ingrese un formato que coincida con el solicitado. 3 dígitos numéricos.";
-        else if(!regexNumTarjeta.test(tarjeta.numero_tarjeta)) validez = "Ingrese un formato que coincida con el solicitado. 16 dígitos numéricos.";
+        else if(!regexCodigoTarjeta.test(tarjeta.codigo)) validez = "Utiliza un formato que coincida con el solicitado: 3 dígitos(Codigo inválido)";
+        else if(!regexNumTarjeta.test(tarjeta.numero_tarjeta)) validez = "Utiliza un formato que coincida con el solicitado: 16 dígitos(Número inválido)";
         else if(!tarjeta.vencimiento > mesActual) validez = "La fecha debe ser posterior";
         else if(!regexNombre.test(tarjeta.nombre_tarjeta)) validez = "Ingrese un nombre válido";
 

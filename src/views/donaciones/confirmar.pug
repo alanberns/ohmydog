@@ -35,7 +35,7 @@ div(class="container-fluid")
       div(class="mb-3")
         label(for="numero_tarjeta" class="form-label")
           b Número de tarjeta *
-        input(type="text" class="form-control" name="numero_tarjeta" id="numero_tarjeta" pattern="[0-9]{16}" title="16 digitos numericos" required value=tarjeta.numero_tarjeta)
+        input(type="text" class="form-control" name="numero_tarjeta" id="numero_tarjeta" pattern="[0-9]{16}" title="16 digitos" required value=tarjeta.numero_tarjeta)
       div(class="mb-3")
         label(for="vencimiento" class="form-label")
           b Vencimiento *
@@ -43,7 +43,7 @@ div(class="container-fluid")
       div(class="mb-3")
         label(for="codigo" class="form-label")
           b Código de seguridad *
-        input(type="number" class="form-control" name="codigo" id="codigo" pattern="[0-9]{3}" title="3 digitos numericos", required value=tarjeta.codigo)
+        input(type="number" class="form-control" name="codigo" id="codigo" pattern="[0-9]{3}" title="3 digitos", required value=tarjeta.codigo)
       div(class="mb-3")
         label(for="nombre_tarjeta" class="form-label")
           b Nombre completo *
