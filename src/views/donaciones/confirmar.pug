@@ -31,6 +31,23 @@ div(class="container-fluid")
       div(class="mb-3")
         label(for="id" class="form-label") 
         input(type="hidden" class="form-control" name="id" id="id" value=datos.id)
+      h4 Datos de la tarjeta
+      div(class="mb-3")
+        label(for="numero_tarjeta" class="form-label")
+          b Número de tarjeta *
+        input(type="text" class="form-control" name="numero_tarjeta" id="numero_tarjeta" pattern="[0-9]{16}" title="16 digitos numericos" required value=tarjeta.numero_tarjeta)
+      div(class="mb-3")
+        label(for="vencimiento" class="form-label")
+          b Vencimiento *
+        input(type="month" class="form-control" name="vencimiento" id="vencimiento" min=mesActual required value=tarjeta.vencimiento)
+      div(class="mb-3")
+        label(for="codigo" class="form-label")
+          b Código de seguridad *
+        input(type="number" class="form-control" name="codigo" id="codigo" pattern="[0-9]{3}" title="3 digitos numericos", required value=tarjeta.codigo)
+      div(class="mb-3")
+        label(for="nombre_tarjeta" class="form-label")
+          b Nombre completo *
+        input(type="text" class="form-control" name="nombre_tarjeta" id="nombre_tarjeta", minlength=1, required value=tarjeta.nombre_tarjeta)
       
       input(type="submit" class="btn btn-info" value="Confirmar donacion")
 

@@ -136,5 +136,23 @@ module.exports = {
         else if(donacion.monto <= 0) validez = "El monto debe ser positivo";
 
         return validez;
+    },
+
+    validarTarjeta: function(tarjeta){
+        // Expresiones regulares
+        var regexNumTarjeta = /^[0-9]{16}$/;
+        var regexCodigoTarjeta = /^[0-9]{3}$/;
+        var regexNombre = /^[a-zA-Z ]{1,50}$/;
+        var mesActual = new Date().toISOString().slice(0, 7);
+
+        var validez = "valido";
+
+        if(!regexNombre.test(tarjeta.nombre_tarjeta)) validez = "Ingrese un nombre válido.";
+        else if(!regexCodigoTarjeta.test(tarjeta.codigo)) validez = "Ingrese un formato que coincida con el solicitado. 3 dígitos numéricos.";
+        else if(!regexNumTarjeta.test(tarjeta.numero_tarjeta)) validez = "Ingrese un formato que coincida con el solicitado. 16 dígitos numéricos.";
+        else if(!tarjeta.vencimiento > mesActual) validez = "La fecha debe ser posterior";
+        else if(!regexNombre.test(tarjeta.nombre_tarjeta)) validez = "Ingrese un nombre válido";
+
+        return validez;
     }
 }
