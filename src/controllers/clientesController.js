@@ -67,6 +67,7 @@ module.exports = {
             apellido: req.body.apellido,
             telefono: req.body.telefono,
             dni: parseInt(req.body.dni),
+            descuento: 0,
             password: ""
         }
         // 2 helpers.validaciones.js validaciones.nombre, dni, telefono. email apellido. obtener error
@@ -112,9 +113,9 @@ module.exports = {
             newCliente.password = password;
             console.log(newCliente);
             // 3 dar el alta en la BBDD
-            db.agregarCliente(newCliente);
+            await db.agregarCliente(newCliente);
             // 6 enviar contraseña al mail del cliente
-            mailer.sendMail(newCliente.email,'Tenes tu cuenta en OhMyDog',"Esta es tu contraseña:  "+ newCliente.password);
+            //mailer.sendMail(newCliente.email,'Tenes tu cuenta en OhMyDog',"Esta es tu contraseña:  "+ newCliente.password);
             res.render('exito', {
                 title: "Éxito",
                 message: "Éxito",
