@@ -4,7 +4,7 @@ $("#formulario").submit(function(event){
   var validez = "true";
 
   // Expresiones regulares
-  var regexNombre = /^[a-zA-Z ]{3,50}$/;
+  var regexNombre = /^[a-zA-Z ]{1,255}$/;
   var regexDni = /^[0-9]{6,9}$/;
   var regexTelefono = /^[0-9]{9,11}$/;
   var regexEmail = /^[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}$/;

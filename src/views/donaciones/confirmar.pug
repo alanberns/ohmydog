@@ -35,19 +35,23 @@ div(class="container-fluid")
       div(class="mb-3")
         label(for="numero_tarjeta" class="form-label")
           b Número de tarjeta *
-        input(type="text" class="form-control" name="numero_tarjeta" id="numero_tarjeta" pattern="[0-9]{16}" title="16 digitos" required value=tarjeta.numero_tarjeta)
+        input(type="text" class="form-control" name="numero_tarjeta" id="numero_tarjeta" placeholder="Ingrese los 16 números de la tarjeta" pattern="[0-9]{16}" title="16 digitos" required value=tarjeta.numero_tarjeta
+                oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un número de tarjeta válido')")
       div(class="mb-3")
         label(for="vencimiento" class="form-label")
           b Vencimiento *
-        input(type="month" class="form-control" name="vencimiento" id="vencimiento" min=mesActual required value=tarjeta.vencimiento)
+        input(type="month" class="form-control" name="vencimiento" id="vencimiento" min=mesActual required value=tarjeta.vencimiento
+                oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('La fecha debe ser igual o posterior al mes actual')")
       div(class="mb-3")
         label(for="codigo" class="form-label")
           b Código de seguridad *
-        input(type="number" class="form-control" name="codigo" id="codigo" pattern="[0-9]{3}" title="3 digitos", required value=tarjeta.codigo)
+        input(type="text" class="form-control" name="codigo" id="codigo" placeholder="Ingrese el código de 3 dígitos de la tarjeta" pattern="[0-9]{3}" title="3 digitos", required value=tarjeta.codigo
+                oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un código de seguridad válido')")
       div(class="mb-3")
         label(for="nombre_tarjeta" class="form-label")
           b Nombre completo *
-        input(type="text" class="form-control" name="nombre_tarjeta" id="nombre_tarjeta", minlength=1, required value=tarjeta.nombre_tarjeta)
+        input(type="text" class="form-control" name="nombre_tarjeta" id="nombre_tarjeta", placeholder="Solo puede ingresar letras" minlength=1, maxlength=255, required value=tarjeta.nombre_tarjeta
+                oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un nombre válido')")
       
       input(type="submit" class="btn btn-info" value="Confirmar donacion")
 

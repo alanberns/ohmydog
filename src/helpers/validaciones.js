@@ -1,7 +1,7 @@
 module.exports = {
     validarNuevoCliente: function(cliente){
         // Expresiones regulares
-        var regexNombre = /^[a-zA-Z ]{3,50}$/;
+        var regexNombre = /^[a-zA-Z ]{1,255}$/;
         var regexDni = /^[0-9]{6,9}$/;
         var regexTelefono = /^[0-9]{9,11}$/;
         var regexEmail = /^[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}$/;
@@ -17,7 +17,7 @@ module.exports = {
 
     validarBusquedaCliente: function(nombre){
         //expresion regular
-        var regexNombre = /^[a-zA-Z ]{1,50}$/;
+        var regexNombre = /^[a-zA-Z ]{1,255}$/;
 
         var validez = "válido";
         if(!regexNombre.test(nombre)) validez = "Ingrese un nombre válido.";
@@ -30,10 +30,10 @@ module.exports = {
         var hoy = new Date().toISOString().slice(0, 10);
 
         // Expresiones regulares
-        var regexNombre = /^[a-zA-Z ]{3,50}$/;
+        var regexNombre = /^[a-zA-Z ]{1,255}$/;
         var regexObservaciones = /^[a-zA-Z0-9 ]{1,255}$/;
-        var regexColor = /^[a-zA-Z ]{3,50}$/;
-        var regexRaza = /^[a-zA-Z ]{3,50}$/;
+        var regexColor = /^[a-zA-Z ]{1,255}$/;
+        var regexRaza = /^[a-zA-Z ]{1,255}$/;
         
         var validez = "valido";
 
@@ -58,7 +58,7 @@ module.exports = {
 
     validarBusquedaPerro: function(nombre){
         //expresion regular
-        var regexNombre = /^[a-zA-Z ]{1,50}$/;
+        var regexNombre = /^[a-zA-Z ]{1,255}$/;
 
         var validez = "válido";
         if(!regexNombre.test(nombre)) validez = "Ingrese un nombre válido.";
@@ -68,7 +68,7 @@ module.exports = {
 
     validarNuevoServicio: function(servicio, dias_seleccionados, horario_inicio, horario_fin){
         // Expresiones regulares
-        var regexNombre = /^[a-zA-Z ]{1,50}$/;
+        var regexNombre = /^[a-zA-Z ]{1,255}$/;
         var regexEmail = /^[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}$/;
 
         var validez = "valido";
@@ -84,7 +84,7 @@ module.exports = {
 
     validarNuevaAdopcion: function(adopcion){
     // Expresiones regulares
-    var regexNombre = /^[a-zA-Z ]{1,50}$/;
+    var regexNombre = /^[a-zA-Z ]{1,255}$/;
     var regexEdad = /^[a-zA-Z0-9ñ ]{1,255}$/;
 
     var validez = "valido";
@@ -112,7 +112,7 @@ module.exports = {
 
     validarContacto: function(nombre,email){
         // Expresiones regulares
-        var regexNombre = /^[a-zA-Z ]{1,50}$/;
+        var regexNombre = /^[a-zA-Z ]{1,255}$/;
         var regexEmail = /^[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}$/;
 
         var validez = "valido";
@@ -125,7 +125,7 @@ module.exports = {
 
     validarNuevaDonacion: function(donacion){
         // Expresiones regulares
-        var regexNombre = /^[a-zA-Z ]{1,50}$/;
+        var regexNombre = /^[a-zA-Z ]{1,255}$/;
         // Fecha de HOY en formato aaaa-mm-dd
         var hoy = new Date().toISOString().slice(0, 10);
 
@@ -142,16 +142,15 @@ module.exports = {
         // Expresiones regulares
         var regexNumTarjeta = /^[0-9]{16}$/;
         var regexCodigoTarjeta = /^[0-9]{3}$/;
-        var regexNombre = /^[a-zA-Z ]{1,50}$/;
+        var regexNombre = /^[a-zA-Z ]{1,255}$/;
         var mesActual = new Date().toISOString().slice(0, 7);
 
         var validez = "valido";
 
         if(!regexNombre.test(tarjeta.nombre_tarjeta)) validez = "Ingrese un nombre válido.";
-        else if(!regexCodigoTarjeta.test(tarjeta.codigo)) validez = "Utiliza un formato que coincida con el solicitado: 3 dígitos(Codigo inválido)";
-        else if(!regexNumTarjeta.test(tarjeta.numero_tarjeta)) validez = "Utiliza un formato que coincida con el solicitado: 16 dígitos(Número inválido)";
-        else if(!tarjeta.vencimiento > mesActual) validez = "La fecha debe ser posterior";
-        else if(!regexNombre.test(tarjeta.nombre_tarjeta)) validez = "Ingrese un nombre válido";
+        else if(!regexCodigoTarjeta.test(tarjeta.codigo)) validez = "Ingrese un código de seguridad válido";
+        else if(!regexNumTarjeta.test(tarjeta.numero_tarjeta)) validez = "Ingrese un número de tarjeta válido";
+        else if(!tarjeta.vencimiento > mesActual) validez = "La fecha debe ser igual o posterior al mes actual";
 
         return validez;
     }

@@ -2,6 +2,7 @@ const db = require('../models/publicacionDonacionesDB');
 const db_donaciones = require('../models/donacionesDB');
 const db_cliente = require('../models/clienteDB');
 const validaciones = require('../helpers/validaciones');
+const NotFoundError = require('../helpers/errors/NotFoundError');
 
 
 module.exports = {
@@ -10,6 +11,10 @@ module.exports = {
         1 obtener la lista de donaciones
         2 filtrar las donaciones con fecha de fin posteriores al dia actual
         */
+        var error = null;
+        if(req.query.e){
+            var error = "ID inválida";
+        }
         var hoy = new Date(Date.now());
         var donaciones = await db.listarDonacionesActivas(hoy);
 
@@ -20,7 +25,8 @@ module.exports = {
             title: 'Donaciones',
             message: 'Campañas de donación',
             donaciones: donaciones,
-            activas: true
+            activas: true,
+            error: error
         });
     },
 
@@ -98,17 +104,35 @@ module.exports = {
         }
     },
 
-    donarGet: async (req, res) => {
+    donarGet: async (req, res, next) => {
         /*
         1 obtener el id de la donacion y el id del cliente
         2 enviar la informacion de la donacion a la ruta
         */
-        var donacion = await db.buscarDonacionById(req.params.id);
-        res.render('donaciones/donacion',{
-            title: "Donar",
-            message: "Donar",
-            donacion: donacion
-        })
+        var id = req.params.id;
+        var publicacionDonacionId = parseInt(id);
+        if (isNaN(publicacionDonacionId)){
+            res.redirect('/donaciones?e=u');
+        }
+        else{
+            // 2 validar que existe la publicacion de donacion
+            var donacion = await db.buscarDonacionById(publicacionDonacionId);
+            if (donacion == null){
+                try{
+                    throw new NotFoundError();
+                }
+                catch(err){
+                    next(err);
+                }
+            }
+            else{
+                res.render('donaciones/donacion',{
+                    title: "Donar",
+                    message: "Donar",
+                    donacion: donacion
+                })
+            }
+        }
     },
 
     confirmarDonacion: async (req, res)=> {

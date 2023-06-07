@@ -14,15 +14,18 @@ div(class="container-fluid")
       div(class="mb-3")
         label(for="servicio" class="form-label")
           b Servicio a ofrecer *
-        input(type="text" class="form-control" name="servicio" id="servicio" minlength=1, maxlength=100 required value=servicio.servicio)
+        input(type="text" class="form-control" name="servicio" id="servicio" placeholder="Solo puede ingresar letras" minlength=1, maxlength=255 required value=servicio.servicio
+                oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un nombre de servicio válido')")
       div(class="mb-3")
         label(for="nombre" class="form-label")
           b Nombre *
-        input(type="text" class="form-control" name="nombre" id="nombre" minlength=1, maxlength=100 required value=servicio.nombre)
+        input(type="text" class="form-control" name="nombre" id="nombre" placeholder="Solo puede ingresar letras" minlength=1, maxlength=255 required value=servicio.nombre
+                oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un nombre válido')")
       div(class="mb-3")
         label(for="apellido" class="form-label")
           b Apellido *
-        input(type="text" class="form-control" name="apellido" id="apellido" minlength=1, maxlength=100 required value=servicio.apellido)
+        input(type="text" class="form-control" name="apellido" id="apellido" placeholder="Solo puede ingresar letras" minlength=1, maxlength=255 required value=servicio.apellido
+                oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un apellido válido')")
       div(class="mb-3")
         label(for="zona" class="form-label")
           b Zona *
@@ -88,7 +91,8 @@ div(class="container-fluid")
       div(class="mb-3")
         label(for="email_contacto" class="form-label")
           b Email *
-        input(type="email" class="form-control" name="email_contacto" id="email_contacto", minlength=7, maxlength=100 value=servicio.email_contacto)
+        input(type="email" class="form-control" name="email_contacto" id="email_contacto", placeholder="name@mail.com" minlength=5, maxlength=255 value=servicio.email_contacto
+                oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un email válido')")
       input(type="submit" class="btn btn-info" value="Publicar") 
 
     br

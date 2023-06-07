@@ -6,10 +6,10 @@ $("#formulario").submit(function(event){
     var hoy = new Date().toISOString().slice(0, 10);
 
     // Expresiones regulares
-    var regexNombre = /^[a-zA-Z ]{3,50}$/;
+    var regexNombre = /^[a-zA-Z ]{1,255}$/;
     var regexObservaciones = /^[a-zA-Z0-9 ]{1,255}$/;
-    var regexColor = /^[a-zA-Z ]{3,50}$/;
-    var regexRaza = /^[a-zA-Z ]{3,50}$/;
+    var regexColor = /^[a-zA-Z ]{1,255}$/;
+    var regexRaza = /^[a-zA-Z ]{1,255}$/;
 
     // Se prueba la expresión regular con el string del input
     if(!regexNombre.test($("#nombre").val())) validez = "Ingrese un nombre válido.";
