@@ -60,10 +60,10 @@ div(class="container-fluid")
           if !sesion.nombre
             div(class="mb-3")
               label(for="nombre" class="form-label") Nombre
-              input(type="text" class="form-control" name="nombre" id="nombre" required value=nombre)
+              input(type="text" class="form-control" name="nombre" id="nombre" placeholder="Solo puede ingresar letras" required value=nombre)
             div(class="mb-3")
               label(for="email" class="form-label") Email
-              input(type="email" class="form-control" name="email" id="email" required value=email)
+              input(type="email" class="form-control" name="email" id="email" placeholder="nombre@mail.com" required value=email)
             label(for="id" class="form-label") 
           input(type="hidden" class="form-control" name="id" id="id" required value=adopcion.id)
           input(type="submit" class="btn btn-info" value="Contactar adopcion ")  

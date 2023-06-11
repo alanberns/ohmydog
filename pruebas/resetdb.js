@@ -164,7 +164,7 @@ async function main(){
         clienteId: cliente2.id
     }
     var adopcion1 = await consulta.agregarAdopcion(datosAdopcion1);
-    var adopcion2 = await consulta.agregarAdopcion(datosAdopcion2);
+    //var adopcion2 = await consulta.agregarAdopcion(datosAdopcion2);
     console.log("adopciones creadas");
 }
 

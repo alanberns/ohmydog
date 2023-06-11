@@ -13,7 +13,7 @@ div(class="container-fluid")
     form(method="post" action="/sesion/intento" id="formulario")
       div(class="mb-3")
         label(for="email" class="form-label") Email 
-        input(type="email" class="form-control" name="email" id="email" required value=datos.email) 
+        input(type="email" class="form-control" name="email" id="email" placeholder="nombre@mail.com" required value=datos.email) 
       div(class="mb-3")
         label(for="nombre" class="form-label") Contrase&ntilde;a
         input(type="password" class="form-control" name="password" id="password" required value=datos.password)
