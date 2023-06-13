@@ -1,50 +1,53 @@
 include ../partials/head.pug
-include ../partials/header.pug
-div(class="container-fluid")
-  //- aca va la pagina hasta footer. inicia con 1 tab
-  h1= message
-
-  br
-  br
-
-  include ../partials/info.pug
-
-  if (sesion.nivel == 2)
-    a(href="/servicios/nuevo")
-      button(type="button" class="btn btn-info") Publicar servicio
-
-  br
-  br
-
-  form(class="d-flex" role="search" method="post" action="/#" id="formulario")
-    input(class="form-control me-2" type="search" placeholder="servicio" id="servicio" aria-label="Search" value=servicio, name="servicio")
-    input(class="btn btn-info" type="submit" disabled value="Buscar") 
-
-  br
-  br
-
-  table(class="table table-striped table-info table-hover")
-    thead 
-      tr 
-        th Servicio
-        th Zona
-        th Horario
-        th Ver detalles
-    tbody 
-    if(servicios)
-      each servicio in servicios
-        tr  
-          td #{servicio.servicio}
-          td #{servicio.zona}
-          td #{servicio.horario}
-          td 
-            a(href="/servicios/ver/"+servicio.id)
-              button(type="button" class="btn btn-info") Ver 
-    else 
-      tr 
-        td
-        td No se encontraron servicios
-        td 
-        td
-
-include ../partials/footer.pug
+div(style="position: relative; min-height: 100vh;")
+  div(style="padding-bottom: calc(1.25rem + 0.3125rem * 2 + 1rem)")
+    - var selected_nav_link = "publicaciones";
+    include ../partials/header.pug
+    div(class="container-fluid")
+      //- aca va la pagina hasta footer. inicia con 1 tab
+      h1= message
+    
+      br
+      br
+    
+      include ../partials/info.pug
+    
+      if (sesion.nivel == 2)
+        a(href="/servicios/nuevo")
+          button(type="button" class="btn btn-info") Publicar servicio
+    
+      br
+      br
+    
+      form(class="d-flex" role="search" method="post" action="/#" id="formulario" style="justify-content: center;")
+        input(class="form-control me-2" type="search" placeholder="servicio" id="servicio" aria-label="Search" value=servicio, name="servicio" style="width: 25rem;")
+        input(class="btn btn-info" type="submit" disabled value="Buscar") 
+    
+      br
+      br
+    
+      table(class="table table-striped table-info table-hover")
+        thead 
+          tr 
+            th Servicio
+            th Zona
+            th Horario
+            th Ver detalles
+        tbody 
+        if(servicios)
+          each servicio in servicios
+            tr  
+              td #{servicio.servicio}
+              td #{servicio.zona}
+              td #{servicio.horario}
+              td 
+                a(href="/servicios/ver/"+servicio.id)
+                  button(type="button" class="btn btn-info") Ver 
+        else 
+          tr 
+            td
+            td No se encontraron servicios
+            td 
+            td
+    
+  include ../partials/footer.pug

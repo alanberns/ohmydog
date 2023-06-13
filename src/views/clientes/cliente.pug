@@ -1,53 +1,55 @@
 include ../partials/head.pug
-include ../partials/header.pug
-div(class="container-fluid")
-  //- aca va la pagina hasta footer. inicia con 1 tab
-  h1= message
-
-  br
-  br
-
-  include ../partials/info.pug
-
-  div(class="")
-    form(action="#")
-      div(class="mb-3")
-        label(for="email" class="form-label") 
-          b Email 
-        input(type="email" class="form-control" id="email" disabled value=cliente.email) 
-        input(type="hidden" class="form-control" name="email" id="email" value=cliente.email) 
-      div(class="mb-3")
-        label(for="nombre" class="form-label") 
-          b Nombre
-        input(type="text" class="form-control" id="nombre" disabled value=cliente.nombre)
-        input(type="hidden" class="form-control" name="nombre" id="nombre" value=cliente.nombre)
-      div(class="mb-3")
-        label(for="apellido" class="form-label") 
-          b Apellido
-        input(type="text" class="form-control" id="apellido" disabled value=cliente.apellido)
-        input(type="hidden" class="form-control" name="apellido" id="apellido" value=cliente.apellido)
-      div(class="mb-3")
-        label(for="dni" class="form-label") 
-          b DNI
-        input(type="number" class="form-control" id="dni" disabled value=cliente.dni)
-        input(type="hidden" class="form-control" name="dni" id="dni" value=cliente.dni)
-      div(class="mb-3")
-        label(for="telefono" class="form-label") 
-          b Teléfono
-        input(type="number" class="form-control" id="telefono" disabled value=cliente.telefono)
-        input(type="hidden" class="form-control" name="telefono" id="telefono" value=cliente.telefono)
-
-    br
+div(style="position: relative; min-height: 100vh;")
+  div(style="padding-bottom: calc(1.25rem + 0.3125rem * 2 + 1rem)")
+    include ../partials/header.pug
     div(class="container-fluid")
-      a
-        button(type="button" disabled class="btn btn-info") Modificar datos
-      span  
-      a(href="/clientes/ver/"+cliente.id+"/mascotas")
-        button(type="button" class="btn btn-info") Ver mascotas 
-      span  
-      a(href="/clientes")
-        button(type="button" class="btn btn-info") Atrás 
-
-
-
-include ../partials/footer.pug
+      //- aca va la pagina hasta footer. inicia con 1 tab
+      h1= message
+    
+      br
+      br
+    
+      include ../partials/info.pug
+    
+      div(class="")
+        form(action="#" style="display: flex; flex-wrap: wrap; justify-content: center;")
+          div(class="mb-3" style="width: calc(50% - 4rem); margin: 0 2rem;")
+            label(for="email" class="form-label") 
+              b Email 
+            input(type="email" class="form-control" id="email" disabled value=cliente.email) 
+            input(type="hidden" class="form-control" name="email" id="email" value=cliente.email)
+          div(class="mb-3" style="width: calc(50% - 4rem); margin: 0 2rem;")
+            label(for="dni" class="form-label") 
+              b DNI
+            input(type="number" class="form-control" id="dni" disabled value=cliente.dni)
+            input(type="hidden" class="form-control" name="dni" id="dni" value=cliente.dni)
+          div(class="mb-3" style="width: calc(50% - 4rem); margin: 0 2rem;")
+            label(for="nombre" class="form-label") 
+              b Nombre
+            input(type="text" class="form-control" id="nombre" disabled value=cliente.nombre)
+            input(type="hidden" class="form-control" name="nombre" id="nombre" value=cliente.nombre)
+          div(class="mb-3" style="width: calc(50% - 4rem); margin: 0 2rem;")
+            label(for="apellido" class="form-label") 
+              b Apellido
+            input(type="text" class="form-control" id="apellido" disabled value=cliente.apellido)
+            input(type="hidden" class="form-control" name="apellido" id="apellido" value=cliente.apellido)
+          div(class="mb-3" style="width: calc(50% - 4rem); margin: 0 2rem;")
+            label(for="telefono" class="form-label") 
+              b Teléfono
+            input(type="number" class="form-control" id="telefono" disabled value=cliente.telefono)
+            input(type="hidden" class="form-control" name="telefono" id="telefono" value=cliente.telefono)
+    
+        br
+        div(class="container-fluid")
+          a
+            button(type="button" disabled class="btn btn-info") Modificar datos
+          span  
+          a(href="/clientes/ver/"+cliente.id+"/mascotas")
+            button(type="button" class="btn btn-info") Ver mascotas 
+          span  
+          a(href="/clientes")
+            button(type="button" class="btn btn-info") Atrás 
+    
+    
+    
+  include ../partials/footer.pug

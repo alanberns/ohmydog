@@ -1,28 +1,31 @@
 include ../partials/head.pug
-include ../partials/header.pug
-
-div(class="container-fluid")
-  h1= message
-
-  br
-  br
-
-  include ../partials/info.pug
-
-  div(class="")
-    form(method="post" action="/sesion/intento" id="formulario")
-      div(class="mb-3")
-        label(for="email" class="form-label") Email 
-        input(type="email" class="form-control" name="email" id="email" required value=datos.email) 
-      div(class="mb-3")
-        label(for="nombre" class="form-label") Contrase&ntilde;a
-        input(type="password" class="form-control" name="password" id="password" required value=datos.password)
-      input(type="submit" class="btn btn-info" value="Iniciar Sesión") 
-
+div(style="position: relative; min-height: 100vh;")
+  div(style="padding-bottom: calc(1.25rem + 0.3125rem * 2 + 1rem)")
+    include ../partials/header.pug
+    
+    div(class="container-fluid")
+      h1= message
+    
+      br
+      br
+    
+      include ../partials/info.pug
+    
+      div(class="" style="margin: auto; width: 30rem;")
+        form(method="post" action="/sesion/intento" id="formulario")
+          div(class="mb-3")
+            label(for="email" class="form-label") Email 
+            input(type="email" class="form-control" name="email" id="email" required value=datos.email) 
+          div(class="mb-3")
+            label(for="nombre" class="form-label") Contrase&ntilde;a
+            input(type="password" class="form-control" name="password" id="password" required value=datos.password)
+          input(type="submit" class="btn btn-info" value="Iniciar sesión") 
+    
+        br
+        a(href="/")
+          button(type="button" class="btn btn-info") Cancelar
+     
+    script(src="/js/validacionSesion.js")
+    
     br
-    a(href="/")
-      button(type="button" class="btn btn-info") Cancelar
- 
-script(src="/js/validacionSesion.js")
-
-include ../partials/footer.pug
+  include ../partials/footer.pug

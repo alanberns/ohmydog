@@ -49,8 +49,8 @@ module.exports = {
         }
         console.log(req.session)
         res.render('adopciones/nuevaAdopcion', {
-            title: 'Publicar adopcion',
-            message: 'Publicar adopcion',
+            title: 'Publicar adopción',
+            message: 'Publicar adopción',
             adopcion: adopcion
         });
     },
@@ -82,8 +82,8 @@ module.exports = {
             //validacion fallida
             // 4 volver a registro con los datos ingresados
             res.render('adopciones/nuevaAdopcion', {
-                title: 'Publicar adopcion',
-                message: 'Publicar adopcion',
+                title: 'Publicar adopción',
+                message: 'Publicar adopción',
                 adopcion: newAdopcion,
                 error: result
             });

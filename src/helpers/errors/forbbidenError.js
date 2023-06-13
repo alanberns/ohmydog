@@ -1,6 +1,6 @@
 class forbbidenError extends Error {
     constructor() {
-        super("Forbidden, No podes acceder");
+        super("Forbidden, No podés acceder");
 
         this.name = "ForbbidenError";
         this.status = 403;
