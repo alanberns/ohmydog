@@ -19,7 +19,10 @@ div(style="position: relative; min-height: 100vh;")
       br
     
       form(class="d-flex" role="search" method="post" action="/perros/" id="formulario" style="justify-content: center;")
-        input(class="form-control me-2" type="search" placeholder="nombre" id="nombre" aria-label="Search" value=nombre, name="nombre" style="width: 20rem;")
+        div(class="search-input input me-2")
+          input(type="search" id="nombre" aria-label="Search" value=nombre?nombre:"" name="nombre" style="width: 20rem;" onchange="this.setAttribute('value', this.value);")
+          div(class="input_border_focus")
+          div(class="input_placeholder") Nombre
         input(class="btn btn-info" type="submit" value="Buscar") 
     
       br

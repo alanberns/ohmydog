@@ -20,7 +20,10 @@ div(style="position: relative; min-height: 100vh;")
       br
     
       form(class="d-flex" role="search" method="post" action="/#" id="formulario" style="justify-content: center;")
-        input(class="form-control me-2" type="search" placeholder="servicio" id="servicio" aria-label="Search" value=servicio, name="servicio" style="width: 25rem;")
+        div(class="search-input input me-2")
+          input(type="search" id="servicio" aria-label="Search" value=servicio?servicio:"" name="servicio" style="width: 20rem;" onchange="this.setAttribute('value', this.value);")
+          div(class="input_border_focus")
+          div(class="input_placeholder") Servicio
         input(class="btn btn-info" type="submit" disabled value="Buscar") 
     
       br

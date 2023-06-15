@@ -1,6 +1,7 @@
 include ../partials/head.pug
 div(style="position: relative; min-height: 100vh;")
   div(style="padding-bottom: calc(1.25rem + 0.3125rem * 2 + 1rem)")
+    - var selected_nav_link = "mi-cuenta";
     include ../partials/header.pug
     
     div(class="container-fluid")
@@ -13,12 +14,14 @@ div(style="position: relative; min-height: 100vh;")
     
       div(class="" style="margin: auto; width: 30rem;")
         form(method="post" action="/sesion/intento" id="formulario")
-          div(class="mb-3")
-            label(for="email" class="form-label") Email 
-            input(type="email" class="form-control" name="email" id="email" required value=datos.email) 
-          div(class="mb-3")
-            label(for="nombre" class="form-label") Contrase&ntilde;a
-            input(type="password" class="form-control" name="password" id="password" required value=datos.password)
+          div(class="login-input input mb-3")
+            input(type="email" name="email" id="email" required autofocus value=datos.email?datos.email:"" onchange="this.setAttribute('value', this.value);")
+            div(class="input_border_focus")
+            div(class="input_placeholder") Email
+          div(class="login-input input mb-3")
+            input(type="password" name="password" id="password" required value=datos.password?datos.password:"" onchange="this.setAttribute('value', this.value);")
+            div(class="input_border_focus")
+            div(class="input_placeholder") Contrase&ntilde;a
           input(type="submit" class="btn btn-info" value="Iniciar sesión") 
     
         br
