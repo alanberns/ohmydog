@@ -38,6 +38,8 @@ div(class="container-fluid")
         th Fecha de cierre
         if sesion.nivel == 1
           th Donar
+        else if sesion.nivel == 2
+          th Donaciones
     tbody 
     if(donaciones)
       each donacion in donaciones
@@ -50,13 +52,16 @@ div(class="container-fluid")
             td 
               a(href="/donaciones/donar/"+donacion.id)
                 button(type="button" class="btn btn-info") Donar 
+          else if sesion.nivel == 2
+            td 
+              a(href="/donaciones/historial/"+donacion.id)
+                button(type="button" class="btn btn-info") Ver
     else 
       tr 
         td
         td
         td No se encontraron donaciones
         td 
-        if sesion.nivel == 1
-          td
+        td
 
 include ../partials/footer.pug

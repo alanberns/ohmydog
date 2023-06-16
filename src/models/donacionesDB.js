@@ -12,5 +12,28 @@ module.exports = {
                 publicacion_donacion: { connect: { id: parseInt(donacion.donacionId)}}
             }
         })
+    },
+
+    obtenerDonacionesCliente: async function obtenerDonacionesCliente(clienteId){
+        return await prisma.clientes.findUnique({
+            where:{
+                id: parseInt(clienteId)
+            },
+            include:{
+                donaciones: true
+            }
+        })
+    },
+
+    obtenerDonantes: async function obtenerDonantes(publicacion_donacionId){
+        return await prisma.donaciones.findMany({
+            where:{
+                publicacion_donacionId: parseInt(publicacion_donacionId)
+            },
+            include:{
+                cliente: true,
+                publicacion_donacion: true
+            }
+        })
     }
 }

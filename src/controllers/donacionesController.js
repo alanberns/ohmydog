@@ -216,5 +216,35 @@ module.exports = {
                 info: "Donaste $"+monto_donacion+" y te otorgamos un descuento de $"+beneficio+" para usar en tu próxima atención"
             });
         }
+    },
+
+    historialCampaña: async (req,res,next) => {
+        /*
+        1 obtener id de la campaña y validar
+        2 obtener las donaciones realizadas a la campaña
+        */
+        var publicacion_donacion_id = req.params.id;
+        if (isNaN(publicacion_donacion_id)){
+            res.redirect('/donaciones?e=u');
+        }
+        else{
+            var donacion = await db.buscarDonacionById(publicacion_donacion_id);
+            if (donacion == null){
+                try{
+                    throw new NotFoundError();
+                }
+                catch(err){
+                    next(err);
+                }
+            }
+            else{
+                var donantes = await db_donaciones.obtenerDonantes(publicacion_donacion_id);
+                res.render('donaciones/historialDonacion',{
+                    title: 'Donaciones',
+                    message: 'Donaciones realizadas a la campaña '+donacion.nombre,
+                    donaciones: donantes
+                });
+            }
+        }
     }
 }
