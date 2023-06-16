@@ -53,5 +53,15 @@ module.exports = {
                 }
             }
         })
+    },
+
+    listarDonacionesCompletadas: async function listarDonacionesCompletadas(hoy){
+        return await prisma.publicacion_donaciones.findMany({
+            where: {
+                fecha_fin: {
+                    lt: hoy
+                }
+            }
+        })
     }
 }

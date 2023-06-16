@@ -23,12 +23,12 @@ div(class="container-fluid")
   form(class="d-flex" role="search" method="post" action="/donaciones/" id="formulario")
     select(class="form-select" aria-label="Default select example", name="estado")
       if(activas)
-        option(selected value=true) Campañas activas
-        option(value=false) Campañas finalizadas
+        option(selected value="Activas") Campañas activas
+        option(value="Finalizadas") Campañas completadas
       else 
-        option(value=true) Campañas activas
-        option(selected value=false) Campañas finalizadas
-    input(class="btn btn-info" type="submit" disabled value="Buscar") 
+        option(value="Activas") Campañas activas
+        option(selected value="Finalizadas") Campañas completadas
+    input(class="btn btn-info" type="submit" value="Buscar") 
   
   br
   br
@@ -40,23 +40,23 @@ div(class="container-fluid")
         th Monto a conseguir 
         th Monto conseguido
         th Fecha de cierre
-        if sesion.nivel == 1
+        if sesion.nivel == 1 && activas
           th Donar
         else if sesion.nivel == 2
           th Donaciones
     tbody 
-    if(donaciones)
+    if(donaciones.length > 0)
       each donacion in donaciones
         tr  
           td #{donacion.nombre}
           td $ #{donacion.monto}
           td $ #{donacion.monto_actual}
           td #{donacion.fecha_fin.toISOString().slice(0,10)}
-          if sesion.nivel == 1
+          if sesion.nivel == 1 && activas
             td 
               a(href="/donaciones/donar/"+donacion.id)
                 button(type="button" class="btn btn-info") Donar 
-          else if sesion.nivel == 2
+          else if sesion.nivel == 2 
             td 
               a(href="/donaciones/historial/"+donacion.id)
                 button(type="button" class="btn btn-info") Ver
@@ -66,6 +66,7 @@ div(class="container-fluid")
         td
         td No se encontraron donaciones
         td 
-        td
+        if ( activas || sesion.nivel == 2)
+          td
 
 include ../partials/footer.pug

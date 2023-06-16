@@ -260,5 +260,31 @@ module.exports = {
             message: 'Mis donaciones',
             donaciones: donaciones
         })
+    },
+
+    buscar: async (req,res) => {
+        /*
+        1 obtener estado para buscar
+        2 buscar por estado
+        */
+        var estado = req.body.estado;
+        var hoy = new Date(Date.now());
+        var activas = true;
+        console.log(estado)
+        if (estado == "Activas"){
+            var campañas = await db.listarDonacionesActivas(hoy);
+        }
+        else{
+            var campañas = await db.listarDonacionesCompletadas(hoy);
+            activas = false;
+        }
+        res.render('donaciones/index',{
+            title: 'Donaciones',
+            message: 'Campañas de donación',
+            donaciones: campañas,
+            activas: true,
+            info: "Resultado de la busqueda",
+            activas: activas
+        });
     }
 }
