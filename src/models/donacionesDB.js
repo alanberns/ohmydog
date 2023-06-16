@@ -15,12 +15,12 @@ module.exports = {
     },
 
     obtenerDonacionesCliente: async function obtenerDonacionesCliente(clienteId){
-        return await prisma.clientes.findUnique({
+        return await prisma.donaciones.findMany({
             where:{
-                id: parseInt(clienteId)
+                clienteId: parseInt(clienteId)
             },
             include:{
-                donaciones: true
+                publicacion_donacion: true
             }
         })
     },

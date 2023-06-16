@@ -12,6 +12,10 @@ div(class="container-fluid")
     div(class="container")
       a(href="/donaciones/nuevo")
         button(type="button" class="btn btn-info") Publicar campaña
+  if sesion.nivel == 1
+    div(class="container")
+      a(href="/donaciones/misDonaciones")
+        button(type="button" class="btn btn-info") Mis donaciones
 
   br
   br

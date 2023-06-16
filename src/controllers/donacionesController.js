@@ -246,5 +246,19 @@ module.exports = {
                 });
             }
         }
+    },
+
+    misDonaciones: async (req,res) =>{
+        /*
+        1 obtener id del cliente
+        2 obtener las donaciones del cliente
+        */
+        var clienteId = req.session.usuario;
+        var donaciones = await db_donaciones.obtenerDonacionesCliente(clienteId);
+        res.render('donaciones/donacionesCliente',{
+            title: 'Mis donaciones',
+            message: 'Mis donaciones',
+            donaciones: donaciones
+        })
     }
 }
