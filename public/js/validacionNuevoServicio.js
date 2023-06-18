@@ -4,7 +4,7 @@
     var validez = "true";
 
     // Expresiones regulares
-    var regexNombre = /^[a-zA-Z ]{1,50}$/;
+    var regexNombre = /^[a-zA-Z ]{1,255}$/;
     var regexHorario = /^[a-zA-Z0-9-:/ ]{1,255}$/;
     var regexEmail = /^[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}$/;
 

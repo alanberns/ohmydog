@@ -14,15 +14,18 @@ div(class="container-fluid")
       div(class="mb-3")
         label(for="nombre" class="form-label")
           b Nombre de la campaña de donación *
-        input(type="text" class="form-control" name="nombre" id="nombre" minlegth=1, maxlength=100 required value=donacion.nombre)
+        input(type="text" class="form-control" name="nombre" id="nombre" placeholder="Solo puede ingresar letras" minlegth=1, maxlength=255 required value=donacion.nombre
+                oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un nombre válido')")
       div(class="mb-3")
         label(for="monto" class="form-label")
           b Monto a alcanzar *
-        input(type="number" class="form-control" name="monto" id="monto" min=1 required value=donacion.monto)
+        input(type="number" class="form-control" name="monto" id="monto" placeholder="Ingrese un monto entero positivo" min=1 required value=donacion.monto
+                oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('El monto debe ser positivo')")
       div(class="mb-3")
         label(for="fecha_fin" class="form-label")
           b Fecha de finalización *
-        input(type="date" class="form-control" name="fecha_fin" id="fecha_fin" min=mañana required value=donacion.fecha_fin)
+        input(type="date" class="form-control" name="fecha_fin" id="fecha_fin" min=mañana required value=donacion.fecha_fin
+                oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('La fecha debe ser posterior a hoy')")
       
       input(type="submit" class="btn btn-info" value="Publicar") 
 

@@ -126,11 +126,14 @@ module.exports = {
             // 3
             else{
                 var esPropia = req.session.email == adopcion.cliente.email;
+                var esConcretada = adopcion.estado == "Adoptado";
+                var contactar = esPropia || esConcretada;
+
                 res.render('adopciones/adopcion', {
                     title: 'Adopción', 
                     message: 'Adopción',
                     adopcion: adopcion,
-                    esPropia: esPropia
+                    esPropia: contactar
                 });
             }
         }

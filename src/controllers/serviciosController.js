@@ -10,7 +10,7 @@ module.exports = {
         1 buscar servicios en estado "publicado"
         */
         if(req.query.i){
-            var info= "Servicio solicitado exitosamente";
+            var info= "Servicio publicado exitosamente";
         }
         else{
             var info = null;

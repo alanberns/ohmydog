@@ -4,7 +4,7 @@ $("#formulario").submit(function(event){
     var validez = "true";
 
     // Expresiones regulares
-    var regexNombre = /^[a-zA-Z ]{1,50}$/;
+    var regexNombre = /^[a-zA-Z ]{1,255}$/;
 
     // Se prueba la expresión regular con el string del input
     if(!regexNombre.test($("#nombre").val())) validez = "Ingrese un nombre válido.";

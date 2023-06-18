@@ -15,7 +15,7 @@ div(style="position: relative; min-height: 100vh;")
       div(class="" style="margin: auto; width: 30rem;")
         form(method="post" action="/sesion/intento" id="formulario")
           div(class="login-input input mb-3")
-            input(type="email" name="email" id="email" required autofocus value=datos.email?datos.email:"" onchange="this.setAttribute('value', this.value);")
+            input(type="email" name="email" id="email" placeholder="nombre@mail.com" required autofocus value=datos.email?datos.email:"" onchange="this.setAttribute('value', this.value);")
             div(class="input_border_focus")
             div(class="input_placeholder") Email
           div(class="login-input input mb-3")

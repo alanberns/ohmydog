@@ -2,6 +2,7 @@ const db = require('../models/publicacionDonacionesDB');
 const db_donaciones = require('../models/donacionesDB');
 const db_cliente = require('../models/clienteDB');
 const validaciones = require('../helpers/validaciones');
+const NotFoundError = require('../helpers/errors/NotFoundError');
 
 
 module.exports = {
@@ -10,6 +11,10 @@ module.exports = {
         1 obtener la lista de donaciones
         2 filtrar las donaciones con fecha de fin posteriores al dia actual
         */
+        var error = null;
+        if(req.query.e){
+            var error = "ID inválida";
+        }
         var hoy = new Date(Date.now());
         var donaciones = await db.listarDonacionesActivas(hoy);
 
@@ -20,7 +25,8 @@ module.exports = {
             title: 'Donaciones',
             message: 'Campañas de donación',
             donaciones: donaciones,
-            activas: true
+            activas: true,
+            error: error
         });
     },
 
@@ -98,17 +104,35 @@ module.exports = {
         }
     },
 
-    donarGet: async (req, res) => {
+    donarGet: async (req, res, next) => {
         /*
         1 obtener el id de la donacion y el id del cliente
         2 enviar la informacion de la donacion a la ruta
         */
-        var donacion = await db.buscarDonacionById(req.params.id);
-        res.render('donaciones/donacion',{
-            title: "Donar",
-            message: "Donar",
-            donacion: donacion
-        })
+        var id = req.params.id;
+        var publicacionDonacionId = parseInt(id);
+        if (isNaN(publicacionDonacionId)){
+            res.redirect('/donaciones?e=u');
+        }
+        else{
+            // 2 validar que existe la publicacion de donacion
+            var donacion = await db.buscarDonacionById(publicacionDonacionId);
+            if (donacion == null){
+                try{
+                    throw new NotFoundError();
+                }
+                catch(err){
+                    next(err);
+                }
+            }
+            else{
+                res.render('donaciones/donacion',{
+                    title: "Donar",
+                    message: "Donar",
+                    donacion: donacion
+                })
+            }
+        }
     },
 
     confirmarDonacion: async (req, res)=> {
@@ -192,5 +216,75 @@ module.exports = {
                 info: "Donaste $"+monto_donacion+" y te otorgamos un descuento de $"+beneficio+" para usar en tu próxima atención"
             });
         }
+    },
+
+    historialCampaña: async (req,res,next) => {
+        /*
+        1 obtener id de la campaña y validar
+        2 obtener las donaciones realizadas a la campaña
+        */
+        var publicacion_donacion_id = req.params.id;
+        if (isNaN(publicacion_donacion_id)){
+            res.redirect('/donaciones?e=u');
+        }
+        else{
+            var donacion = await db.buscarDonacionById(publicacion_donacion_id);
+            if (donacion == null){
+                try{
+                    throw new NotFoundError();
+                }
+                catch(err){
+                    next(err);
+                }
+            }
+            else{
+                var donantes = await db_donaciones.obtenerDonantes(publicacion_donacion_id);
+                res.render('donaciones/historialDonacion',{
+                    title: 'Donaciones',
+                    message: 'Donaciones realizadas a la campaña '+donacion.nombre,
+                    donaciones: donantes
+                });
+            }
+        }
+    },
+
+    misDonaciones: async (req,res) =>{
+        /*
+        1 obtener id del cliente
+        2 obtener las donaciones del cliente
+        */
+        var clienteId = req.session.usuario;
+        var donaciones = await db_donaciones.obtenerDonacionesCliente(clienteId);
+        res.render('donaciones/donacionesCliente',{
+            title: 'Mis donaciones',
+            message: 'Mis donaciones',
+            donaciones: donaciones
+        })
+    },
+
+    buscar: async (req,res) => {
+        /*
+        1 obtener estado para buscar
+        2 buscar por estado
+        */
+        var estado = req.body.estado;
+        var hoy = new Date(Date.now());
+        var activas = true;
+        console.log(estado)
+        if (estado == "Activas"){
+            var campañas = await db.listarDonacionesActivas(hoy);
+        }
+        else{
+            var campañas = await db.listarDonacionesCompletadas(hoy);
+            activas = false;
+        }
+        res.render('donaciones/index',{
+            title: 'Donaciones',
+            message: 'Campañas de donación',
+            donaciones: campañas,
+            activas: true,
+            info: "Resultado de la busqueda",
+            activas: activas
+        });
     }
 }

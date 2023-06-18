@@ -11,7 +11,8 @@ module.exports = {
                 email: cliente.email,
                 telefono: cliente.telefono,
                 dni: cliente.dni,
-                password: cliente.password
+                password: cliente.password,
+                descuento: 0
             }
         })
     },

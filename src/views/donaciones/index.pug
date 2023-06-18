@@ -15,6 +15,10 @@ div(style="position: relative; min-height: 100vh;")
         div(class="container")
           a(href="/donaciones/nuevo")
             button(type="button" class="btn btn-info") Publicar campaña
+      if sesion.nivel == 1
+        div(class="container")
+          a(href="/donaciones/misDonaciones")
+            button(type="button" class="btn btn-info") Mis donaciones
     
       br
       br
@@ -25,12 +29,12 @@ div(style="position: relative; min-height: 100vh;")
             Filtrar por:
         select(class="form-select me-2" aria-label="Default select example", name="estado" style="width: 15rem;")
           if(activas)
-            option(selected value=true) Campañas activas
-            option(value=false) Campañas finalizadas
+            option(selected value="Activas") Campañas activas
+            option(value="Finalizadas") Campañas completadas
           else 
-            option(value=true) Campañas activas
-            option(selected value=false) Campañas finalizadas
-        input(class="btn btn-info" type="submit" disabled value="Buscar") 
+            option(value="Activas") Campañas activas
+            option(selected value="Finalizadas") Campañas completadas
+        input(class="btn btn-info" type="submit" value="Buscar") 
       
       br
       br
@@ -42,27 +46,33 @@ div(style="position: relative; min-height: 100vh;")
             th Monto a conseguir 
             th Monto conseguido
             th Fecha de cierre
-            if sesion.nivel == 1
+            if sesion.nivel == 1 && activas
               th Donar
+            else if sesion.nivel == 2
+              th Donaciones
         tbody 
-        if(donaciones)
+        if(donaciones.length > 0)
           each donacion in donaciones
             tr  
               td #{donacion.nombre}
               td $ #{donacion.monto}
               td $ #{donacion.monto_actual}
               td #{donacion.fecha_fin.toISOString().slice(0,10)}
-              if sesion.nivel == 1
+              if sesion.nivel == 1 && activas
                 td 
                   a(href="/donaciones/donar/"+donacion.id)
                     button(type="button" class="btn btn-info") Donar 
+              else if sesion.nivel == 2 
+                td 
+                  a(href="/donaciones/historial/"+donacion.id)
+                    button(type="button" class="btn btn-info") Ver
         else 
           tr 
             td
             td
             td No se encontraron donaciones
             td 
-            if sesion.nivel == 1
+            if ( activas || sesion.nivel == 2)
               td
     
   include ../partials/footer.pug
