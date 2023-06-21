@@ -90,6 +90,7 @@ model donaciones{
 model publicacion_cruzas{
   id                      Int       @id @default(autoincrement())
   periodo_celo            String?   @db.VarChar(255)
+  sexo                    String    @db.VarChar(255)
   perroId                 Int?      @unique
   perro                   perros?   @relation(fields: [perroId], references: [id])  
 }

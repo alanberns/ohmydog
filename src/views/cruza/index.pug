@@ -21,29 +21,29 @@ div(class="container-fluid")
         th Disponible para cruza 
         th Ver perros para cruzar
     tbody 
-    if(cruzas.perros)
-      each cruza in cruzas.perros
+    if(cliente.perros)
+      each perro in cliente.perros
         tr  
-          td #{cruza.nombre}
-          td #{cruza.raza}
-          if cruza.cruza
+          td #{perro.nombre}
+          td #{perro.raza}
+          if perro.cruza
+            td 
+              a
+                button(type="button" class="btn btn-info" disabled ) Cancelar cruza
             td 
               a(href="/cruza")
-                button(type="button" class="btn btn-info") Cancelar cruza
-            td 
-              a(href="/cruza")
-                button(type="button" class="btn btn-info") Perros
+                button(type="button" class="btn btn-info") Buscar
           else 
             td 
-              a(href="/cruza")
-                button(type="button" class="btn btn-info") Cruzar perro 
+              a(href="/cruza/cruzar/"+perro.id)
+                button(type="button" class="btn btn-info") Iniciar cruza
             td 
-              a(href="/cruza")
-                button(type="button" class="btn btn-info" disabled) Perros
+              a
+                button(type="button" class="btn btn-info" disabled) Buscar
     else 
       tr 
         td
-        td No se encontraron publicaciones
+        td No se encontraron mascotas
         td
         td
 
