@@ -1,76 +1,82 @@
 include ../partials/head.pug
-include ../partials/header.pug
-div(class="container-fluid")
-  //- aca va la pagina hasta footer. inicia con 1 tab
-  h1= message
-
-  br
-  br
-
-  include ../partials/info.pug
-
-  div(class="")
-    form(action="#")
-      div(class="mb-3")
-        label(for="nombre" class="form-label")
-          b Nombre
-        input(type="text" class="form-control" id="nombre" disabled value=adopcion.nombre)
-        input(type="hidden" class="form-control" name="nombre" id="nombre" disabled value=adopcion.nombre)
-      div(class="mb-3")
-        label(for="edad" class="form-label") 
-          b Edad
-        input(type="text" class="form-control" id="edad" disabled value=adopcion.edad)
-        input(type="hidden" class="form-control" name="edad" id="edad" disabled value=adopcion.edad)
-      div(class="mb-3")
-        label(for="raza" class="form-label") 
-          b Raza
-        input(type="text" class="form-control" id="raza" disabled value=adopcion.raza)
-        input(type="hidden" class="form-control" name="raza" id="raza" disabled value=adopcion.raza)
-      div(class="mb-3")
-        label(for="color" class="form-label")
-          b  Color
-        input(type="text" class="form-control" id="color" disabled value=adopcion.color)
-        input(type="hidden" class="form-control" name="color" id="color" disabled value=adopcion.color)
-      div(class="mb-3")
-        label(for="color" class="form-label")
-          b  Sexo
-        input(type="text" class="form-control" id="color" disabled value=adopcion.sexo)
-        input(type="hidden" class="form-control" name="color" id="color" disabled value=adopcion.sexo)
-      div(class="mb-3")
-        label(for="observaciones" class="form-label") 
-          b Observaciones
-        input(type="text" class="form-control" id="observaciones" disabled value=adopcion.observaciones)
-        input(type="hidden" class="form-control" name="observaciones" id="observaciones" disabled value=adopcion.observaciones)
-      div(class="mb-3")
-        label(for="origen" class="form-label")
-          b Origen
-        input(type="text" class="form-control" id="origen" disabled value=adopcion.origen)
-        input(type="hidden" class="form-control" name="origen" id="origen" value=adopcion.origen)
-      div(class="mb-3")
-        label(for="color" class="form-label")
-          b  Tamaño
-        input(type="text" class="form-control" id="color" disabled value=adopcion.tamanio)
-        input(type="hidden" class="form-control" name="color" id="color" value=adopcion.tamanio)
-
-    if !esPropia
+div(style="position: relative; min-height: 100vh;")
+  div(style="padding-bottom: calc(1.25rem + 0.3125rem * 2 + 1rem)")
+    include ../partials/header.pug
+    div(class="container-fluid")
+      //- aca va la pagina hasta footer. inicia con 1 tab
+      h1= message
+    
       br
-      div(class="container-fluid")
-        form(action="/adopciones/contactar" method="post" id="contacto") 
-          h4 Contactate!
-          if !sesion.nombre
-            div(class="mb-3")
-              label(for="nombre" class="form-label") Nombre
-              input(type="text" class="form-control" name="nombre" id="nombre" placeholder="Solo puede ingresar letras" required value=nombre)
-            div(class="mb-3")
-              label(for="email" class="form-label") Email
-              input(type="email" class="form-control" name="email" id="email" placeholder="nombre@mail.com" required value=email)
-            label(for="id" class="form-label") 
-          input(type="hidden" class="form-control" name="id" id="id" required value=adopcion.id)
-          input(type="submit" class="btn btn-info" value="Contactar adopcion ")  
-    br
-    a(href="/adopciones")
-      button(type="button" class="btn btn-info") Atrás 
-
-
-
-include ../partials/footer.pug
+      br
+    
+      include ../partials/info.pug
+    
+      div(class="")
+        form(action="#" class="flex-form-wrap")
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="text" id="nombre" disabled value=adopcion.nombre?adopcion.nombre:"" onchange="this.setAttribute('value', this.value);")
+            div(class="input_border_focus")
+            div(class="input_placeholder") Nombre
+            input(type="hidden" class="form-control" name="nombre" id="nombre" disabled value=adopcion.nombre)
+          div(class="d-flex mb-3 flex-form-item")
+            div(class="left-input input" style="width: 4.3rem;min-width: 4.3rem;margin-right: 1rem;")
+              input(type="text" id="edad" disabled value=adopcion.edad?adopcion.edad:"" onchange="this.setAttribute('value', this.value);")
+              div(class="input_border_focus")
+              div(class="input_placeholder") Edad
+              input(type="hidden" class="form-control" name="edad" id="edad" disabled value=adopcion.edad)
+            div(class="left-input input" style="width: 100%;min-width: 8.7rem;")
+              input(type="text" id="raza" disabled value=adopcion.raza?adopcion.raza:"" onchange="this.setAttribute('value', this.value);")
+              div(class="input_border_focus")
+              div(class="input_placeholder") Raza
+              input(type="hidden" class="form-control" name="raza" id="raza" disabled value=adopcion.raza)
+          div(class="d-flex mb-3 flex-form-item")
+            div(class="left-input input" style="width: 17rem;min-width: 8rem;margin-right: 1rem;")
+              input(type="text" id="color" disabled value=adopcion.color?adopcion.color:"" onchange="this.setAttribute('value', this.value);")
+              div(class="input_border_focus")
+              div(class="input_placeholder") Color
+              input(type="hidden" class="form-control" name="color" id="color" disabled value=adopcion.color)
+            div(class="left-input input" style="width: 6rem;min-width: 6rem;")
+              input(type="text" id="sexo" disabled value=adopcion.sexo?adopcion.sexo:"" onchange="this.setAttribute('value', this.value);")
+              div(class="input_border_focus")
+              div(class="input_placeholder") Sexo
+              input(type="hidden" class="form-control" name="sexo" id="sexo" disabled value=adopcion.sexo)
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="text" id="observaciones" disabled value=adopcion.observaciones?adopcion.observaciones:"" onchange="this.setAttribute('value', this.value);")
+            div(class="input_border_focus")
+            div(class="input_placeholder") Observaciones
+            input(type="hidden" class="form-control" name="observaciones" id="observaciones" disabled value=adopcion.observaciones)
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="text" id="origen" disabled value=adopcion.origen?adopcion.origen:"" onchange="this.setAttribute('value', this.value);")
+            div(class="input_border_focus")
+            div(class="input_placeholder") Origen
+            input(type="hidden" class="form-control" name="origen" id="origen" value=adopcion.origen)
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="text" id="color" disabled value=adopcion.tamanio?adopcion.tamanio:"" onchange="this.setAttribute('value', this.value);")
+            div(class="input_border_focus")
+            div(class="input_placeholder") Tamaño
+            input(type="hidden" class="form-control" name="color" id="color" value=adopcion.tamanio)
+    
+        if !esPropia
+          br
+          div(class="container-fluid")
+            form(action="/adopciones/contactar" method="post" id="contacto") 
+              h4 ¡Contactate!
+              if !sesion.nombre
+                div(class="left-input input mb-3 flex-form-item" style="margin: auto;")
+                  input(type="text" name="nombre" id="nombre" placeholder="Solo puede ingresar letras" required value=nombre?nombre:"" onchange="this.setAttribute('value', this.value);")
+                  div(class="input_border_focus")
+                  div(class="input_placeholder") Nombre
+                div(class="left-input input mb-3 flex-form-item" style="margin: auto;")
+                  input(type="email" name="email" id="email" placeholder="nombre@mail.com" required value=email?email:"" onchange="this.setAttribute('value', this.value);")
+                  div(class="input_border_focus")
+                  div(class="input_placeholder") Email
+                label(for="id" class="form-label") 
+              input(type="hidden" class="form-control" name="id" id="id" required value=adopcion.id)
+              input(type="submit" class="btn btn-info" value="Contactar adopción")  
+        br
+        a(href="/adopciones")
+          button(type="button" class="btn btn-info") Atrás
+    
+    
+    
+  include ../partials/footer.pug

@@ -12,23 +12,29 @@ div(style="position: relative; min-height: 100vh;")
     
       include ../partials/info.pug
     
-      div(class="" style="margin: auto; width: 30rem;")
+      div(class="" style="margin: auto; width: 25rem;")
         form(method="post" action="/sesion/intento" id="formulario")
-          div(class="login-input input mb-3")
+          div(class="left-input large-padding input mb-3")
             input(type="email" name="email" id="email" placeholder="nombre@mail.com" required autofocus value=datos.email?datos.email:"" onchange="this.setAttribute('value', this.value);")
             div(class="input_border_focus")
             div(class="input_placeholder") Email
-          div(class="login-input input mb-3")
+          div(class="left-input large-padding input mb-3")
             input(type="password" name="password" id="password" required value=datos.password?datos.password:"" onchange="this.setAttribute('value', this.value);")
             div(class="input_border_focus")
             div(class="input_placeholder") Contrase&ntilde;a
-          input(type="submit" class="btn btn-info" value="Iniciar sesión") 
+          input(type="submit" id="boton_iniciar_sesion" class="btn btn-info" value="Iniciar sesión")
     
         br
         a(href="/")
           button(type="button" class="btn btn-info") Cancelar
      
     script(src="/js/validacionSesion.js")
+    script
+      .
+        formulario = document.getElementById("formulario");
+        formulario.addEventListener("keydown", function() {if (event.keyCode === 13) document.getElementById('boton_iniciar_sesion').classList.add('active');});
+        formulario.addEventListener("keyup", function() {if (event.keyCode === 13) document.getElementById('boton_iniciar_sesion').classList.remove('active');});
+        window.addEventListener("focus", function() {document.getElementById('boton_iniciar_sesion').classList.remove('active');})
     
     br
   include ../partials/footer.pug

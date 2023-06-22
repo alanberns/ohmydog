@@ -1,63 +1,67 @@
 include ../partials/head.pug
-include ../partials/header.pug
-div(class="container-fluid")
-  //- aca va la pagina hasta footer. inicia con 1 tab
-  h1= message
-
-  br
-  br
-
-  include ../partials/info.pug
-
-  div(class="")
-    form(method="post" action="/adopciones/nuevo" id="formulario")
-      div(class="mb-3")
-        label(for="nombre" class="form-label")
-          b Nombre *
-        input(type="text" class="form-control" name="nombre" id="nombre", placeholder="Solo puede ingresar letras" minlength=1, maxlenght=255, required value=adopcion.nombre)
-      div(class="mb-3")
-        label(for="edad" class="form-label")
-          b Edad *
-        input(type="text" class="form-control" name="edad" id="edad", placeholder="Solo puede ingresar letras y números" minlength=1, maxlenght=255, required value=adopcion.edad)
-      div(class="mb-3")
-        label(for="raza" class="form-label")
-          b Raza *
-        input(type="text" class="form-control" name="raza" id="raza", placeholder="Solo puede ingresar letras" minlength=1, maxlenght=255, required value=adopcion.raza)
-      div(class="mb-3")
-        label(for="color" class="form-label")
-          b Color *
-        input(type="text" class="form-control" name="color" id="color", placeholder="Solo puede ingresar letras" minlength=1, maxlenght=255, required value=adopcion.color)
-      div(class="mb-3")
-        label(for="sexo" class="form-label")
-          b Sexo *
-        select(class="form-select" aria-label="Default select example", name="sexo" required value=adopcion.sexo)
-          option(value="Macho") Macho
-          option(value="Hembra") Hembra
-      div(class="mb-3")
-        label(for="origen" class="form-label")
-          b Origen *
-        input(type="text" class="form-control" name="origen" id="origen", placeholder="Solo puede ingresar letras" minlength=1, maxlenght=255, required value=adopcion.origen)
-      div(class="mb-3")
-        label(for="observaciones" class="form-label")
-          b Observaciones *
-        input(type="text" class="form-control" name="observaciones" id="observaciones", placeholder="Solo puede ingresar letras" minlength=1, maxlenght=255, required value=adopcion.observaciones)
-      div(class="mb-3")
-        label(for="tamanio" class="form-label")
-          b Tamaño *
-        select(class="form-select" aria-label="Default select example", name="tamanio" required value=adopcion.tamanio)
-          option(value="Chico") Chico
-          option(value="Grande") Grande
-          option(value="Mediano") Mediano
-      div(class="mb-3")
-        label(for="clienteId" class="form-label")
-        input(type="hidden" class="form-control" name="clienteId" id="clienteId" required value=adopcion.clienteId)
+div(style="position: relative; min-height: 100vh;")
+  div(style="padding-bottom: calc(1.25rem + 0.3125rem * 2 + 1rem)")
+    include ../partials/header.pug
+    div(class="container-fluid")
+      //- aca va la pagina hasta footer. inicia con 1 tab
+      h1= message
     
-
-      input(type="submit" class="btn btn-info" value="Publicar") 
-
-    br
-    a(href="/adopciones")
-      button(type="button" class="btn btn-info") Cancelar
-
-script(src="/js/validacionNuevaAdopcion.js") 
-include ../partials/footer.pug
+      br
+      br
+    
+      include ../partials/info.pug
+    
+      div(class="")
+        form(method="post" action="/adopciones/nuevo" id="formulario" class="flex-form-wrap")
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="text" name="nombre" id="nombre", placeholder="Solo puede ingresar letras" minlength=1, maxlenght=255, required value=adopcion.nombre?adopcion.nombre:"" onchange="this.setAttribute('value', this.value);")
+            div(class="input_border_focus")
+            div(class="input_placeholder") Nombre *
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="text" name="edad" id="edad", placeholder="Solo puede ingresar letras y números" minlength=1, maxlenght=255, required value=adopcion.edad?adopcion.edad:"" onchange="this.setAttribute('value', this.value);")
+            div(class="input_border_focus")
+            div(class="input_placeholder") Edad *
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="text" name="raza" id="raza", placeholder="Solo puede ingresar letras" minlength=1, maxlenght=255, required value=adopcion.raza?adopcion.raza:"" onchange="this.setAttribute('value', this.value);")
+            div(class="input_border_focus")
+            div(class="input_placeholder") Raza *
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="text" name="color" id="color", placeholder="Solo puede ingresar letras" minlength=1, maxlenght=255, required value=adopcion.color?adopcion.color:"" onchange="this.setAttribute('value', this.value);")
+            div(class="input_border_focus")
+            div(class="input_placeholder") Color *
+          div(class="left-input input mb-3 flex-form-item")
+            select(name="sexo" required value=adopcion.sexo?adopcion.sexo:"" onclick="if(this.opened){this.opened=false;this.blur();}else{this.opened=true;}" onblur="this.opened=false;" onchange="this.setAttribute('value', this.value);")
+              option(value hidden selected=adopcion.sexo?null:"" disabled)
+              option(value="Macho" selected=adopcion.sexo=="Macho"?"":null) Macho
+              option(value="Hembra" selected=adopcion.sexo=="Hembra"?"":null) Hembra
+            div(class="input_border_focus")
+            div(class="input_placeholder") Sexo *
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="text" name="origen" id="origen", placeholder="Solo puede ingresar letras" minlength=1, maxlenght=255, required value=adopcion.origen?adopcion.origen:"" onchange="this.setAttribute('value', this.value);")
+            div(class="input_border_focus")
+            div(class="input_placeholder") Origen *
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="text" name="observaciones" id="observaciones", placeholder="Solo puede ingresar letras" minlength=1, maxlenght=255, required value=adopcion.observaciones?adopcion.observaciones:"" onchange="this.setAttribute('value', this.value);")
+            div(class="input_border_focus")
+            div(class="input_placeholder") Observaciones *
+          div(class="left-input input mb-3 flex-form-item")
+            select(name="tamanio" required value=adopcion.tamanio?adopcion.tamanio:"" onclick="if(this.opened){this.opened=false;this.blur();}else{this.opened=true;}" onblur="this.opened=false;" onchange="this.setAttribute('value', this.value);")
+              option(value hidden selected=adopcion.tamanio?null:"" disabled)
+              option(value="Chico" selected=adopcion.tamanio=="Chico"?"":null) Chico
+              option(value="Grande" selected=adopcion.tamanio=="Grande"?"":null) Grande
+              option(value="Mediano" selected=adopcion.tamanio=="Mediano"?"":null) Mediano
+            div(class="input_border_focus")
+            div(class="input_placeholder") Tamaño *
+          div(class="mb-3")
+            label(for="clienteId" class="form-label")
+            input(type="hidden" class="form-control" name="clienteId" id="clienteId" required value=adopcion.clienteId)
+        
+    
+          input(type="submit" class="btn btn-info" value="Publicar" style="margin: 0 45%") 
+    
+        br
+        a(href="/adopciones")
+          button(type="button" class="btn btn-info") Cancelar
+    
+    script(src="/js/validacionNuevaAdopcion.js") 
+  include ../partials/footer.pug

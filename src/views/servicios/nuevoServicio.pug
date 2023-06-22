@@ -1,103 +1,102 @@
 include ../partials/head.pug
-include ../partials/header.pug
-div(class="container-fluid")
-  //- aca va la pagina hasta footer. inicia con 1 tab
-  h1= message
-
-  br
-  br
-
-  include ../partials/info.pug
-
-  div(class="")
-    form(method="post" action="/servicios/nuevo" id="formulario")
-      div(class="mb-3")
-        label(for="servicio" class="form-label")
-          b Servicio a ofrecer *
-        input(type="text" class="form-control" name="servicio" id="servicio" placeholder="Solo puede ingresar letras" minlength=1, maxlength=255 required value=servicio.servicio
-                oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un nombre de servicio válido')")
-      div(class="mb-3")
-        label(for="nombre" class="form-label")
-          b Nombre *
-        input(type="text" class="form-control" name="nombre" id="nombre" placeholder="Solo puede ingresar letras" minlength=1, maxlength=255 required value=servicio.nombre
-                oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un nombre válido')")
-      div(class="mb-3")
-        label(for="apellido" class="form-label")
-          b Apellido *
-        input(type="text" class="form-control" name="apellido" id="apellido" placeholder="Solo puede ingresar letras" minlength=1, maxlength=255 required value=servicio.apellido
-                oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un apellido válido')")
-      div(class="mb-3")
-        label(for="zona" class="form-label")
-          b Zona *
-        select(class="form-select" aria-label="Default select example", name="zona" required value=servicio.zona)
-          if servicio.zona 
-            option(value=servicio.zona selected) #{servicio.zona}
-          option(value="La Plata") La Plata
-          option(value="Villa Elisa") Villa Elisa
-          option(value="Tolosa") Tolosa
-          option(value="City Bell") City Bell
-      div(class="mb-3") 
-        b Días *
-        div(class="form-check" style="width:16vw")
-          label(class="form-check-label" for="flexCheckDefault") Lunes
-          if servicio.Lunes != undefined
-            input(class="form-check-input" type="checkbox" value="Lunes" id="flexCheckDefault" name="Lunes"  checked )
-          else 
-            input(class="form-check-input" type="checkbox" value="Lunes" id="flexCheckDefault" name="Lunes"   )
-        div(class="form-check" style="width:16vw")  
-          label(class="form-check-label" for="flexCheckDefault") Martes
-          if servicio.Martes != undefined
-            input(class="form-check-input" type="checkbox" value="Martes" id="flexCheckDefault" name="Martes" checked ) 
-          else 
-            input(class="form-check-input" type="checkbox" value="Martes" id="flexCheckDefault" name="Martes") 
-        div(class="form-check" style="width:16vw")  
-          label(class="form-check-label" for="flexCheckDefault") Miércoles
-          if servicio.Miercoles != undefined
-            input(class="form-check-input" type="checkbox" value="Miercoles" id="flexCheckDefault" name="Miercoles" checked ) 
-          else 
-            input(class="form-check-input" type="checkbox" value="Miercoles" id="flexCheckDefault" name="Miercoles") 
-        div(class="form-check" style="width:16vw")  
-          label(class="form-check-label" for="flexCheckDefault") Jueves
-          if servicio.Jueves != undefined
-            input(class="form-check-input" type="checkbox" value="Jueves" id="flexCheckDefault" name="Jueves" checked ) 
-          else 
-            input(class="form-check-input" type="checkbox" value="Jueves" id="flexCheckDefault" name="Jueves") 
-        div(class="form-check" style="width:16vw")  
-          label(class="form-check-label" for="flexCheckDefault") Viernes
-          if servicio.Viernes != undefined
-            input(class="form-check-input" type="checkbox" value="Viernes" id="flexCheckDefault" name="Viernes" checked ) 
-          else 
-            input(class="form-check-input" type="checkbox" value="Viernes" id="flexCheckDefault" name="Viernes") 
-        div(class="form-check" style="width:16vw")  
-          label(class="form-check-label" for="flexCheckDefault") Sábado
-          if servicio.Sabado != undefined
-            input(class="form-check-input" type="checkbox" value="Sabado" id="flexCheckDefault" name="Sabado" checked ) 
-          else 
-            input(class="form-check-input" type="checkbox" value="Sabado" id="flexCheckDefault" name="Sabado") 
-        div(class="form-check" style="width:16vw")  
-          label(class="form-check-label" for="flexCheckDefault") Domingo
-          if servicio.Domingo != undefined
-            input(class="form-check-input" type="checkbox" value="Domingo" id="flexCheckDefault" name="Domingo" checked ) 
-          else 
-            input(class="form-check-input" type="checkbox" value="Domingo" id="flexCheckDefault" name="Domingo") 
-      div(class="mb-3")
-        label(for="horario_inicio" class="form-label")
-          b Horario de inicio *
-        input(type="time" class="form-control" name="horario_inicio" id="horario_inicio" required value=servicio.horario_inicio)
-      div(class="mb-3")
-        label(for="horario_fin" class="form-label")
-          b Horario de fin *
-        input(type="time" class="form-control" name="horario_fin" id="horario_fin" required value=servicio.horario_fin)
-      div(class="mb-3")
-        label(for="email_contacto" class="form-label")
-          b Email *
-        input(type="email" class="form-control" name="email_contacto" id="email_contacto", placeholder="name@mail.com" minlength=5, maxlength=255 value=servicio.email_contacto
-                oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un email válido')")
-      input(type="submit" class="btn btn-info" value="Publicar") 
-
-    br
-    a(href="/servicios")
-      button(type="button" class="btn btn-info") Cancelar
-
-script(src="/js/validacionNuevoServicio.js") 
-include ../partials/footer.pug
+div(style="position: relative; min-height: 100vh;")
+  div(style="padding-bottom: calc(1.25rem + 0.3125rem * 2 + 1rem)")
+    include ../partials/header.pug
+    div(class="container-fluid")
+      //- aca va la pagina hasta footer. inicia con 1 tab
+      h1= message
+    
+      br
+    
+      include ../partials/info.pug
+    
+      div(class="")
+        form(method="post" action="/servicios/nuevo" id="formulario")
+          div(class="flex-form-wrap")
+            div(class="left-input input margin-top-and-bottom flex-form-item")
+              input(type="text" name="servicio" id="servicio" placeholder="Solo puede ingresar letras" minlength=1, maxlength=255 required value=servicio.servicio?servicio.servicio:""
+                      oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un nombre de servicio válido')" onchange="this.setAttribute('value', this.value);")
+              div(class="input_border_focus")
+              div(class="input_placeholder") Servicio a ofrecer *
+            div(class="left-input input margin-top-and-bottom flex-form-item")
+              select(name="zona" required value=servicio.zona?servicio.zona:"" onclick="if(this.opened){this.opened=false;this.blur();}else{this.opened=true;}" onblur="this.opened=false;" onchange="this.setAttribute('value', this.value);")
+                option(value hidden selected=servicio.zona?null:"" disabled)
+                option(value="La Plata" selected=servicio.zona=="La Plata"?"":null) La Plata
+                option(value="Villa Elisa" selected=servicio.zona=="Villa Elisa"?"":null) Villa Elisa
+                option(value="Tolosa" selected=servicio.zona=="Tolosa"?"":null) Tolosa
+                option(value="City Bell" selected=servicio.zona=="City Bell"?"":null) City Bell
+              div(class="input_border_focus")
+              div(class="input_placeholder") Zona *
+          div(class="flex-form-wrap")
+            div(class="left-input input margin-top-and-bottom flex-form-item")
+              input(type="text" name="nombre" id="nombre" placeholder="Solo puede ingresar letras" minlength=1, maxlength=255 required value=servicio.nombre?servicio.nombre:""
+                      oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un nombre válido')" onchange="this.setAttribute('value', this.value);")
+              div(class="input_border_focus")
+              div(class="input_placeholder") Nombre *
+            div(class="left-input input margin-top-and-bottom flex-form-item")
+              input(type="text" name="apellido" id="apellido" placeholder="Solo puede ingresar letras" minlength=1, maxlength=255 required value=servicio.apellido?servicio.apellido:""
+                      oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un apellido válido')" onchange="this.setAttribute('value', this.value);")
+              div(class="input_border_focus")
+              div(class="input_placeholder") Apellido *
+          div(class="margin-top-and-bottom horizontal-margin-center" style="padding: 0 1em; width: 34rem; max-width: 100%;")
+            div(class="d-flex" style="position: relative; flex-wrap: wrap; justify-content: space-evenly; padding: .5em; background-color: white; border:1px solid #dadce0; border-radius: .375em;")
+              div(style="position: absolute; margin-top: -.5em; left: 7px; padding: 0 8px;")
+                div(style="font-size: .84375em; margin-top: -.5em; line-height: 1em; user-select: none; text-shadow: 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white;") Días *
+              div(class="form-check")
+                label(class="form-check-label" for="lunesCheck")
+                  input(class="check-input form-check-input" type="checkbox" value="Lunes" id="lunesCheck" name="Lunes" checked=servicio.Lunes != undefined?"":null)
+                  .
+                    Lunes
+              div(class="form-check")
+                label(class="form-check-label" for="martesCheck")
+                  input(class="check-input form-check-input" type="checkbox" value="Martes" id="martesCheck" name="Martes" checked=servicio.Martes != undefined?"":null)
+                  .
+                    Martes
+              div(class="form-check")
+                label(class="form-check-label" for="miercolesCheck")
+                  input(class="check-input form-check-input" type="checkbox" value="Miércoles" id="miercolesCheck" name="Miercoles" checked=servicio.Miercoles != undefined?"":null)
+                  .
+                    Miércoles
+              div(class="form-check")
+                label(class="form-check-label" for="juevesCheck")
+                  input(class="check-input form-check-input" type="checkbox" value="Jueves" id="juevesCheck" name="Jueves" checked=servicio.Jueves != undefined?"":null)
+                  .
+                    Jueves
+              div(class="form-check")
+                label(class="form-check-label" for="viernesCheck")
+                  input(class="check-input form-check-input" type="checkbox" value="Viernes" id="viernesCheck" name="Viernes" checked=servicio.Viernes != undefined?"":null)
+                  .
+                    Viernes
+              div(class="form-check")
+                label(class="form-check-label" for="sabadoCheck")
+                  input(class="check-input form-check-input" type="checkbox" value="Sábado" id="sabadoCheck" name="Sabado" checked=servicio.Sabado != undefined?"":null)
+                  .
+                    Sábado
+              div(class="form-check")
+                label(class="form-check-label" for="domingoCheck")
+                  input(class="check-input form-check-input" type="checkbox" value="Domingo" id="domingoCheck" name="Domingo" checked=servicio.Domingo != undefined?"":null)
+                  .
+                    Domingo
+          div(class="flex-form-wrap")
+            div(class="left-input input margin-top-and-bottom flex-form-item")
+              input(type="time" name="horario_inicio" id="horario_inicio" required value=servicio.horario_inicio?servicio.horario_inicio:"" onchange="this.setAttribute('value', this.value);")
+              div(class="input_border_focus")
+              div(class="input_placeholder") Horario de inicio *
+            div(class="left-input input margin-top-and-bottom flex-form-item")
+              input(type="time" name="horario_fin" id="horario_fin" required value=servicio.horario_fin?servicio.horario_fin:"" onchange="this.setAttribute('value', this.value);")
+              div(class="input_border_focus")
+              div(class="input_placeholder") Horario de fin *
+          div(class="margin-top-and-bottom horizontal-margin-center" style="padding: 0 1em; width: 26rem; max-width: 100%;")
+            div(class="left-input input")
+              input(type="email" name="email_contacto" id="email_contacto", placeholder="name@mail.com" minlength=5, maxlength=255 value=servicio.email_contacto
+                      oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un email válido')" onchange="this.setAttribute('value', this.value);")
+              div(class="input_border_focus")
+              div(class="input_placeholder") Email *
+          input(type="submit" class="btn btn-info" value="Publicar") 
+    
+        br
+        a(href="/servicios")
+          button(type="button" class="btn btn-info") Cancelar
+    
+    script(src="/js/validacionNuevoServicio.js") 
+  include ../partials/footer.pug

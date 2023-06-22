@@ -1,10 +1,13 @@
 include partials/head.pug
-
-div(class="container-fluid")
-  h1=error.status
-  h2=error.name
-  h3=error.message
-  a(href="/")
-    button(type="button" class="btn btn-info") Volver al inicio
-
-include partials/footer.pug
+div(style="position: relative; min-height: 100vh;")
+  div(style="padding-bottom: calc(1.25rem + 0.3125rem * 2 + 1rem)")
+    include partials/header.pug
+    
+    div(class="container-fluid")
+      h1=error.status
+      h2=error.name
+      h3=error.message
+      a(href="/")
+        button(type="button" class="btn btn-info") Volver al inicio
+    
+  include partials/footer.pug

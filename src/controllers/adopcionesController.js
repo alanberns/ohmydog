@@ -24,7 +24,7 @@ module.exports = {
         }
         res.render('adopciones/index', { 
             title: 'Adopciones',
-            message: 'Inicio adopciones',
+            message: 'Adopciones',
             adopciones: adopciones,
             error:error,
             estado: estado
@@ -95,7 +95,7 @@ module.exports = {
             res.render('exito', {
                 title: "Éxito",
                 message: "Éxito",
-                info: "La publicacion se registró con éxito"
+                info: "La publicación se registró con éxito"
             });
         }
     },
@@ -150,7 +150,7 @@ module.exports = {
         console.log(req.body.estado)
         res.render('adopciones/index', { 
             title: 'Adopciones',
-            message: 'Inicio adopciones',
+            message: 'Adopciones',
             adopciones: adopciones,
             estado: req.body.estado
          });

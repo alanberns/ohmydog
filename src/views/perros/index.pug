@@ -19,10 +19,10 @@ div(style="position: relative; min-height: 100vh;")
       br
     
       form(class="d-flex" role="search" method="post" action="/perros/" id="formulario" style="justify-content: center;")
-        div(class="search-input input me-2")
-          input(type="search" id="nombre" aria-label="Search" value=nombre?nombre:"" name="nombre" style="width: 20rem;" onchange="this.setAttribute('value', this.value);")
+        div(class="left-input input me-2")
+          input(type="search" id="nombre" aria-label="Search" placeholder="Solo puede contener letras" value=nombre?nombre:"" name="nombre" style="width: 20rem;" onchange="this.setAttribute('value', this.value);")
           div(class="input_border_focus")
-          div(class="input_placeholder") Nombre (solo puede contener letras)
+          div(class="input_placeholder") Nombre
         input(class="btn btn-info" type="submit" value="Buscar") 
     
       br
@@ -33,7 +33,7 @@ div(style="position: relative; min-height: 100vh;")
           tr 
             th Nombre
             th Email dueño
-            th Ver Datos
+            th Ver datos
             th Eliminar
         tbody 
         if(perros)

@@ -11,24 +11,26 @@ div(style="position: relative; min-height: 100vh;")
       br
     
       div(class="row")
-        div(class="col-md-2") &nbsp;
-        div(class="col-md-8")
+        div(class="col-md-4") &nbsp;
+        div(class="col-md-4")
           form(method="post" action="/turno/intento" id="formulario")
-            div(class="mb-3")
-              label(for="email" class="form-label") Franja Horaria
-              select(class="form-control" name="franja" id="franja" required)
-                option(value="" selected disabled) Elija una opci&oacute;n 
+            div(class="left-input input mb-3")
+              select(name="franja" id="franja" required value="" onclick="if(this.opened){this.opened=false;this.blur();}else{this.opened=true;}" onblur="this.opened=false;" onchange="this.setAttribute('value', this.value);")
+                option(value hidden selected disabled)
                 option(value="temprano") Ma&ntilde;ana
                 option(value="tarde") Tarde
-            div(class="mb-3")
-              label(for="nombre" class="form-label") D&iacute;a
-              input(type="text" class="form-control" name="dia" id="dia" placeholder="dd/mm/aaaa" required)
-            input(type="submit" class="btn btn-info" value="Solicitar Turno") 
+              div(class="input_border_focus")
+              div(class="input_placeholder") Franja horaria
+            div(class="left-input input mb-3")
+              input(type="date" name="dia" id="dia" placeholder="dd/mm/aaaa" required value="" onchange="this.setAttribute('value', this.value);")
+              div(class="input_border_focus")
+              div(class="input_placeholder") D&iacute;a
+            input(type="submit" class="btn btn-info" value="Solicitar turno") 
     
           br
           a(href="/")
             button(type="button" class="btn btn-info") Cancelar
-        div(class="col-md-2") &nbsp;
+        div(class="col-md-4") &nbsp;
      
     script(src="/js/validacionSesion.js")
     

@@ -12,31 +12,31 @@ div(style="position: relative; min-height: 100vh;")
       include ../partials/info.pug
     
       div(class="")
-        form(action="#" style="display: flex; flex-wrap: wrap; justify-content: center;")
-          div(class="mb-3" style="width: calc(50% - 4rem); margin: 0 2rem;")
-            label(for="email" class="form-label") 
-              b Email 
-            input(type="email" class="form-control" id="email" disabled value=cliente.email) 
+        form(action="#" class="flex-form-wrap")
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="email" id="email" disabled value=cliente.email?cliente.email:"" onchange="this.setAttribute('value', this.value);")
+            div(class="input_border_focus")
+            div(class="input_placeholder") Email
             input(type="hidden" class="form-control" name="email" id="email" value=cliente.email)
-          div(class="mb-3" style="width: calc(50% - 4rem); margin: 0 2rem;")
-            label(for="dni" class="form-label") 
-              b DNI
-            input(type="number" class="form-control" id="dni" disabled value=cliente.dni)
-            input(type="hidden" class="form-control" name="dni" id="dni" value=cliente.dni)
-          div(class="mb-3" style="width: calc(50% - 4rem); margin: 0 2rem;")
-            label(for="nombre" class="form-label") 
-              b Nombre
-            input(type="text" class="form-control" id="nombre" disabled value=cliente.nombre)
+          div(class="left-input input mb-3 flex-form-item" style="width: 15rem;min-width: 15rem;")
+            input(type="text" id="nombre" disabled value=cliente.nombre?cliente.nombre:"" onchange="this.setAttribute('value', this.value);")
+            div(class="input_border_focus")
+            div(class="input_placeholder") Nombre
             input(type="hidden" class="form-control" name="nombre" id="nombre" value=cliente.nombre)
-          div(class="mb-3" style="width: calc(50% - 4rem); margin: 0 2rem;")
-            label(for="apellido" class="form-label") 
-              b Apellido
-            input(type="text" class="form-control" id="apellido" disabled value=cliente.apellido)
+          div(class="left-input input mb-3 flex-form-item" style="width: 15rem;min-width: 15rem;")
+            input(type="text" id="apellido" disabled value=cliente.apellido?cliente.apellido:"" onchange="this.setAttribute('value', this.value);")
+            div(class="input_border_focus")
+            div(class="input_placeholder") Apellido
             input(type="hidden" class="form-control" name="apellido" id="apellido" value=cliente.apellido)
-          div(class="mb-3" style="width: calc(50% - 4rem); margin: 0 2rem;")
-            label(for="telefono" class="form-label") 
-              b Teléfono
-            input(type="number" class="form-control" id="telefono" disabled value=cliente.telefono)
+          div(class="left-input input mb-3 flex-form-item" style="width: 7rem;min-width: 7rem;")
+            input(type="number" id="dni" disabled value=cliente.dni?cliente.dni:"" onchange="this.setAttribute('value', this.value);")
+            div(class="input_border_focus")
+            div(class="input_placeholder") DNI
+            input(type="hidden" class="form-control" name="dni" id="dni" value=cliente.dni)
+          div(class="left-input input mb-3 flex-form-item" style="width: 10rem;min-width: 10rem;")
+            input(type="number" id="telefono" disabled value=cliente.telefono?cliente.telefono:"" onchange="this.setAttribute('value', this.value);")
+            div(class="input_border_focus")
+            div(class="input_placeholder") Teléfono
             input(type="hidden" class="form-control" name="telefono" id="telefono" value=cliente.telefono)
     
         br

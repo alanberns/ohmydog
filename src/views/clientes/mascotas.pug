@@ -7,35 +7,34 @@ div(style="position: relative; min-height: 100vh;")
       h1= message
     
       br
-      br
     
       include ../partials/info.pug
       br
-      br
     
-      if(mascotas)
-        each mascota in mascotas
-    
-          div(class="text-center" style="width: 20vw;")
-            div(class="card")
-              if(mascota.link_foto)
-                img(src= mascota.link_foto class="card-img-top" alt="...")
-                div(class="card-body")
-                    h5(class="card-title") #{mascota.nombre}
-                    p(class="card-text") Raza:  #{mascota.raza} 
-                    p(class="card-text") Color:  #{mascota.color}
-                    p(class="card-text") Observaciones: #{mascota.observaciones}
-                    a(href="/perros/ver/"+mascota.id)
-                      button(type="button" class="btn btn-info") Ver detalles
-                
-              else
-                div(class="card-body")
-                    h5(class="card-title") #{mascota.nombre}
-                    p(class="card-text") Raza:  #{mascota.raza} 
-                    p(class="card-text") Color:  #{mascota.color}
-                    p(class="card-text") Observaciones: #{mascota.observaciones}
-                    a(href="/perros/ver/"+mascota.id)
-                      button(type="button" class="btn btn-info") Ver detalles
+      div(class="flex-form-wrap" style="margin-left: 1rem;")
+        if(mascotas)
+          each mascota in mascotas
+        
+            div(class="text-center" style="width: 20vw; margin: 0 1rem 1rem 0;")
+              div(class="card")
+                if(mascota.link_foto)
+                  img(src= mascota.link_foto class="card-img-top" alt="...")
+                  div(class="card-body")
+                      h5(class="card-title") #{mascota.nombre}
+                      p(class="card-text") Raza:  #{mascota.raza} 
+                      p(class="card-text") Color:  #{mascota.color}
+                      p(class="card-text") Observaciones: #{mascota.observaciones}
+                      a(href="/perros/ver/"+mascota.id)
+                        button(type="button" class="btn btn-info") Ver detalles
+                  
+                else
+                  div(class="card-body")
+                      h5(class="card-title") #{mascota.nombre}
+                      p(class="card-text") Raza:  #{mascota.raza} 
+                      p(class="card-text") Color:  #{mascota.color}
+                      p(class="card-text") Observaciones: #{mascota.observaciones}
+                      a(href="/perros/ver/"+mascota.id)
+                        button(type="button" class="btn btn-info") Ver detalles
           br
     
       

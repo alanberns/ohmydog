@@ -12,33 +12,33 @@ div(style="position: relative; min-height: 100vh;")
       include ../partials/info.pug
     
       div(class="")
-        form(method="post" action="/clientes/registrar" id="formulario")
-          div(class="mb-3")
-            label(for="email" class="form-label")
-              b Email *
-            input(type="email" class="form-control" name="email" id="email", placeholder="name@mail.com" minlength=5, maxlenght=255, required value=cliente.email
-                    oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un email válido')")
-          div(class="mb-3")
-            label(for="nombre" class="form-label")
-              b Nombre *
-            input(type="text" class="form-control" name="nombre" id="nombre", placeholder="Solo puede ingresar letras" minlength=1, maxlenght=255, required value=cliente.nombre
-                    oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un nombre válido')")
-          div(class="mb-3")
-            label(for="apellido" class="form-label")
-              b Apellido *
-            input(type="text" class="form-control" name="apellido" id="apellido", placeholder="Solo puede ingresar letras" minlength=1, maxlenght=255, required value=cliente.apellido
-                    oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un apellido válido')")
-          div(class="mb-3")
-            label(for="dni" class="form-label")
-              b DNI *
-            input(type="number" class="form-control" name="dni" id="dni" placeholder="Ingrese un número de 7 a 9 cifras" min=1000000, max=100000000 required value=cliente.dni
-                    oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un DNI válido')")
-          div(class="mb-3")
-            label(for="telefono" class="form-label")
-              b Teléfono (Cod. área sin 0 + número)
-            input(type="number" class="form-control" name="telefono" id="telefono" placeholder="Ingrese un número de 10 cifras" min=1100000000 max=9999999999 value=cliente.telefono
-                    oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un teléfono válido')")
-          input(type="submit" class="btn btn-info" value="Registrar cliente") 
+        form(method="post" action="/clientes/registrar" id="formulario" class="flex-form-wrap")
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="email" name="email" id="email", placeholder="name@mail.com" minlength=5, maxlenght=255, required value=cliente.email?cliente.email:""
+                    oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un email válido')" onchange="this.setAttribute('value', this.value);")
+            div(class="input_border_focus")
+            div(class="input_placeholder") Email *
+          div(class="left-input input mb-3 flex-form-item" style="width: 15rem;min-width: 15rem;")
+            input(type="text" name="nombre" id="nombre", placeholder="Solo puede ingresar letras" minlength=1, maxlenght=255, required value=cliente.nombre?cliente.nombre:""
+                    oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un nombre válido')" onchange="this.setAttribute('value', this.value);")
+            div(class="input_border_focus")
+            div(class="input_placeholder") Nombre *
+          div(class="left-input input mb-3 flex-form-item" style="width: 15rem;min-width: 15rem;")
+            input(type="text" name="apellido" id="apellido", placeholder="Solo puede ingresar letras" minlength=1, maxlenght=255, required value=cliente.apellido?cliente.apellido:""
+                    oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un apellido válido')" onchange="this.setAttribute('value', this.value);")
+            div(class="input_border_focus")
+            div(class="input_placeholder") Apellido *
+          div(class="left-input input mb-3 flex-form-item" style="width: 19rem;min-width: 19rem;/*width: 7rem;*//*min-width: 7rem;*/")
+            input(type="number" name="dni" id="dni" placeholder="Ingrese un número de 7 a 9 cifras" min=1000000, max=100000000 required value=cliente.dni?cliente.dni:""
+                    oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un DNI válido')" onchange="this.setAttribute('value', this.value);")
+            div(class="input_border_focus")
+            div(class="input_placeholder") DNI *
+          div(class="left-input input mb-3 flex-form-item" style="width: 20rem;min-width: 20rem;")
+            input(type="number" name="telefono" id="telefono" placeholder="Ingrese un número de 10 cifras" min=1100000000 max=9999999999 value=cliente.telefono?cliente.telefono:""
+                    oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un teléfono válido')" onchange="this.setAttribute('value', this.value);")
+            div(class="input_border_focus")
+            div(class="input_placeholder") Teléfono (Cod. área sin 0 + número)
+          input(type="submit" class="btn btn-info" value="Registrar cliente" style="margin: 0 40%")
     
         br
         a(href="/clientes")

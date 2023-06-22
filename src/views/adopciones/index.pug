@@ -13,9 +13,8 @@ div(style="position: relative; min-height: 100vh;")
       include ../partials/info.pug
       if sesion.nivel == 1
         div(class="container")
-          a(href="/adopciones/nuevo")
-            button(type="button" class="btn btn-info") Publicar adopcion
-          span 
+          a(class="me-2" href="/adopciones/nuevo")
+            button(type="button" class="btn btn-info") Publicar adopción
           a(href="/adopciones/misPublicaciones")
             button(type="button" class="btn btn-info") Mis publicaciones
     
@@ -24,16 +23,16 @@ div(style="position: relative; min-height: 100vh;")
       br
       
       form(class="d-flex" role="search" method="post" action="/adopciones/" id="formulario" style="justify-content: center; align-items: center;")
-        div(style="margin-right: .5rem;")
-          .
-            Filtrar por:
-        select(class="form-select me-2" aria-label="Default select example", name="estado" style="width: 15rem;")
-          if(estado == "Activo")
-            option(selected value="Activo") En adopción
-            option(value="Adoptado") Adopciones concretadas
-          else 
-            option(value="Activo") En adopción
-            option(selected value="Adoptado") Adopciones concretadas
+        div(class="left-input input me-2")
+          select(name="estado" value=estado=="Activo"?"Activo":"Adoptado" style="width: 15rem;" onclick="if(this.opened){this.opened=false;this.blur();}else{this.opened=true;}" onblur="this.opened=false;" onchange="this.setAttribute('value', this.value);")
+            if(estado == "Activo")
+              option(selected value="Activo") En adopción
+              option(value="Adoptado") Adopciones concretadas
+            else 
+              option(value="Activo") En adopción
+              option(selected value="Adoptado") Adopciones concretadas
+          div(class="input_border_focus")
+          div(class="input_placeholder") Filtrar por:
         input(class="btn btn-info" type="submit" value="Buscar") 
       
       br
