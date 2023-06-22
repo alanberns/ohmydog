@@ -9,5 +9,6 @@ router = express.Router();
 router.get('/', permisos.isAuth, cruzaController.index);
 router.get('/cruzar/:id', cruzaController.cruzar);
 router.post('/cruzar/ok', cruzaController.cruzarConfirmar);
+router.get('/buscar/:id', cruzaController.buscarPerrosCruza);
 
 module.exports = router;

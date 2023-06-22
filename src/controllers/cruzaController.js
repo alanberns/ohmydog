@@ -11,7 +11,6 @@ module.exports = {
         1 enviar el cartel de informacion rojo
         */
         var mascotasCliente = await db.mascotasCliente(req.session.usuario);
-        console.log(mascotasCliente)
         res.render('cruza/index',{
         title: 'Cruza',
         message: 'Cruza de perros',
@@ -68,5 +67,45 @@ module.exports = {
             message: 'Éxito',
             info: 'Tu mascota estará disponible para cruza'
         })
+    },
+
+    buscarPerrosCruza: async (req,res,next) => {
+        /*
+        1 obtener id del cliente, id del perro 
+        */
+        var perroId = parseInt(req.params.id);
+        if (isNaN(perroId)){
+            res.redirect('/cruza');
+        }
+        else{
+            // verificar que el id esta registrado en la bd
+            var perro = await db_perros.buscarPerroById(perroId);
+            if (perro == null){
+                try{
+                    throw new NotFoundError();
+                }
+                catch(err){
+                    next(err);
+                }
+            }
+            else{
+                var clienteId = req.session.usuario;
+                var cruza = await db.buscarPublicacionCruza(perroId);
+                var infoCruza = {
+                    raza: cruza.perro.raza,
+                    clienteId: clienteId,
+                    cruza:{
+                        sexo: cruza.sexo
+                    }
+                }
+                var perrosCompatibles = await db.buscarPerrosCompatibles(infoCruza);
+                res.render('cruza/busqueda',{
+                    title: 'Cruza',
+                    message: 'Perros compatibles con tu mascota para cruza',
+                    info: 'Resultados de la busqueda',
+                    perros: perrosCompatibles
+                })
+            }
+        }
     }
 }

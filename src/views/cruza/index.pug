@@ -21,7 +21,7 @@ div(class="container-fluid")
         th Disponible para cruza 
         th Ver perros para cruzar
     tbody 
-    if(cliente.perros)
+    if(cliente.perros.length > 0)
       each perro in cliente.perros
         tr  
           td #{perro.nombre}
@@ -31,7 +31,7 @@ div(class="container-fluid")
               a
                 button(type="button" class="btn btn-info" disabled ) Cancelar cruza
             td 
-              a(href="/cruza")
+              a(href="/cruza/buscar/"+perro.id)
                 button(type="button" class="btn btn-info") Buscar
           else 
             td 
