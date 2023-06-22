@@ -107,5 +107,28 @@ module.exports = {
                 })
             }
         }
+    },
+
+    contactar: async (req,res) => {
+        /*
+        1 obtener id del perro
+        2 buscar el perro y dueño
+        3 obtener el email del dueño y perro
+        4 obtener datos del que quiere contactarse
+        */
+        var perroId = req.body.perroId;
+        var perro = await db_perros.buscarPerroById(perroId);
+        var nombreEmisor = req.session.nombre;
+        var emailEmisor = req.session.email;
+        var email_contacto = perro.cliente.email;
+        var mensaje = "Hola, "+nombreEmisor+" quiere contactarse con vos, su email es: "+
+        emailEmisor+" por tu anuncio en OhMyDog: Cruza de: "+perro.nombre;
+        console.log(mensaje);
+        //mailer.sendMail(email_contacto,"Quieren contactarte",mensaje)
+        res.render('exito', {
+            title: "Éxito",
+            message: "Contacto realizado",
+            info: "Enviamos tu email para que se contacten con vos"
+        })
     }
 }

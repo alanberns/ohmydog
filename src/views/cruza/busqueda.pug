@@ -29,8 +29,9 @@ div(class="container-fluid")
           td #{perro.cruza.sexo}
           td #{perro.cruza.periodo_celo}
           td 
-            a(href="/cruza/contactar/"+perro.id)
-              button(type="button" class="btn btn-info") Contactar
+            form(action="/cruza/contactar/" method="post")
+              input(type="hidden" name="perroId" value=perro.id)
+              input(type="submit" class="btn btn-info" value="Contactar") 
     else 
       tr 
         td
@@ -40,6 +41,7 @@ div(class="container-fluid")
         td
 
   a(href="/cruza")
+    
     button(type="button", class="btn btn-info") Volver
 
 include ../partials/footer.pug
