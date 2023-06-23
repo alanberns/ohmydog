@@ -1,0 +1,63 @@
+include ../partials/head.pug
+div(style="position: relative; min-height: 100vh;")
+  div(style="padding-bottom: calc(1.25rem + 0.3125rem * 2 + 1rem)")
+    include ../partials/header.pug
+    div(class="container-fluid")
+      //- aca va la pagina hasta footer. inicia con 1 tab
+      h1= message
+    
+      br
+      br
+    
+      include ../partials/info.pug
+
+      div(class="")
+        form(method="post" action="/reencuentro/nuevo" id="formulario", enctype="multipart/form-data" class="flex-form-wrap")
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="text" class="form-control" name="zona" id="zona" placeholder="Solo puede ingresar letras" minlegth=1, maxlength=255 required value=publicacion.zona
+                    oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un nombre válido')")
+            div(class="input_border_focus")
+            div(class="input_placeholder") Zona *
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="text" class="form-control" name="sexo" id="sexo" placeholder="Ingrese un monto entero positivo" min=1 required value=publicacion.sexo
+                    oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('El monto debe ser positivo')")
+            div(class="input_border_focus")
+            div(class="input_placeholder") Sexo *
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="text" class="form-control" name="edad" id="edad" maxlength=255 required value=publicacion.edad
+                    oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('La fecha debe ser posterior a hoy')")
+            div(class="input_border_focus")
+            div(class="input_placeholder") Edad 
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="text" class="form-control" name="caracteristicas" id="caracteristicas" maxlength=255 required value=publicacion.caracteristicas
+                    oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('La fecha debe ser posterior a hoy')")
+            div(class="input_border_focus")
+            div(class="input_placeholder") Caracteristicas
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="text" class="form-control" name="comportamiento" id="comportamiento" maxlength=255 required value=publicacion.comportamiento
+                    oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('La fecha debe ser posterior a hoy')")
+            div(class="input_border_focus")
+            div(class="input_placeholder") Comportamiento
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="text" class="form-control" name="telefono" id="telefono" maxlength=255 required value=publicacion.telefono
+                    oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('La fecha debe ser posterior a hoy')")
+            div(class="input_border_focus")
+            div(class="input_placeholder") Teléfono de contacto
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="text" class="form-control" name="email" id="email" maxlength=255 required value=publicacion.email
+                    oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('La fecha debe ser posterior a hoy')")
+            div(class="input_border_focus")
+            div(class="input_placeholder") Email
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="file" class="form-control" name="link_foto" id="link_foto" accept=".png, .jpg, .jpeg"    )
+            div(class="input_border_focus")
+            div(class="input_placeholder") formatos: "jpg", "jpeg" y "png"
+    
+          input(type="submit" class="btn btn-info" value="Publicar" style="margin: 0 40%;") 
+    
+        br
+        a(href="/donaciones")
+          button(type="button" class="btn btn-info") Cancelar
+    
+    script(src="/js/validacionNuevaDonacion.js") 
+  include ../partials/footer.pug

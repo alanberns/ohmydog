@@ -1,63 +1,65 @@
 include ../partials/head.pug
-include ../partials/header.pug
-div(class="container-fluid")
-  //- aca va la pagina hasta footer. inicia con 1 tab
-  h1= message
-
-  br
-  br
-
-  include ../partials/info.pug
-
-  div(class="")
-    form(action="/donaciones/donar/"+datos.id method="post")
-      div(class="mb-3")
-        label(for="Alias" class="form-label")
-          b Alias
-        input(type="text" class="form-control" name="Alias" id="Alias" required disabled value=datos.alias)
-      div(class="mb-3")
-        label(for="nombre" class="form-label")
-          b Nombre
-        input(type="text" class="form-control" name="nombre" id="nombre" required disabled value=datos.nombre)
-      div(class="mb-3")
-        label(for="monto_donacion" class="form-label")
-          b Monto a donar
-        input(type="number" class="form-control" id="monto_donacion" required disabled value=datos.monto)
-        input(type="hidden" class="form-control" name="monto_donacion" id="monto_donacion" value=datos.monto)
-      div(class="mb-3")
-        label(for="nombre" class="form-label")
-          b Nombre de la campaña de donación
-        input(type="text" class="form-control" name="nombre" id="nombre" required disabled value=datos.nombre_donacion)
-      div(class="mb-3")
-        label(for="id" class="form-label") 
-        input(type="hidden" class="form-control" name="id" id="id" value=datos.id)
-      h4 Datos de la tarjeta
-      div(class="mb-3")
-        label(for="numero_tarjeta" class="form-label")
-          b Número de tarjeta *
-        input(type="text" class="form-control" name="numero_tarjeta" id="numero_tarjeta" placeholder="Ingrese los 16 números de la tarjeta" pattern="[0-9]{16}" title="16 digitos" required value=tarjeta.numero_tarjeta
-                oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un número de tarjeta válido')")
-      div(class="mb-3")
-        label(for="vencimiento" class="form-label")
-          b Vencimiento *
-        input(type="month" class="form-control" name="vencimiento" id="vencimiento" min=mesActual required value=tarjeta.vencimiento
-                oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('La fecha debe ser igual o posterior al mes actual')")
-      div(class="mb-3")
-        label(for="codigo" class="form-label")
-          b Código de seguridad *
-        input(type="text" class="form-control" name="codigo" id="codigo" placeholder="Ingrese el código de 3 dígitos de la tarjeta" pattern="[0-9]{3}" title="3 digitos", required value=tarjeta.codigo
-                oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un código de seguridad válido')")
-      div(class="mb-3")
-        label(for="nombre_tarjeta" class="form-label")
-          b Nombre completo *
-        input(type="text" class="form-control" name="nombre_tarjeta" id="nombre_tarjeta", placeholder="Solo puede ingresar letras" minlength=1, maxlength=255, required value=tarjeta.nombre_tarjeta
-                oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un nombre válido')")
-      
-      input(type="submit" class="btn btn-info" value="Confirmar donacion")
-
-    br
+div(style="position: relative; min-height: 100vh;")
+  div(style="padding-bottom: calc(1.25rem + 0.3125rem * 2 + 1rem)")
+    include ../partials/header.pug
     div(class="container-fluid")
-      a(href="/donaciones")
-        button(type="button" class="btn btn-info") Cancelar
-
-include ../partials/footer.pug
+      //- aca va la pagina hasta footer. inicia con 1 tab
+      h1= message
+    
+      br
+      br
+    
+      include ../partials/info.pug
+    
+      div(class="")
+        h4 Ingrese los datos de la tarjeta
+        form(action="/donaciones/donar/"+datos.id method="post" class="flex-form-wrap")
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="text" class="form-control" name="Alias" id="Alias" required disabled value=datos.alias)
+            div(class="input_border_focus")
+            div(class="input_placeholder") Alias
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="text" class="form-control" name="nombre" id="nombre" required disabled value=datos.nombre)
+            div(class="input_border_focus")
+            div(class="input_placeholder") Nombre
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="number" class="form-control" id="monto_donacion" required disabled value=datos.monto)
+            input(type="hidden" class="form-control" name="monto_donacion" id="monto_donacion" value=datos.monto)
+            div(class="input_border_focus")
+            div(class="input_placeholder") Monto a donar
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="text" class="form-control" name="nombre" id="nombre" required disabled value=datos.nombre_donacion)
+            div(class="input_border_focus")
+            div(class="input_placeholder") Nombre de la campaña de donación
+          div(class="mb-3")
+            label(for="id" class="form-label") 
+            input(type="hidden" class="form-control" name="id" id="id" value=datos.id)
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="text" class="form-control" name="numero_tarjeta" id="numero_tarjeta" placeholder="Ingrese los 16 números de la tarjeta" pattern="[0-9]{16}" title="16 digitos" required value=tarjeta.numero_tarjeta
+                    oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un número de tarjeta válido')")
+            div(class="input_border_focus")
+            div(class="input_placeholder") Número de tarjeta *
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="month" class="form-control" name="vencimiento" id="vencimiento" min=mesActual required value=tarjeta.vencimiento
+                    oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('La fecha debe ser igual o posterior al mes actual')")
+            div(class="input_border_focus")
+            div(class="input_placeholder") Vencimiento *
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="text" class="form-control" name="codigo" id="codigo" placeholder="Ingrese el código de 3 dígitos de la tarjeta" pattern="[0-9]{3}" title="3 digitos", required value=tarjeta.codigo
+                    oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un código de seguridad válido')")
+            div(class="input_border_focus")
+            div(class="input_placeholder") Código de seguridad *
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="text" class="form-control" name="nombre_tarjeta" id="nombre_tarjeta", placeholder="Solo puede ingresar letras" minlength=1, maxlength=255, required value=tarjeta.nombre_tarjeta
+                    oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un nombre válido')")
+            div(class="input_border_focus")
+            div(class="input_placeholder") Nombre completo *
+          
+          input(type="submit" class="btn btn-info" value="Confirmar donacion" style="margin: 0 40%;")
+    
+        br
+        div(class="container-fluid")
+          a(href="/donaciones")
+            button(type="button" class="btn btn-info") Cancelar
+    
+  include ../partials/footer.pug

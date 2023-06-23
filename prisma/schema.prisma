@@ -99,13 +99,13 @@ model publicacion_perdidos{
   id                      Int       @id @default(autoincrement())
   clienteId               Int?
   cliente                 clientes? @relation(fields: [clienteId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  link_foto
-  zona
-  fecha
-  sexo
-  edad
-  caracteristicas
-  comportamiento
-  telefono
-  email
+  link_foto               String?   @db.VarChar(255)
+  zona                    String?   @db.VarChar(255)
+  fecha                   DateTime  @db.Timestamp(6)
+  sexo                    String?   @db.VarChar(255)
+  edad                    String?   @db.VarChar(255)
+  caracteristicas         String?   @db.VarChar(255)
+  comportamiento          String?   @db.VarChar(255)
+  telefono                String?   @db.VarChar(255)
+  email                   String?   @db.VarChar(255)
 }

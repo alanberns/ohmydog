@@ -1,0 +1,49 @@
+include ../partials/head.pug
+div(style="position: relative; min-height: 100vh;")
+  div(style="padding-bottom: calc(1.25rem + 0.3125rem * 2 + 1rem)")
+    - var selected_nav_link = "publicaciones";
+    include ../partials/header.pug
+    div(class="container-fluid")
+      //- aca va la pagina hasta footer. inicia con 1 tab
+      h1= message
+    
+      br
+      br
+    
+      include ../partials/info.pug
+    
+      if (sesion.nivel == 1)
+        a(href="/reencuentros/nuevo")
+          button(type="button" class="btn btn-info") Crear publicación
+    
+      br
+      br
+    
+      table(class="table table-striped table-info table-hover")
+        thead 
+          tr 
+            th Zona
+            th Sexo
+            th Fecha
+            th Caracteristicas 
+            th Ver detalles
+        tbody 
+        if(publicaciones.lenght > 0)
+          each publicacion in publicaciones
+            tr  
+              td #{publicacion.zona}
+              td #{publicacion.sexo}
+              td #{publicacion.fecha.toISOString().slice(0,10)}
+              td #{publicaion.caracteristicas}
+              td 
+                a(href="/servicios/ver/"+servicio.id)
+                  button(type="button" class="btn btn-info") Ver 
+        else 
+          tr 
+            td
+            td
+            td No se encontraron publicaciones
+            td 
+            td
+    
+  include ../partials/footer.pug

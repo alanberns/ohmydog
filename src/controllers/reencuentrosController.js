@@ -7,8 +7,52 @@ const NotFoundError = require('../helpers/errors/NotFoundError');
 module.exports = {
     index: async (req,res) => {
         /*
-        foto, la zona, la fecha, sexo, edad, características particulares, si tenía collar, comportamiento del perro en el momento, y teléfono y email para contactarse
+        
         */
-        res.send("reencuentros")
+        var publicaciones = []
+        res.render("reencuentros/index",{
+            title: 'Perros perdidos y buscados',
+            message: 'Perros perdidos y buscados',
+            publicaciones: publicaciones
+        })
+    },
+
+    nuevoGet: async (req,res) => {
+        /*
+
+        */
+        publicacion= {
+            zona: "",
+            edad: "",
+            caracteristicas: "",
+            comportamiento: "",
+            sexo: "",
+            telefono: "",
+            email: "",
+            link_foto: "",
+        }
+        res.render('reencuentros/nuevo',{
+            title: 'Publicar perro perdido',
+            message: 'Publicar perro perdido'
+        })
+    },
+
+    nuevoPost: async (req,res) => {
+        /*
+
+        */
+        publicacion= {
+            zona: "",
+            edad: "",
+            caracteristicas: "",
+            comportamiento: "",
+            sexo: "",
+            telefono: "",
+            email: "",
+            link_foto: "",
+            fecha: new Date(Date.now())
+        }
+        // await db.agregarPublicacion(publicacion);
+        res.send('nuevo post')
     }
 }
