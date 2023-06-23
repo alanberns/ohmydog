@@ -24,6 +24,8 @@ const sesionRoutes = require('./src/routes/sesionRoutes');
 const turnoRoutes = require('./src/routes/turnoRoutes');
 const usuariosRoutes = require('./src/routes/usuariosRoutes');
 const donacionesRoutes = require('./src/routes/donacionesRoutes');
+const cruzaRoutes = require('./src/routes/cruzaRoutes');
+const reencuentrosRoutes = require('./src/routes/reencuentrosRoutes');
 
 
 //indicar a la app lo que debe usar
@@ -64,6 +66,8 @@ app.use('/sesion', sesionRoutes);
 app.use('/turno', turnoRoutes);
 app.use('/usuario',usuariosRoutes);
 app.use('/donaciones',donacionesRoutes);
+app.use('/cruza',cruzaRoutes);
+app.use('/reencuentros', reencuentrosRoutes);
 
 
 //error handler

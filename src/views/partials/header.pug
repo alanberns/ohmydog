@@ -33,6 +33,10 @@ nav(class="navbar navbar-expand-lg bg-body-tertiary" style={padding:'0px'})
             if sesion.nivel > 0
               li 
                 a(class="dropdown-item" href="/donaciones") Donaciones
+              li 
+                a(class="dropdown-item" href="/cruza") Cruza
+            li 
+              a(class="dropdown-item" href="/reencuentros") Perros perdidos
         if sesion.nivel == 1
           li
             a(class="nav-link" href="/turno/solicitar" class=(selected_nav_link == "turnos") ? "active" : "") Solicitar turno
