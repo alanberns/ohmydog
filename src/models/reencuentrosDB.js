@@ -16,7 +16,22 @@ module.exports = {
                 email: publicacion.email,
                 fecha: publicacion.fecha,
                 link_foto: "",
+                estado: "Activa",
                 cliente: { connect: { id: parseInt(publicacion.clienteId) } },
+            }
+        })
+    },
+
+    listarPublicaciones: async function listarPublicaciones(){
+        return await prisma.publicacion_reencuentros.findMany();
+    },
+
+    filtrarPublicaciones: async function filtrarPublicaciones(busqueda){
+        return await prisma.publicacion_reencuentros.findMany({
+            where:{
+                tipo: {
+                    contains: busqueda
+                }
             }
         })
     }

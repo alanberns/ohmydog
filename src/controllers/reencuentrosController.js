@@ -9,7 +9,8 @@ module.exports = {
         /*
         
         */
-        var publicaciones = []
+        var publicaciones = await db.listarPublicaciones();
+        console.log(publicaciones)
         res.render("reencuentros/index",{
             title: 'Perros perdidos y buscados',
             message: 'Perros perdidos y buscados',
@@ -82,5 +83,19 @@ module.exports = {
 
         */
         
+    },
+
+    busqueda: async (req,res) => {
+        /* 
+
+        */
+        var busqueda = req.body.tipo;
+        var publicaciones = await db.filtrarPublicaciones(busqueda);
+        res.render("reencuentros/index",{
+            title: 'Perros perdidos y buscados',
+            message: 'Perros perdidos y buscados',
+            publicaciones: publicaciones,
+            info: 'resultados de la busqueda'
+        })
     }
 }

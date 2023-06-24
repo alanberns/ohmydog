@@ -18,25 +18,41 @@ div(style="position: relative; min-height: 100vh;")
     
       br
       br
+
+      form(class="d-flex" role="search" method="post" action="/reencuentros" id="formulario" style="justify-content: center;")
+        div(class="left-input input me-2")
+          select(name="tipo" value=busqueda?busqueda:"" style="width: 15rem;" onclick="if(this.opened){this.opened=false;this.blur();}else{this.opened=true;}" onblur="this.opened=false;" onchange="this.setAttribute('value', this.value);")
+            option(value hidden selected=busqueda?null:"" disabled)
+            option(value="" selected=busqueda==""?"":null) Todas las publicaciones
+            option(value="Buscado" selected=busqueda=="Perdidos"?"":null) Buscados
+            option(value="Encontrado" selected=busqueda=="Encontrados"?"":null) Encontrado
+          div(class="input_border_focus")
+          div(class="input_placeholder") Filtrar por:
+        input(class="btn btn-info" type="submit" value="Buscar") 
+
+      br
+      br
     
       table(class="table table-striped table-info table-hover")
         thead 
           tr 
+            th Tipo publicación
             th Zona
             th Sexo
             th Fecha
             th Caracteristicas 
             th Ver detalles
         tbody 
-        if(publicaciones.lenght > 0)
+        if(publicaciones.length > 0)
           each publicacion in publicaciones
             tr  
+              td #{publicacion.tipo}
               td #{publicacion.zona}
               td #{publicacion.sexo}
               td #{publicacion.fecha.toISOString().slice(0,10)}
-              td #{publicaion.caracteristicas}
+              td #{publicacion.caracteristicas}
               td 
-                a(href="/servicios/ver/"+servicio.id)
+                a(href="/reencuentros/ver/"+publicacion.id)
                   button(type="button" class="btn btn-info") Ver 
         else 
           tr 
@@ -44,6 +60,7 @@ div(style="position: relative; min-height: 100vh;")
             td
             td No se encontraron publicaciones
             td 
+            td
             td
     
   include ../partials/footer.pug

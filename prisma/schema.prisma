@@ -99,6 +99,7 @@ model publicacion_cruzas{
 model publicacion_reencuentros{
   id                      Int       @id @default(autoincrement())
   tipo                    String?   @db.VarChar(255)
+  estado                  String?   @db.VarChar(255)
   clienteId               Int?
   cliente                 clientes? @relation(fields: [clienteId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   link_foto               String?   @db.VarChar(255)
