@@ -7,6 +7,7 @@ router = express.Router();
 router.get('/', reencuentrosController.index);
 router.get('/nuevo', reencuentrosController.nuevoGet);
 router.post('/nuevo', reencuentrosController.nuevoPost);
+router.post('/agregarFoto', reencuentrosController.agregarFoto);
 
 
 module.exports = router;

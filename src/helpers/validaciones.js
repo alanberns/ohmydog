@@ -169,5 +169,22 @@ module.exports = {
         else if(!tarjeta.vencimiento > mesActual) validez = "La fecha debe ser igual o posterior al mes actual";
 
         return validez;
+    },
+
+    validarPublicacionReencuentro: function(publicacion){
+        // Expresiones regulares
+        var regexTexto = /^[a-zA-Z0-9ñÑ ]{0,255}$/;
+        var regexEmail = /^[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}$/;
+        var regexTelefono = /^[0-9]{10}$/;
+
+        var validez = "valido";
+        
+        if(!regexTexto.test(publicacion.caracteristicas)) validez = "Ingrese un texto de características válido.";
+        else if(!regexTexto.test(publicacion.comportamiento)) validez = "Ingrese un texto de comportamiento válido.";
+        else if(!regexTexto.test(publicacion.edad)) validez = "Ingrese una edad válida.";
+        else if (publicacion.email) {if(!regexEmail.test(publicacion.email)) validez = "Ingrese un email válido.";}
+        else if (publicacion.telefono) {if(!regexTelefono.test(publicacion.telefono)) validez = "Ingrese un telefono válido.";}
+
+        return validez;
     }
 }

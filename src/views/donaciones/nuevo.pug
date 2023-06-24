@@ -14,17 +14,17 @@ div(style="position: relative; min-height: 100vh;")
       div(class="")
         form(method="post" action="/donaciones/nuevo" id="formulario" class="flex-form-wrap")
           div(class="left-input input mb-3 flex-form-item")
-            input(type="text" class="form-control" name="nombre" id="nombre" placeholder="Solo puede ingresar letras" minlegth=1, maxlength=255 required value=donacion.nombre
+            input(type="text" class="form-control" name="nombre" id="nombre" placeholder="Solo puede ingresar letras" minlegth=1, maxlength=255 required value=donacion.nombre onchange="this.setAttribute('value', this.value);"
                     oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un nombre válido')")
             div(class="input_border_focus")
             div(class="input_placeholder") Nombre de la campaña de donación *
           div(class="left-input input mb-3 flex-form-item")
-            input(type="number" class="form-control" name="monto" id="monto" placeholder="Ingrese un monto entero positivo" min=1 required value=donacion.monto
+            input(type="number" class="form-control" name="monto" id="monto" placeholder="Ingrese un monto entero positivo" min=1 required value=donacion.monto onchange="this.setAttribute('value', this.value);"
                     oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('El monto debe ser positivo')")
             div(class="input_border_focus")
             div(class="input_placeholder") Monto a alcanzar *
           div(class="left-input input mb-3 flex-form-item")
-            input(type="date" class="form-control" name="fecha_fin" id="fecha_fin" min=mañana required value=donacion.fecha_fin
+            input(type="date" class="form-control" name="fecha_fin" id="fecha_fin" min=mañana required value=donacion.fecha_fin onchange="this.setAttribute('value', this.value);"
                     oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('La fecha debe ser posterior a hoy')")
             div(class="input_border_focus")
             div(class="input_placeholder") Fecha de finalización *

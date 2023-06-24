@@ -38,12 +38,14 @@ div(style="position: relative; min-height: 100vh;")
             label(for="id" class="form-label") 
             input(type="hidden" class="form-control" name="id" id="id" value=donacion.id)
           div(class="left-input input mb-3 flex-form-item")
-            select(class="form-select" aria-label="Default select example", name="monto_donacion" required)
-              option(value="100") 100
-              option(value="500") 500
-              option(value="1000") 1000
-              option(value="2000") 2000
-              option(value="4000") 4000
+            select(class="form-select" aria-label="Default select example", name="monto_donacion" required value=monto_donacion?monto_donacion:""
+                  onclick="if(this.opened){this.opened=false;this.blur();}else{this.opened=true;}" onblur="this.opened=false;" onchange="this.setAttribute('value', this.value);")
+              option(value hidden selected=monto_donacion?null:"" disabled)
+              option(value="100" selected=monto_donacion=="100"?"":null) 100
+              option(value="500" selected=monto_donacion=="500"?"":null) 500
+              option(value="1000" selected=monto_donacion=="1000"?"":null) 1000
+              option(value="2000" selected=monto_donacion=="2000"?"":null) 2000
+              option(value="4000" selected=monto_donacion=="4000"?"":null) 4000
             div(class="input_border_focus")
             div(class="input_placeholder")  Monto a donar *
           input(type="submit" class="btn btn-info" value="Donar" style="margin: 0 40%;")
