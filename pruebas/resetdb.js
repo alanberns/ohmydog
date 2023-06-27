@@ -56,7 +56,7 @@ async function donacion(){
         monto: 50000,
         fecha_fin: new Date(2023,12,12),
         monto_actual: 0,
-        fecha_inicio: new Date(2023,05,30)
+        fecha_inicio: new Date(2023,10,30)
     }
     
 }
@@ -80,6 +80,7 @@ async function delete_all() {
     await prisma.publicacion_donaciones.deleteMany();
     await prisma.perros.deleteMany();
     await prisma.administradores.deleteMany();
+    await prisma.publicacion_reencuentros.deleteMany();
     await prisma.clientes.deleteMany();
 }
 

@@ -18,9 +18,6 @@ module.exports = {
         var hoy = new Date(Date.now());
         var donaciones = await db.listarDonacionesActivas(hoy);
 
-        if (donaciones.length == 0){
-            donaciones = null
-        }
         res.render('donaciones/index',{
             title: 'Donaciones',
             message: 'Campañas de donación',
@@ -282,7 +279,6 @@ module.exports = {
             title: 'Donaciones',
             message: 'Campañas de donación',
             donaciones: campañas,
-            activas: true,
             info: "Resultado de la busqueda",
             activas: activas
         });
