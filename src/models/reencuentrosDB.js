@@ -34,5 +34,16 @@ module.exports = {
                 }
             }
         })
+    },
+
+    cambiarLink_foto: async function cambiarLink_foto(publicacion_reencuentrosId,link_foto){
+        return await prisma.publicacion_reencuentros.update({
+            where:{
+                id: parseInt(publicacion_reencuentrosId)
+            },
+            data:{
+                link_foto: link_foto
+            }
+        })
     }
 }

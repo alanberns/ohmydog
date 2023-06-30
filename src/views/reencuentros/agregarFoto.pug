@@ -12,18 +12,18 @@ div(style="position: relative; min-height: 100vh;")
       include ../partials/info.pug
     
       div(class="")
-        form(method="post" action="/reencuentros/agregarFoto" id="formulario" enctype="multipart/form-data")
+        form(method="post" action="/reencuentros/agregarFoto/"+publicacionId, id="formulario" enctype="multipart/form-data")
           div(class="mb-3")
-            label(for="publicacionId" class="form-label")
-            input(type="hidden" class="form-control" name="publicacionId" id="publicacionId" value=publicacionId)
+            label(for="perroId" class="form-label")
+            input(type="hidden" class="form-control" name="perroId" id="perroId")
           div(class="mb-3" style="width: 30em; min-width: 25em; margin-left: auto; margin-right: auto;")
             label(for="link_foto" class="form-label") Seleccionar imagen (formatos: "jpg", "jpeg" y "png")
             input(type="file" class="form-control" name="link_foto" id="link_foto" accept=".png, .jpg, .jpeg")
-          input(type="submit" class="btn btn-info" value="Añadir foto" disabled) 
+          input(type="submit" class="btn btn-info" value="Añadir foto") 
     
         br
         a(href="/reencuentros")
-          button(type="button" class="btn btn-info") No agregar foto
+          button(type="button" class="btn btn-info") No añadir foto
     
     script(src="/js/validarExtensionFoto.js") 
   include ../partials/footer.pug

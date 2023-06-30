@@ -16,10 +16,10 @@ div(style="position: relative; min-height: 100vh;")
           div(class="left-input input mb-3 flex-form-item")
             select(name="tipo" required value=publicacion.tipo?publicacion.tipo:"" onclick="if(this.opened){this.opened=false;this.blur();}else{this.opened=true;}" onblur="this.opened=false;" onchange="this.setAttribute('value', this.value);")
                 option(value hidden selected=publicacion.tipo?null:"" disabled)
-                option(value="Buscado" selected=publicacion.tipo=="Buscado"?"":null) Buscado
-                option(value="Encontrado" selected=publicacion.tipo=="Encontrado"?"":null) Encontrado
+                option(value="Buscado" selected=publicacion.tipo=="Buscado"?"":null) Busco a un perro perdido
+                option(value="Encontrado" selected=publicacion.tipo=="Encontrado"?"":null) Encontré a un perro perdido
             div(class="input_border_focus")
-            div(class="input_placeholder") Tipo de busqueda *
+            div(class="input_placeholder") Tipo de publicación de busqueda *
           div(class="left-input input mb-3 flex-form-item")
             select(name="zona" required value=publicacion.zona?publicacion.zona:"" onclick="if(this.opened){this.opened=false;this.blur();}else{this.opened=true;}" onblur="this.opened=false;" onchange="this.setAttribute('value', this.value);")
                 option(value hidden selected=publicacion.zona?null:"" disabled)
@@ -38,29 +38,44 @@ div(style="position: relative; min-height: 100vh;")
             div(class="input_placeholder") Sexo *
           div(class="left-input input mb-3 flex-form-item")
             input(type="text" class="form-control" name="edad" id="edad" maxlength=255 value=publicacion.edad pattern="[a-zA-Z0-9ñÑ ]{1,255}" onchange="this.setAttribute('value', this.value);"
-                    oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese una edad válida')")
+                    oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese una edad válida')" placeholder="Solo puede ingresar letras y números")
             div(class="input_border_focus")
             div(class="input_placeholder") Edad 
           div(class="left-input input mb-3 flex-form-item")
             input(type="text" class="form-control" name="caracteristicas" id="caracteristicas" maxlength=255 value=publicacion.caracteristicas pattern="[a-zA-Z0-9ñÑ ]{1,255}" onchange="this.setAttribute('value', this.value);"
-                    oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un texto válido')")
+                    oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un texto de características válido')" placeholder="Solo puede ingresar letras y números")
             div(class="input_border_focus")
             div(class="input_placeholder") Caracteristicas
           div(class="left-input input mb-3 flex-form-item")
             input(type="text" class="form-control" name="comportamiento" id="comportamiento" maxlength=255 value=publicacion.comportamiento pattern="[a-zA-Z0-9ñÑ ]{1,255}" onchange="this.setAttribute('value', this.value);"
-                    oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un texto válido')")
+                    oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un texto de comportamiento válido')" placeholder="Solo puede ingresar letras y números")
             div(class="input_border_focus")
             div(class="input_placeholder") Comportamiento
-          div(class="left-input input mb-3 flex-form-item")
-            input(type="text" class="form-control" name="telefono" id="telefono" maxlength=255 value=publicacion.telefono pattern="[0-9]{10}" onchange="this.setAttribute('value', this.value);"
-                    oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un teléfono válido')")
-            div(class="input_border_focus")
-            div(class="input_placeholder") Teléfono de contacto
-          div(class="left-input input mb-3 flex-form-item")
-            input(type="text" class="form-control" name="email" id="email" maxlength=255 value=publicacion.email pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}" onchange="this.setAttribute('value', this.value);"
-                    oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un email válido')")
-            div(class="input_border_focus")
-            div(class="input_placeholder") Email
+          div(class="margin-top-and-bottom horizontal-margin-center" style="padding: 0 1em; width: 34rem; max-width: 100%;")
+            div(class="d-flex" style="position: relative; flex-wrap: wrap; justify-content: space-evenly; padding: .5em; background-color: white; border:1px solid #dadce0; border-radius: .375em;")
+              div(style="position: absolute; margin-top: -.5em; left: 7px; padding: 0 8px;")
+                div(style="font-size: .84375em; margin-top: -.5em; line-height: 1em; user-select: none; text-shadow: 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white;") Publicar mis datos de contacto
+              div(class="form-check")
+                label(class="form-check-label" for="email")
+                  input(class="check-input form-check-input" type="checkbox" value="email" id="email" name="email" )
+                  .
+                    Email
+              div(class="form-check")
+                label(class="form-check-label" for="telefono")
+                  input(class="check-input form-check-input" type="checkbox" value="telefono" id="telefono" name="telefono")
+                  .
+                    Telefono
+          //-
+            div(class="left-input input mb-3 flex-form-item")
+              input(type="text" class="form-control" name="telefono_nuevo" id="telefono_nuevo" maxlength=255 value=publicacion.telefono pattern="[0-9]{10}" onchange="this.setAttribute('value', this.value);"
+                      oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un teléfono válido')" placeholder="Ingrese un número de 10 dígitos")
+              div(class="input_border_focus")
+              div(class="input_placeholder") Teléfono de contacto
+            div(class="left-input input mb-3 flex-form-item")
+              input(type="text" class="form-control" name="email_nuevo" id="email_nuevo" maxlength=255 value=publicacion.email pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}" onchange="this.setAttribute('value', this.value);"
+                      oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un email válido')" placeholder="nombre@mail.com")
+              div(class="input_border_focus")
+              div(class="input_placeholder") Email
           
     
           input(type="submit" class="btn btn-info" value="Publicar" style="margin: 0 40%;") 

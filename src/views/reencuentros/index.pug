@@ -23,9 +23,9 @@ div(style="position: relative; min-height: 100vh;")
         div(class="left-input input me-2")
           select(name="tipo" value=busqueda?busqueda:"" style="width: 15rem;" onclick="if(this.opened){this.opened=false;this.blur();}else{this.opened=true;}" onblur="this.opened=false;" onchange="this.setAttribute('value', this.value);")
             option(value hidden selected=busqueda?null:"" disabled)
-            option(value="" selected=busqueda==""?"":null) Todas las publicaciones
-            option(value="Buscado" selected=busqueda=="Perdidos"?"":null) Buscados
-            option(value="Encontrado" selected=busqueda=="Encontrados"?"":null) Encontrado
+            option(value="" selected=busqueda=="Todos"?"":null) Todas las publicaciones
+            option(value="Buscado" selected=busqueda=="Buscado"?"":null) Buscados
+            option(value="Encontrado" selected=busqueda=="Encontrado"?"":null) Encontrados
           div(class="input_border_focus")
           div(class="input_placeholder") Filtrar por:
         input(class="btn btn-info" type="submit" value="Buscar") 
