@@ -2,6 +2,7 @@ const db = require('../models/reencuentrosDB');
 const db_clientes = require('../models/clienteDB');
 const validaciones = require('../helpers/validaciones');
 const fs = require('fs');
+const NotFoundError = require('../helpers/errors/NotFoundError');
 
 
 module.exports = {
@@ -161,5 +162,35 @@ module.exports = {
             info: 'resultados de la busqueda',
             busqueda: busqueda
         })
+    },
+
+    verPublicacion: async (req,res,next) =>{
+        /*
+        1 Obtener id y validar
+        */
+        var id = req.params.id;
+        var publicacionId = parseInt(id);
+        if (isNaN(publicacionId)){
+            res.redirect('/reencuentros');
+        }
+        else{
+            // verificar que el id esta registrado en la bd
+            var publicacion = await db.buscarPublicacionById(id);
+            if (publicacion == null){
+                try{
+                    throw new NotFoundError();
+                }
+                catch(err){
+                    next(err);
+                }
+            }
+            else{
+                res.render('reencuentros/verPublicacion', {
+                    title: 'Publicacion de reencuentro', 
+                    message: 'Datos de la publicación',
+                    publicacion: publicacion
+                });
+            }
+        }
     }
 }

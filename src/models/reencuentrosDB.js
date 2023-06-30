@@ -45,5 +45,13 @@ module.exports = {
                 link_foto: link_foto
             }
         })
+    },
+
+    buscarPublicacionById: async function buscarPublicacionById(publicacion_reencuentrosId){
+        return await prisma.publicacion_reencuentros.findUnique({
+            where:{
+                id: parseInt(publicacion_reencuentrosId)
+            }
+        })
     }
 }

@@ -50,7 +50,7 @@ div(style="position: relative; min-height: 100vh;")
               td #{publicacion.zona}
               td #{publicacion.sexo}
               td #{publicacion.fecha.toISOString().slice(0,10)}
-              td #{publicacion.caracteristicas}
+              td #{publicacion.caracteristicas?publicacion.caracteristicas:"-"}
               td 
                 a(href="/reencuentros/ver/"+publicacion.id)
                   button(type="button" class="btn btn-info") Ver 
