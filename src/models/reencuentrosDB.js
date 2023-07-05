@@ -12,8 +12,6 @@ module.exports = {
                 caracteristicas: publicacion.caracteristicas,
                 comportamiento: publicacion.comportamiento,
                 sexo: publicacion.sexo,
-                telefono: publicacion.telefono,
-                email: publicacion.email,
                 fecha: publicacion.fecha,
                 link_foto: "",
                 estado: "Activa",
@@ -53,5 +51,16 @@ module.exports = {
                 id: parseInt(publicacion_reencuentrosId)
             }
         })
-    }
+    },
+
+    buscarPublicacionAndClienteById: async function buscarPublicacionAndClienteById(publicacion_reencuentrosId){
+        return await prisma.publicacion_reencuentros.findUnique({
+            where:{
+                id: parseInt(publicacion_reencuentrosId)
+            },
+            include:{
+                cliente:true
+            }
+        })
+    },
 }

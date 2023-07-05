@@ -109,6 +109,4 @@ model publicacion_reencuentros{
   edad                    String?   @db.VarChar(255)
   caracteristicas         String?   @db.VarChar(255)
   comportamiento          String?   @db.VarChar(255)
-  telefono                String?   @db.VarChar(255)
-  email                   String?   @db.VarChar(255)
 }

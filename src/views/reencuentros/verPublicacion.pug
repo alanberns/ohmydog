@@ -47,18 +47,27 @@ div(style="position: relative; min-height: 100vh;")
             input(type="text" id="sexo" disabled value=publicacion.sexo?publicacion.sexo:"-")
             div(class="input_border_focus")
             div(class="input_placeholder") Sexo 
-          div(class="left-input input mb-3 flex-form-item")
-            input(type="text" id="telefono" disabled value=publicacion.telefono?publicacion.telefono:"-")
-            div(class="input_border_focus")
-            div(class="input_placeholder") Telefono de contacto 
-          div(class="left-input input mb-3 flex-form-item")
-            input(type="text" id="email" disabled value=publicacion.email?publicacion.email:"-")
-            div(class="input_border_focus")
-            div(class="input_placeholder") Email
     
+        if !esPropia
+          br
+          div(class="container-fluid")
+            form(action="/reencuentros/contactar" method="post" id="contacto") 
+              h4 ¡Contactate!
+              if !sesion.nombre
+                div(class="left-input input mb-3 flex-form-item" style="margin: auto;")
+                  input(type="text" name="nombre" id="nombre" placeholder="Solo puede ingresar letras" required value=nombre?nombre:"" onchange="this.setAttribute('value', this.value);")
+                  div(class="input_border_focus")
+                  div(class="input_placeholder") Nombre
+                div(class="left-input input mb-3 flex-form-item" style="margin: auto;")
+                  input(type="email" name="email" id="email" placeholder="nombre@mail.com" required value=email?email:"" onchange="this.setAttribute('value', this.value);")
+                  div(class="input_border_focus")
+                  div(class="input_placeholder") Email
+                label(for="id" class="form-label") 
+              input(type="hidden" class="form-control" name="id" id="id" required value=publicacion.id)
+              input(type="submit" class="btn btn-info" value="Contactarme")  
         br
         a(href="/reencuentros")
-          button(type="button" class="btn btn-info") Volver
+          button(type="button" class="btn btn-info") Atrás
     
     
   include ../partials/footer.pug

@@ -30,8 +30,6 @@ module.exports = {
             caracteristicas: "",
             comportamiento: "",
             sexo: "",
-            telefono: "",
-            email: "",
             link_foto: "",
         }
         res.render('reencuentros/nuevo',{
@@ -44,23 +42,7 @@ module.exports = {
     nuevoPost: async (req,res) => {
         /*
         Obtener el body del formulario de nueva publicacion de reencuentro
-        Checks: obtener los datos del usuario si quiere publicar algun dato suyo de contacto
         */
-        /*
-        Para obtener los datos modificados:
-        if req.body.telefono_nuevo.length > 0
-        telefono: req.body.telefono_nuevo,
-        email: req.body.email_nuevo,
-        */
-        var checks = {
-            telefono: req.body.telefono,
-            email: req.body.email
-        }
-        if (checks.telefono || checks.email){
-            var cliente = await db_clientes.buscarClienteById(req.session.usuario);
-        }
-        var telefono = checks.telefono?cliente.telefono:""
-        var email = checks.email?cliente.email:""
         var publicacion= {
             tipo: req.body.tipo,
             zona: req.body.zona,
@@ -68,8 +50,6 @@ module.exports = {
             caracteristicas: req.body.caracteristicas,
             comportamiento: req.body.comportamiento,
             sexo: req.body.sexo,
-            telefono: telefono,
-            email: email,
             fecha: new Date(Date.now()),
             clienteId: req.session.usuario
         }
@@ -153,8 +133,8 @@ module.exports = {
         2 Enviar a la vista la lista de publicaciones de resultado y el tipo de publicacion
         */
         var busqueda = req.body.tipo;
-        if (busqueda == "") {busqueda="Todos"}
         var publicaciones = await db.filtrarPublicaciones(busqueda);
+        if (busqueda == "") {busqueda="Todos"}
         res.render("reencuentros/index",{
             title: 'Perros perdidos y buscados',
             message: 'Perros perdidos y buscados',
@@ -175,7 +155,7 @@ module.exports = {
         }
         else{
             // verificar que el id esta registrado en la bd
-            var publicacion = await db.buscarPublicacionById(id);
+            var publicacion = await db.buscarPublicacionAndClienteById(id);
             if (publicacion == null){
                 try{
                     throw new NotFoundError();
@@ -185,10 +165,59 @@ module.exports = {
                 }
             }
             else{
+                var esPropia = req.session.email == publicacion.cliente.email;
                 res.render('reencuentros/verPublicacion', {
                     title: 'Publicacion de reencuentro', 
                     message: 'Datos de la publicación',
-                    publicacion: publicacion
+                    publicacion: publicacion,
+                    esPropia: esPropia
+                });
+            }
+        }
+    },
+
+    contactarPublicacion: async (req,res) => {
+        /*
+        1 si hay session obtener info de la session
+        2 si era por formulario obtener el body
+        3 obtener los datos del anuncio
+        4 enviar el mail
+        */
+        var publicacionId = req.body.id;
+        var publicacion = await db.buscarPublicacionAndClienteById(publicacionId);
+        if(req.session.nombre){
+            var nombre = req.session.nombre;
+            var email = req.session.email;
+        }
+        else{
+            var nombre = req.body.nombre;
+            var email = req.body.email;
+            var result = validaciones.validarContacto(nombre,email);
+            if(result != "valido"){
+                var esPropia = req.session.email == publicacion.cliente.email;
+                res.render('reencuentros/verPublicacion', {
+                    title: 'Publicacion de reencuentro', 
+                    message: 'Datos de la publicación',
+                    publicacion: publicacion,
+                    esPropia: esPropia,
+                    error: result,
+                    nombre: nombre,
+                    email: email
+                })
+            }
+            else{
+                var email_contacto = publicacion.cliente.email;
+
+                var mensaje = "Hola, "+nombre+" quiere contactarse con vos, su email es: "+
+                email+" por tu anuncio en OhMyDog: Publicación de perro " + publicacion.tipo +
+                ": " + publicacion.sexo + ", " + publicacion.zona + " el " + publicacion.fecha.toISOString().slice(0,10);
+                console.log(mensaje);
+                console.log(email_contacto)
+                //mailer.sendMail(email_contacto,"Quieren contactarte",mensaje);
+                res.render('exito', {
+                    title: "Éxito",
+                    message: "Contacto realizado",
+                    info: "Enviamos tu email para que se contacten con vos"
                 });
             }
         }

@@ -22,6 +22,7 @@ router.post('/nuevo', permisos.esCliente, reencuentrosController.nuevoPost);
 router.post('/agregarFoto/:id', upload.single('link_foto'), permisos.esCliente, reencuentrosController.agregarFoto);
 router.post('/', reencuentrosController.busqueda);
 router.get('/ver/:id', reencuentrosController.verPublicacion);
+router.post('/contactar', reencuentrosController.contactarPublicacion);
 
 
 module.exports = router;
