@@ -46,20 +46,58 @@ var consulta = {
                 cliente: { connect: { id: parseInt(adopcion.clienteId) } },
             }
         })
-    }
+    },
+
+    agregarCampañaDonacion: async function agregarCampañaDonacion(campaña){
+        return await prisma.publicacion_donaciones.create({
+            data:{
+                nombre: campaña.nombre,
+                monto: campaña.monto,
+                fecha_fin: campaña.fecha_fin,
+                monto_actual: campaña.monto_actual,
+                fecha_inicio: campaña.fecha_inicio,
+            }
+        })
+    },
+
+    sumarMontoDonacion: async function sumarMontoDonacion(publicacion_donacionId, monto_donacion){
+        return await prisma.publicacion_donaciones.update({
+            where:{
+                id: parseInt(publicacion_donacionId)
+            },
+            data:{
+                monto_actual: {
+                    increment: parseInt(monto_donacion),
+                }
+            }
+        })
+    },
+
+    registrarDonacion:  async function registrarDonacion(donacion){
+        return await prisma.donaciones.create({
+            data:{
+                monto: parseInt(donacion.monto),
+                fecha: donacion.fecha,
+                cliente: { connect:{ id: parseInt(donacion.clienteId)}},
+                publicacion_donacion: { connect: { id: parseInt(donacion.publicacion_donacionId)}}
+            }
+        })
+    },
+
+    sumarMontoDescuento: async function sumarMontoDescuento(clienteId,beneficio){
+        return await prisma.clientes.update({
+            where:{
+                id: parseInt(clienteId)
+            },
+            data:{
+                descuento:{
+                    increment: parseInt(beneficio),
+                }
+            }
+        })
+    },
 }
 
-
-async function donacion(){
-    var donacion1 = {
-        nombre: "Operación de Perrito",
-        monto: 50000,
-        fecha_fin: new Date(2023,12,12),
-        monto_actual: 0,
-        fecha_inicio: new Date(2023,10,30)
-    }
-    
-}
 
 async function admins() {
     return await prisma.administradores.create({
@@ -167,6 +205,52 @@ async function main(){
     var adopcion1 = await consulta.agregarAdopcion(datosAdopcion1);
     //var adopcion2 = await consulta.agregarAdopcion(datosAdopcion2);
     console.log("adopciones creadas");
+
+    //CAMPAÑAS DE DONACION
+
+    var datos_campaña_donacion1 = {
+        nombre: "Campaña con donaciones",
+        monto: 50000,
+        fecha_fin: new Date(2023,12,12),
+        monto_actual: 0,
+        fecha_inicio: new Date(2023,1,1)
+    }
+    var datos_campaña_donacion2 = {
+        nombre: "Campaña sin donaciones",
+        monto: 100000,
+        fecha_fin: new Date(2023,12,12),
+        monto_actual: 0,
+        fecha_inicio: new Date(2023,1,1)
+    }
+    var campaña_donacion1 = await consulta.agregarCampañaDonacion(datos_campaña_donacion1);
+    var campaña_donacion2 = await consulta.agregarCampañaDonacion(datos_campaña_donacion2);
+    console.log("Campañas de donación creadas");
+
+    //DONACIONES
+    var datos_donacion1 = {
+        monto: 1000,
+        fecha: new Date(2023,2,2),
+        clienteId: cliente1.id,
+        publicacion_donacionId: campaña_donacion1.id
+    }
+    var datos_donacion2 = {
+        monto: 500,
+        fecha: new Date(2023,2,2),
+        clienteId: cliente1.id,
+        publicacion_donacionId: campaña_donacion1.id
+    }
+    var donacion1 = await consulta.registrarDonacion(datos_donacion1);
+    var donacion2 = await consulta.registrarDonacion(datos_donacion2);
+    console.log("Donaciones creadas");
+
+    await consulta.sumarMontoDescuento(datos_donacion1.clienteId, donacion1.monto * 0.2);
+    await consulta.sumarMontoDescuento(datos_donacion2.clienteId, donacion2.monto * 0.2);
+    console.log('Descuentos asignados a clientes');
+
+    await consulta.sumarMontoDonacion(campaña_donacion1.id, donacion1.monto);
+    await consulta.sumarMontoDonacion(campaña_donacion1.id, donacion2.monto);
+    console.log('Sumas asignadas a campañas');
+
 }
 
 main();

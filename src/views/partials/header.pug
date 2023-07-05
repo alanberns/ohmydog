@@ -33,6 +33,7 @@ nav(class="navbar navbar-expand-lg bg-body-tertiary" style={padding:'0px'})
             if sesion.nivel > 0
               li 
                 a(class="dropdown-item" href="/donaciones") Donaciones
+            if sesion.nivel == 1
               li 
                 a(class="dropdown-item" href="/cruza") Cruza
             li 
