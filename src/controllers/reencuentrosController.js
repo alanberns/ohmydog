@@ -188,38 +188,39 @@ module.exports = {
         if(req.session.nombre){
             var nombre = req.session.nombre;
             var email = req.session.email;
+            var result = "valido";
         }
         else{
             var nombre = req.body.nombre;
             var email = req.body.email;
             var result = validaciones.validarContacto(nombre,email);
-            if(result != "valido"){
-                var esPropia = req.session.email == publicacion.cliente.email;
-                res.render('reencuentros/verPublicacion', {
-                    title: 'Publicacion de reencuentro', 
-                    message: 'Datos de la publicación',
-                    publicacion: publicacion,
-                    esPropia: esPropia,
-                    error: result,
-                    nombre: nombre,
-                    email: email
-                })
-            }
-            else{
-                var email_contacto = publicacion.cliente.email;
+        }
+        if(result != "valido"){
+            var esPropia = req.session.email == publicacion.cliente.email;
+            res.render('reencuentros/verPublicacion', {
+                title: 'Publicacion de reencuentro', 
+                message: 'Datos de la publicación',
+                publicacion: publicacion,
+                esPropia: esPropia,
+                error: result,
+                nombre: nombre,
+                email: email
+            })
+        }
+        else{
+            var email_contacto = publicacion.cliente.email;
 
-                var mensaje = "Hola, "+nombre+" quiere contactarse con vos, su email es: "+
-                email+" por tu anuncio en OhMyDog: Publicación de perro " + publicacion.tipo +
-                ": " + publicacion.sexo + ", " + publicacion.zona + " el " + publicacion.fecha.toISOString().slice(0,10);
-                console.log(mensaje);
-                console.log(email_contacto)
-                //mailer.sendMail(email_contacto,"Quieren contactarte",mensaje);
-                res.render('exito', {
-                    title: "Éxito",
-                    message: "Contacto realizado",
-                    info: "Enviamos tu email para que se contacten con vos"
-                });
-            }
+            var mensaje = "Hola, "+nombre+" quiere contactarse con vos, su email es: "+
+            email+" por tu anuncio en OhMyDog: Publicación de perro " + publicacion.tipo +
+            ": " + publicacion.sexo + ", " + publicacion.zona + " el " + publicacion.fecha.toISOString().slice(0,10);
+            console.log(mensaje);
+            console.log(email_contacto)
+            //mailer.sendMail(email_contacto,"Quieren contactarte",mensaje);
+            res.render('exito', {
+                title: "Éxito",
+                message: "Contacto realizado",
+                info: "Enviamos tu email para que se contacten con vos"
+            });
         }
     }
 }

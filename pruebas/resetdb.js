@@ -149,9 +149,19 @@ async function main(){
         password: "12345",
         descuento: 0,
     } 
+    var datosCliente3 = {
+        nombre: "Julian",
+        apellido: "Alvarez",
+        email: "test2@test.com",
+        dni: 40555001,
+        telefono: "1134248901",
+        password: "12345",
+        descuento: 0,
+    }
     var cliente1 = await consulta.agregarCliente(datosCliente1);
     console.log(cliente1)
     var cliente2 = await consulta.agregarCliente(datosCliente2);
+    var cliente3 = await consulta.agregarCliente(datosCliente3);
     console.log("clientes creados");
 
     //CREAR PERROS
@@ -173,8 +183,38 @@ async function main(){
         observaciones: "sin observaciones",
         clienteId: cliente1.id
     }
+    var datosPerro3 = {
+        nombre: "Srperro",
+        raza: "golden",
+        color: "rubio",
+        fecha_nacimiento: new Date(2020,12,12),
+        link_foto: "",
+        observaciones: "primer perro",
+        clienteId: cliente2.id
+    }
+    var datosPerro4 = {
+        nombre: "Blanco",
+        raza: "golden",
+        color: "rubio",
+        fecha_nacimiento: new Date(2020,12,12),
+        link_foto: "",
+        observaciones: "segundo perro",
+        clienteId: cliente2.id
+    }
+    var datosPerro5 = {
+        nombre: "Huesos",
+        raza: "golden",
+        color: "rubio",
+        fecha_nacimiento: new Date(2020,12,12),
+        link_foto: "",
+        observaciones: "tercer perro",
+        clienteId: cliente2.id
+    }
     var perro1 = await consulta.agregarPerro(datosPerro1);
     var perro2 = await consulta.agregarPerro(datosPerro2);
+    var perro3 = await consulta.agregarPerro(datosPerro3);
+    var perro4 = await consulta.agregarPerro(datosPerro4);
+    var perro5 = await consulta.agregarPerro(datosPerro5);
     console.log("perros creados");
 
     //CREAR ADOPCIONES
@@ -222,8 +262,16 @@ async function main(){
         monto_actual: 0,
         fecha_inicio: new Date(2023,1,1)
     }
+    var datos_campaña_finalizada = {
+        nombre: "Campaña finalizada",
+        monto: 50000,
+        fecha_fin: new Date(2022,12,12),
+        monto_actual: 70000,
+        fecha_inicio: new Date(2021,1,1)
+    }
     var campaña_donacion1 = await consulta.agregarCampañaDonacion(datos_campaña_donacion1);
     var campaña_donacion2 = await consulta.agregarCampañaDonacion(datos_campaña_donacion2);
+    var campaña_donacionFin = await consulta.agregarCampañaDonacion(datos_campaña_finalizada);
     console.log("Campañas de donación creadas");
 
     //DONACIONES
@@ -239,12 +287,20 @@ async function main(){
         clienteId: cliente1.id,
         publicacion_donacionId: campaña_donacion1.id
     }
+    var datos_donacion3 = {
+        monto: 70000,
+        fecha: new Date(2022,2,2),
+        clienteId: cliente3.id,
+        publicacion_donacionId: campaña_donacionFin.id
+    }
     var donacion1 = await consulta.registrarDonacion(datos_donacion1);
     var donacion2 = await consulta.registrarDonacion(datos_donacion2);
+    var donacion3 = await consulta.registrarDonacion(datos_donacion3);
     console.log("Donaciones creadas");
 
     await consulta.sumarMontoDescuento(datos_donacion1.clienteId, donacion1.monto * 0.2);
     await consulta.sumarMontoDescuento(datos_donacion2.clienteId, donacion2.monto * 0.2);
+    await consulta.sumarMontoDescuento(datos_donacion3.clienteId, donacion3.monto * 0.2);
     console.log('Descuentos asignados a clientes');
 
     await consulta.sumarMontoDonacion(campaña_donacion1.id, donacion1.monto);
