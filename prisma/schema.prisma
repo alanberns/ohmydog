@@ -20,6 +20,8 @@ model clientes {
   adopciones                  publicacion_adopciones[]
   donaciones                  donaciones[]
   publicaciones_reencuentros  publicacion_reencuentros[]
+  turnos                      turnos[]
+  historias                   historias[]
 }
 
 model administradores {
@@ -41,6 +43,8 @@ model perros {
   clienteId        Int?
   cliente          clientes?              @relation(fields: [clienteId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   cruza            publicacion_cruzas?
+  turnos           turnos[]
+  historias        historias[]
 }
 
 model publicacion_servicios {
@@ -109,4 +113,31 @@ model publicacion_reencuentros{
   edad                    String?   @db.VarChar(255)
   caracteristicas         String?   @db.VarChar(255)
   comportamiento          String?   @db.VarChar(255)
+}
+
+model turnos{
+  id          Int       @id  @default(autoincrement())
+  dia         DateTime  @db.Date
+  franja      String    @db.VarChar(255)
+  practica    String    @db.VarChar(255)
+  estado      String    @db.VarChar(255)
+  id_cliente  Int
+  cliente     clientes  @relation(fields: [id_cliente], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  id_perro    Int
+  perro       perros    @relation(fields: [id_perro], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model historias{
+  id              Int       @id  @default(autoincrement())
+  practica        String    @db.VarChar(255)
+  observaciones   String    @db.VarChar(255)
+  dia             DateTime  @db.Date
+  monto           Int
+  peso            Int?
+  medicamento     String?   @db.VarChar(255)
+  cantMedicamento Int?
+  id_cliente      Int
+  cliente         clientes  @relation(fields: [id_cliente], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  id_perro        Int
+  perro           perros    @relation(fields: [id_perro], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }

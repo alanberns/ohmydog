@@ -9,29 +9,51 @@ div(style="position: relative; min-height: 100vh;")
     
       br
       br
+
+      include ../partials/info.pug
     
       div(class="row")
         div(class="col-md-4") &nbsp;
         div(class="col-md-4")
+          label() * Campos Obligatorios
           form(method="post" action="/turno/intento" id="formulario")
+            div(class="left-input input mb-3")
+              select(name="perro" id="perro" required value="" onclick="if(this.opened){this.opened=false;this.blur();}else{this.opened=true;}" onblur="this.opened=false;" onchange="this.setAttribute('value', this.value);")
+                option(value hidden selected disabled)
+                each perro in perros
+                  option(value=perro.id) #{perro.nombre}
+                else
+                  option(value="" selected)
+              div(class="input_border_focus")
+              div(class="input_placeholder") Perro*
+            div(class="left-input input mb-3")
+              select(name="practica" id="practica" required value="" onclick="if(this.opened){this.opened=false;this.blur();}else{this.opened=true;}" onblur="this.opened=false;" onchange="this.setAttribute('value', this.value);")
+                option(value hidden selected disabled)
+                option(value="Consulta") Consulta
+                option(value="Peluqueria") Peluquer&iacute;a
+                option(value="Castracion") Castraci&oacute;n
+                option(value="Operacion") Operaci&oacute;n
+                option(value="Vacuna A") Vacuna A
+                option(value="Vacuna B") Vacuna B
+                option(value="Desparacitacion") Desparacitaci&oacute;n
+              div(class="input_border_focus")
+              div(class="input_placeholder") Pr&aacute;ctica*
             div(class="left-input input mb-3")
               select(name="franja" id="franja" required value="" onclick="if(this.opened){this.opened=false;this.blur();}else{this.opened=true;}" onblur="this.opened=false;" onchange="this.setAttribute('value', this.value);")
                 option(value hidden selected disabled)
-                option(value="temprano") Ma&ntilde;ana
-                option(value="tarde") Tarde
+                option(value="Temprano") Ma&ntilde;ana: 8 a 13hs
+                option(value="Tarde") Tarde: 15 a 20hs
               div(class="input_border_focus")
-              div(class="input_placeholder") Franja horaria
+              div(class="input_placeholder") Franja horaria*
             div(class="left-input input mb-3")
               input(type="date" name="dia" id="dia" placeholder="dd/mm/aaaa" required value="" onchange="this.setAttribute('value', this.value);")
               div(class="input_border_focus")
-              div(class="input_placeholder") D&iacute;a
+              div(class="input_placeholder") D&iacute;a*
             input(type="submit" class="btn btn-info" value="Solicitar turno") 
     
           br
           a(href="/")
             button(type="button" class="btn btn-info") Cancelar
         div(class="col-md-4") &nbsp;
-     
-    script(src="/js/validacionSesion.js")
     
   include ../partials/footer.pug
