@@ -38,17 +38,20 @@ nav(class="navbar navbar-expand-lg bg-body-tertiary" style={padding:'0px'})
                 a(class="dropdown-item" href="/cruza") Cruza
             li 
               a(class="dropdown-item" href="/reencuentros") Perros perdidos
-        if sesion.nivel == 1
-          li
-            a(class="nav-link" href="/turno/solicitar" class=(selected_nav_link == "turnos") ? "active" : "") Solicitar turno
-        else if sesion.nivel == 2
+        if sesion.nivel > 0
           li(class="nav-item dropdown")
             a(class="nav-link dropdown-toggle" class=(selected_nav_link == "turnos") ? "active" : "" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false") Turnos
             ul(class="dropdown-menu")
-              li
-                a(class="dropdown-item" href="#") Solicitudes
-              li
-                a(class="dropdown-item" href="#") Próximos
+              if sesion.nivel == 1
+                li
+                  a(class="dropdown-item" href="/turno/solicitar") Solicitar turno
+                li
+                  a(class="dropdown-item" href="/turno/listar") Ver mis turnos
+              else if sesion.nivel == 2
+                li
+                  a(class="dropdown-item" href="/turno/listarAdmin") Listado de Turnos
+                li
+                  a(class="dropdown-item" href="/turno/listarAceptadosAdmin") Turnos Aceptados
     if sesion.nombre
       = sesion.nombre+" "+sesion.apellido
     else

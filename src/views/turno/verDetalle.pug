@@ -1,0 +1,46 @@
+include ../partials/head.pug
+div(style="position: relative; min-height: 100vh;")
+  div(style="padding-bottom: calc(1.25rem + 0.3125rem * 2 + 1rem)")
+    include ../partials/header.pug
+    div(class="container-fluid")
+      //- aca va la pagina hasta footer. inicia con 1 tab
+      h1= message
+    
+      br
+      br
+    
+      include ../partials/info.pug
+    
+      div(class="row")
+        div(class="col-md-4") &nbsp;
+        div(class="col-md-4")
+          label() Cliente: #[strong #{turno.cliente.nombre} #{turno.cliente.apellido}]
+          br
+          label() Perro: #[strong #{turno.perro.nombre}]
+          br
+          label() Pr&aacute;ctica: #[strong #{turno.practica}]
+          br
+          label() Fecha: #[strong #{turno.dia}]
+          br
+          label() Franja horaria: #[strong #{turno.franja}]
+          br
+          label() Estado del turno: #[strong #{turno.estado}]
+          br
+          br
+          label() Contacto
+          br
+          label() Tel&eacute;fono: #[strong #{turno.cliente.telefono}]
+          br
+          label() Email: #[strong #{turno.cliente.email}]
+          br
+          br
+        if turno.estado == "Pendiente"
+          div(class="container-fluid")
+            a(href="/turno/aceptar/"+turno.id)
+              button(type="button" class="btn btn-info") Aceptar Turno
+            span  
+            a(href="/turno/rechazar/"+turno.id)
+              button(type="button" class="btn btn-danger") Rechazar Turno
+          div(class="col-md-4") &nbsp;
+    
+  include ../partials/footer.pug
