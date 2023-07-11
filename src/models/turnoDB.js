@@ -192,5 +192,111 @@ module.exports = {
                 perro: true
             }
         });
+    },
+
+    crearConsulta: async function crearConsulta(consulta) {
+        return await prisma.historias.create({
+            data:{
+                practica: consulta.practica,
+                dia: consulta.dia,        
+                observaciones: consulta.observaciones,
+                monto: consulta.monto,
+                cliente: { connect: { id: parseInt(consulta.id_cliente) } },
+                perro: { connect: { id: parseInt(consulta.id_perro) } }
+            }
+        });
+    },
+
+    crearOperacion: async function crearOperacion(consulta) {
+        return await prisma.historias.create({
+            data:{
+                practica: consulta.practica,
+                dia: consulta.dia,        
+                observaciones: consulta.observaciones,
+                peso: consulta.peso,
+                medicamento: consulta.medicamento,
+                monto: consulta.monto,
+                cliente: { connect: { id: parseInt(consulta.id_cliente) } },
+                perro: { connect: { id: parseInt(consulta.id_perro) } }
+            }
+        });
+    },
+
+    crearDesparacitacion: async function crearDesparacitacion(consulta) {
+        return await prisma.historias.create({
+            data:{
+                practica: consulta.practica,
+                dia: consulta.dia,        
+                observaciones: consulta.observaciones,
+                peso: consulta.peso,
+                cantMedicamento: consulta.cantMedicamento,
+                monto: consulta.monto,
+                cliente: { connect: { id: parseInt(consulta.id_cliente) } },
+                perro: { connect: { id: parseInt(consulta.id_perro) } }
+            }
+        });
+    },
+
+    aplicarDescuento: async function aplicarDescuento(id) {
+        return await prisma.clientes.update({
+            where:{
+                id: parseInt(id)
+            },
+            data:{
+                descuento: 0
+            }
+        });
+    },
+
+    historiaClinica: async function historiaClinica(id_perro) {
+        return await prisma.historias.findMany({
+            where:{
+                id_perro: parseInt(id_perro)
+            },
+            include:{
+                perro: true
+            }
+        });
+    },
+
+    libretaSanitaria: async function libretaSanitaria(id_perro) {
+        return await prisma.historias.findMany({
+            where: {
+                OR: [
+                    {
+                        practica: {
+                            equals: "Vacuna A",
+                        },
+                    },
+                    {
+                        practica: {
+                            equals: "Vacuna B",
+                        },
+                    },
+                    {
+                        practica: {
+                            equals: "Desparacitacion",
+                        }
+                    }
+                ],
+                AND: {
+                    id_perro: parseInt(id_perro),
+                }
+            },
+            include:{
+                perro: true
+            }
+        });
+    },
+
+    resolverTurno: async function resolverTurno(id) {
+        return await prisma.turnos.update({
+            where:{
+                id: parseInt(id)
+            },
+            data:{
+                estado: "Resuelto"
+            }
+        });
     }
 };

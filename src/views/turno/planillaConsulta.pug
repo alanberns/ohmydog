@@ -1,0 +1,74 @@
+include ../partials/head.pug
+div(style="position: relative; min-height: 100vh;")
+  div(style="padding-bottom: calc(1.25rem + 0.3125rem * 2 + 1rem)")
+    - var selected_nav_link = "turnos";
+    include ../partials/header.pug
+    
+    div(class="container-fluid")
+      h1= message
+    
+      br
+      br
+
+      include ../partials/info.pug
+    
+      div(class="row")
+        div(class="col-md-4") &nbsp;
+        div(class="col-md-4")
+          label() Cliente: #[strong #{turno.cliente.nombre} #{turno.cliente.apellido}]
+          br
+          label() Perro: #[strong #{turno.perro.nombre}]
+          br
+          label() Pr&aacute;ctica: #[strong #{turno.practica}]
+          br
+          label() Fecha: #[strong #{turno.dia}]
+          br
+          br
+
+          label() *Campos Obligatorios
+          form(method="post" action="/turno/intentoConsulta" id="formulario" class="flex-form-wrap")
+            input(type="text" name="id" value=turno.id hidden="hidden")
+            div(class="left-input input mb-3 flex-form-item")
+              input(type="text" name="observaciones" id="observaciones", placeholder="Solo puede ingresar letras y numeros" maxlenght=255, required value="" onchange="this.setAttribute('value', this.value);")
+              div(class="input_border_focus")
+              div(class="input_placeholder") Observaciones*
+            if turno.practica == "Desparacitacion" || turno.practica == "Operacion"
+              div(class="left-input input mb-3 flex-form-item")
+                input(type="text" name="peso" id="peso", placeholder="Solo puede ingresar letras y números" maxlenght=255, required value="" onchange="this.setAttribute('value', this.value);")
+                div(class="input_border_focus")
+                div(class="input_placeholder") Peso*
+            if turno.practica == "Desparacitacion"
+              div(class="left-input input mb-3 flex-form-item")
+                input(type="text" name="cantMedicamento" id="cantMedicamento", placeholder="Solo puede ingresar letras y numeros" maxlenght=255, required value="" onchange="this.setAttribute('value', this.value);")
+                div(class="input_border_focus")
+                div(class="input_placeholder") Cantidad de Medicamento*
+            if turno.practica == "Operacion"
+              div(class="left-input input mb-3 flex-form-item")
+                input(type="text" name="medicamento" id="medicamento", placeholder="Solo puede ingresar letras y numeros" maxlenght=255, required value="" onchange="this.setAttribute('value', this.value);")
+                div(class="input_border_focus")
+                div(class="input_placeholder") Medicamentos*
+            div(class="left-input input mb-3 flex-form-item")
+              input(type="number" name="monto" id="monto", placeholder="Solo puede ingresar numeros" maxlenght=255, required value="" onchange="this.setAttribute('value', this.value);")
+              div(class="input_border_focus")
+              div(class="input_placeholder") Monto*
+            label() Dispone de un descuento de: $ #[strong #{turno.cliente.descuento}] .-
+            div(class="margin-top-and-bottom horizontal-margin-center" style="padding: 0 1em; width: 34rem; max-width: 100%;")
+              div(class="d-flex" style="position: relative; flex-wrap: wrap; justify-content: space-evenly; padding: .5em; background-color: white; border:1px solid #dadce0; border-radius: .375em;")
+                div(style="position: absolute; margin-top: -.5em; left: 7px; padding: 0 8px;")
+                  div(style="font-size: .84375em; margin-top: -.5em; line-height: 1em; user-select: none; text-shadow: 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white, 0 0 0.3em white;") Aplicar Descuento 
+                div(class="form-check")
+                  label(class="form-check-label" for="lunesCheck")
+                    input(class="check-input form-check-input" type="checkbox" value="descuento" id="descuentoCheck" name="descuento")
+                    .
+                      Sí
+          
+      
+            input(type="submit" class="btn btn-info" value="Registrar" style="margin: 0 45%") 
+      
+          br
+          a(href="/turno/listarAceptadosAdmin")
+            button(type="button" class="btn btn-info") Cancelar
+    
+        div(class="col-md-4") &nbsp;
+    
+  include ../partials/footer.pug

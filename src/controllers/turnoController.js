@@ -1,5 +1,7 @@
 const dbTurno = require('../models/turnoDB');
 const mailer = require('../../mail');
+const TRESHORASENMILIS = 10800000;
+const DIAENMILIS = 86400000;
 
 module.exports = {
     solicitar: async (req,res) => {
@@ -26,7 +28,7 @@ module.exports = {
         var tieneTurnoVacunaA = await dbTurno.tieneTurnoVacunaA(req.body.perro);
         var tieneTurnoVacunaB = await dbTurno.tieneTurnoVacunaB(req.body.perro);
         var perro = await dbTurno.verPerro(req.body.perro);
-        var edadEnDias = (fechaHoy - perro.fecha_nacimiento) / 86400000;
+        var edadEnDias = (fechaHoy - perro.fecha_nacimiento) / DIAENMILIS;
 
 
         var error = "";
@@ -63,7 +65,7 @@ module.exports = {
             await dbTurno.crearTurno(nuevoTurno);
             var info = "Turno solicitado correctamente";
             var turnos = await dbTurno.listarTurnos(req.session.usuario);
-            turnos.forEach(turno => turno.dia.setTime(turno.dia.getTime() + 10800000));
+            turnos.forEach(turno => turno.dia.setTime(turno.dia.getTime() + TRESHORASENMILIS));
             res.render('turno/listar', {
                 title: 'Mis Turnos',
                 message: 'Mis Turnos',
@@ -79,7 +81,7 @@ module.exports = {
         if(turnos.length == 0)
             var info = "Aún no ha solicitado ningún turno";
         else{
-            turnos.forEach(turno => turno.dia.setTime(turno.dia.getTime() + 10800000));
+            turnos.forEach(turno => turno.dia.setTime(turno.dia.getTime() + TRESHORASENMILIS));
         }
 
         res.render('turno/listar', {
@@ -94,7 +96,7 @@ module.exports = {
     cancelar: async (req,res) => {
         await dbTurno.cancelarTurno(req.params.id);
         var turnos = await dbTurno.listarTurnos(req.session.usuario);
-        turnos.forEach(turno => turno.dia.setTime(turno.dia.getTime() + 10800000));
+        turnos.forEach(turno => turno.dia.setTime(turno.dia.getTime() + TRESHORASENMILIS));
         var info = "Turno cancelado exitosamente";
 
         res.render('turno/listar', {
@@ -110,14 +112,14 @@ module.exports = {
         var fecha = new Date();
         if(req.body.dia){
             fecha = new Date(req.body.dia);
-            fecha.setTime(fecha.getTime() + 10800000);
+            fecha.setTime(fecha.getTime() + TRESHORASENMILIS);
         }
 
         var turnos = await dbTurno.listarTurnosFecha(fecha);
         if(turnos.length == 0)
             var info = "Aún no han solicitado ningún turno para este día";
         else{
-            turnos.forEach(turno => turno.dia.setTime(turno.dia.getTime() + 10800000));
+            turnos.forEach(turno => turno.dia.setTime(turno.dia.getTime() + TRESHORASENMILIS));
         }
 
         res.render('turno/listarAdmin', {
@@ -138,11 +140,11 @@ module.exports = {
 
         if(!fecha)
             fecha = new Date();
-        fecha.setTime(fecha.getTime() + 10800000);
+        fecha.setTime(fecha.getTime() + TRESHORASENMILIS);
 
         var turnos = await dbTurno.listarTurnosFecha(fecha);
         if(turnos.length >= 0)
-            turnos.forEach(turno => turno.dia.setTime(turno.dia.getTime() + 10800000));
+            turnos.forEach(turno => turno.dia.setTime(turno.dia.getTime() + TRESHORASENMILIS));
 
         
         if(turno.franja == "Temprano")
@@ -170,11 +172,11 @@ module.exports = {
 
         if(!fecha)
             fecha = new Date();
-        fecha.setTime(fecha.getTime() + 10800000);
+        fecha.setTime(fecha.getTime() + TRESHORASENMILIS);
 
         var turnos = await dbTurno.listarTurnosFecha(fecha);
         if(turnos.length >= 0)
-            turnos.forEach(turno => turno.dia.setTime(turno.dia.getTime() + 10800000));
+            turnos.forEach(turno => turno.dia.setTime(turno.dia.getTime() + TRESHORASENMILIS));
 
         
         if(turno.franja == "Temprano")
@@ -196,7 +198,7 @@ module.exports = {
 
     verDetalle: async (req,res) => {
         var turno = await dbTurno.verDetalle(req.params.id);
-        turno.dia.setTime(turno.dia.getTime() + 10800000);
+        turno.dia.setTime(turno.dia.getTime() + TRESHORASENMILIS);
         turno.dia = turno.dia.toLocaleDateString();
 
         res.render('turno/verDetalle', {
@@ -211,14 +213,14 @@ module.exports = {
         var fecha = new Date();
         if(req.body.dia){
             fecha = new Date(req.body.dia);
-            fecha.setTime(fecha.getTime() + 10800000);
+            fecha.setTime(fecha.getTime() + TRESHORASENMILIS);
         }
 
         var turnos = await dbTurno.listarTurnosAceptadosFecha(fecha);
         if(turnos.length == 0)
             var info = "Aún no hay turnos para este día";
         else{
-            turnos.forEach(turno => turno.dia.setTime(turno.dia.getTime() + 10800000));
+            turnos.forEach(turno => turno.dia.setTime(turno.dia.getTime() + TRESHORASENMILIS));
         }
 
         res.render('turno/listarAceptadosAdmin', {
@@ -230,4 +232,108 @@ module.exports = {
             info: info
         });
     },
+
+
+    cargarConsulta: async (req,res) => {
+        var turno = await dbTurno.verDetalle(req.params.id);
+        turno.dia.setTime(turno.dia.getTime() + TRESHORASENMILIS);
+        turno.dia = turno.dia.toLocaleDateString();
+
+        res.render('turno/planillaConsulta', {
+            title: 'Cargar Consulta',
+            message: 'Cargar Consulta',
+            usuario: req.session,
+            turno: turno
+        });
+    },
+
+    intentoConsulta: async (req,res) => {
+        var turno = await dbTurno.verDetalle(req.body.id);
+        var descuento = 0;
+        if (req.body.descuento){
+            descuento = turno.cliente.descuento;
+            await dbTurno.aplicarDescuento(turno.cliente.id);
+        }
+        var monto = req.body.monto - descuento;
+
+        var consulta = {
+            practica: turno.practica,
+            dia: turno.dia,        
+            observaciones: req.body.observaciones,
+            monto: monto,
+            id_cliente: turno.id_cliente,
+            id_perro: turno.id_perro
+        }
+
+        if(turno.practica == "Desparacitacion"){
+            consulta.peso = req.body.peso;
+            consulta.cantMedicamento = req.body.cantMedicamento;
+            await dbTurno.crearDesparacitacion(consulta);
+        }
+        else if(turno.practica == "Operacion"){
+            consulta.peso = req.body.peso;
+            consulta.medicamento = req.body.medicamento;
+            await dbTurno.crearOperacion(consulta);
+        }
+        else{
+            await dbTurno.crearConsulta(consulta);
+        }
+
+
+        await dbTurno.resolverTurno(req.body.id);
+        
+
+        info = "La consulta fue cargada exitosamente";
+
+
+        var turnos = await dbTurno.listarTurnosAceptadosFecha(new Date());
+        if(turnos.length == 0)
+            var info = "Aún no hay turnos para este día";
+        else{
+            turnos.forEach(turno => turno.dia.setTime(turno.dia.getTime() + TRESHORASENMILIS));
+        }
+
+        res.render('turno/listarAceptadosAdmin', {
+            title: 'Turnos Aceptados',
+            message: 'Listado de Turnos Aceptados '+ new Date().toLocaleDateString(),
+            usuario: req.session,
+            turnos: turnos,
+            fecha: new Date(),
+            info: info
+        });
+    },
+
+    clinica: async (req,res) => {
+        var historias = await dbTurno.historiaClinica(req.params.id);
+        historias.forEach(historia => historia.dia.setTime(historia.dia.getTime() + TRESHORASENMILIS));
+        historias.forEach(historia => historia.dia = historia.dia.toLocaleDateString());
+        var perro = await dbTurno.verPerro(req.params.id);
+
+        if(historias.length == 0)
+            var info = "Esta mascota aún no tiene historia clínica";
+
+        res.render('turno/listarHistoria', {
+            title: 'Historia Clinica',
+            message: 'Historia Clínica de ' + perro.nombre,
+            usuario: req.session,
+            historias: historias
+        });
+    },
+
+    libreta: async (req,res) => {
+        var libretas = await dbTurno.libretaSanitaria(req.params.id);
+        libretas.forEach(libreta => libreta.dia.setTime(libreta.dia.getTime() + TRESHORASENMILIS));
+        libretas.forEach(libreta => libreta.dia = libreta.dia.toLocaleDateString());
+        var perro = await dbTurno.verPerro(req.params.id);
+
+        if(libretas.length == 0)
+            var info = "La libreta sanitaria de esta mascota está vacía";
+
+        res.render('turno/listarLibreta', {
+            title: 'Libreta Sanitaria',
+            message: 'Libreta Sanitaria de ' + perro.nombre,
+            usuario: req.session,
+            libretas: libretas
+        });
+    }
 }

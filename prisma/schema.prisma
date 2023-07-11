@@ -133,9 +133,9 @@ model historias{
   observaciones   String    @db.VarChar(255)
   dia             DateTime  @db.Date
   monto           Int
-  peso            Int?
+  peso            String?   @db.VarChar(255)
   medicamento     String?   @db.VarChar(255)
-  cantMedicamento Int?
+  cantMedicamento String?   @db.VarChar(255)
   id_cliente      Int
   cliente         clientes  @relation(fields: [id_cliente], references: [id], onDelete: NoAction, onUpdate: NoAction)
   id_perro        Int

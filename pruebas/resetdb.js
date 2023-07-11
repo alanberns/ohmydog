@@ -432,7 +432,7 @@ async function main(){
     var datosTurnoPeluqueria = {
         dia: new Date('2023-08-01'),
         franja: "Tarde",
-        practica: "Peluqueria",
+        practica: "Desparacitacion",
         estado: "Aceptado",
         id_perro: perroConTurnos.id,
         id_cliente: clienteConPerroYTurnos.id

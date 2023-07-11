@@ -17,4 +17,10 @@ router.get('/verDetalle/:id', permisos.esAdmin, turnoController.verDetalle);
 router.get('/listarAceptadosAdmin', permisos.esAdmin, turnoController.listarAceptadosAdmin);
 router.post('/listarAceptadosAdmin', permisos.esAdmin, turnoController.listarAceptadosAdmin);
 
+
+router.get('/cargarConsulta/:id', permisos.esAdmin, turnoController.cargarConsulta);
+router.post('/intentoConsulta', permisos.esAdmin, turnoController.intentoConsulta);
+router.get('/clinica/:id', permisos.isAuth, turnoController.clinica);
+router.get('/libreta/:id', permisos.isAuth, turnoController.libreta);
+
 module.exports = router;

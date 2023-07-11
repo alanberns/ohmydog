@@ -47,6 +47,8 @@ div(style="position: relative; min-height: 100vh;")
                 td De 15 a 20hs
               td #{turno.estado}
               td
+                a(href="/turno/cargarConsulta/"+turno.id)
+                  button(type="button" class="btn btn-info") Cargar Consulta
                 a(href="/turno/verDetalle/"+turno.id)
                   button(type="button" class="btn btn-warning") Ver Detalles
         else 

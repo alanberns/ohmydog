@@ -26,6 +26,10 @@ div(style="position: relative; min-height: 100vh;")
                       p(class="card-text") Observaciones: #{mascota.observaciones}
                       a(href="/perros/ver/"+mascota.id)
                         button(type="button" class="btn btn-info") Ver detalles
+                      a(href="/turno/clinica/"+mascota.id)
+                        button(type="button" class="btn btn-danger") Historia Clinica
+                      a(href="/turno/libreta/"+mascota.id)
+                        button(type="button" class="btn btn-warning") Libreta Sanitaria
                   
                 else
                   div(class="card-body")
@@ -35,6 +39,10 @@ div(style="position: relative; min-height: 100vh;")
                       p(class="card-text") Observaciones: #{mascota.observaciones}
                       a(href="/perros/ver/"+mascota.id)
                         button(type="button" class="btn btn-info") Ver detalles
+                      a(href="/turno/clinica/"+mascota.id)
+                        button(type="button" class="btn btn-danger") Historia Clinica
+                      a(href="/turno/libreta/"+mascota.id)
+                        button(type="button" class="btn btn-warning") Libreta Sanitaria
           br
     
       
