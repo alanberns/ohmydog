@@ -7,7 +7,7 @@
 
     var extension = $("#link_foto").val().slice(($("#link_foto").val().lastIndexOf(".") - 1 >>> 0) + 2);
 
-    if(!extensiones.includes(extension)) validez = "Ingrese un archivo con extension: 'jpeg' 'jpg' 'png'";
+    if(!extensiones.includes(extension)) validez = "Ingrese un archivo con extensión: 'jpeg' 'jpg' o 'png'";
 
     /* Si validez se mantiene en "true" el formulario es correcto y se envía,
     caso contrario se muestra un mensaje y se cancela el envío. */

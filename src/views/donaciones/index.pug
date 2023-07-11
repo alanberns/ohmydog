@@ -24,16 +24,16 @@ div(style="position: relative; min-height: 100vh;")
       br
       
       form(class="d-flex" role="search" method="post" action="/donaciones/" id="formulario" style="justify-content: center; align-items: center;")
-        div(style="margin-right: .5rem;")
-          .
-            Filtrar por:
-        select(class="form-select me-2" aria-label="Default select example", name="estado" style="width: 15rem;")
-          if(activas)
-            option(selected value="Activas") Campañas activas
-            option(value="Finalizadas") Campañas completadas
-          else 
-            option(value="Activas") Campañas activas
-            option(selected value="Finalizadas") Campañas completadas
+        div(class="left-input input me-2")
+          select(aria-label="Default select example", name="estado" style="width: 15rem;" onclick="if(this.opened){this.opened=false;this.blur();}else{this.opened=true;}" onblur="this.opened=false;" onchange="this.setAttribute('value', this.value);")
+            if(activas)
+              option(selected value="Activas") Campañas activas
+              option(value="Finalizadas") Campañas completadas
+            else 
+              option(value="Activas") Campañas activas
+              option(selected value="Finalizadas") Campañas completadas
+          div(class="input_border_focus")
+          div(class="input_placeholder") Filtrar por:
         input(class="btn btn-info" type="submit" value="Buscar") 
       
       br

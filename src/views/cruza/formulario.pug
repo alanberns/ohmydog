@@ -18,7 +18,7 @@ div(style="position: relative; min-height: 100vh;")
             div(class="input_border_focus")
             div(class="input_placeholder") Nombre de la mascota
           div(class="left-input input mb-3 flex-form-item")
-            select(class="form-select" aria-label="Default select example", name="sexo" required value=perro.sexo?perro.sexo:""
+            select(aria-label="Default select example", name="sexo" required value=perro.sexo?perro.sexo:""
                   onclick="if(this.opened){this.opened=false;this.blur();}else{this.opened=true;}" onblur="this.opened=false;" onchange="this.setAttribute('value', this.value);")
               option(value hidden selected=perro.sexo?null:"" disabled)
               option(value="Macho" selected=perro.sexo=="Macho"?"":null) Macho
@@ -26,12 +26,12 @@ div(style="position: relative; min-height: 100vh;")
             div(class="input_border_focus")
             div(class="input_placeholder") Sexo *
           div(class="left-input input mb-3 flex-form-item")
-            input(type="text" class="form-control" name="celo" id="celo" minlength=1, maxlenght=255 value="" onchange="this.setAttribute('value', this.value);")
+            input(type="text" name="celo" id="celo" minlength=1, maxlenght=255 value="" onchange="this.setAttribute('value', this.value);")
             div(class="input_border_focus")
             div(class="input_placeholder") Período de celo (en el caso de ser Hembra)
           div(class="mb-3")
             label(for="id" class="form-label")
-            input(type="hidden" class="form-control" name="id" id="id" required value=perro.id )
+            input(type="hidden" name="id" id="id" required value=perro.id )
         
     
           input(type="submit" class="btn btn-info" value="Aceptar") 
