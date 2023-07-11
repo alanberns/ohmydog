@@ -71,7 +71,7 @@ module.exports = {
                 title: 'Publicar perro perdido',
                 message: 'Publicar perro perdido',
                 publicacionId: publicacionCreada.id,
-                info: "Tu publicación ha sido creada, podes añadir una foto"
+                info: "Tu publicación ha sido creada, podés añadir una foto"
             })
         }
     },
@@ -140,7 +140,7 @@ module.exports = {
             title: 'Perros perdidos y buscados',
             message: 'Perros perdidos y buscados',
             publicaciones: publicaciones,
-            info: 'resultados de la busqueda',
+            info: 'Resultados de la búsqueda',
             busqueda: busqueda
         })
     },
@@ -168,7 +168,7 @@ module.exports = {
             else{
                 var esPropia = req.session.email == publicacion.cliente.email;
                 res.render('reencuentros/verPublicacion', {
-                    title: 'Publicacion de reencuentro', 
+                    title: 'Publicación de reencuentro', 
                     message: 'Datos de la publicación',
                     publicacion: publicacion,
                     esPropia: esPropia
@@ -199,7 +199,7 @@ module.exports = {
         if(result != "valido"){
             var esPropia = req.session.email == publicacion.cliente.email;
             res.render('reencuentros/verPublicacion', {
-                title: 'Publicacion de reencuentro', 
+                title: 'Publicación de reencuentro', 
                 message: 'Datos de la publicación',
                 publicacion: publicacion,
                 esPropia: esPropia,

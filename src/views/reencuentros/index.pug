@@ -21,7 +21,7 @@ div(style="position: relative; min-height: 100vh;")
 
       form(class="d-flex" role="search" method="post" action="/reencuentros" id="formulario" style="justify-content: center;")
         div(class="left-input input me-2")
-          select(name="tipo" value=busqueda?busqueda:"" style="width: 15rem;" onclick="if(this.opened){this.opened=false;this.blur();}else{this.opened=true;}" onblur="this.opened=false;" onchange="this.setAttribute('value', this.value);")
+          select(name="tipo" value="value" style="width: 15rem;" onclick="if(this.opened){this.opened=false;this.blur();}else{this.opened=true;}" onblur="this.opened=false;")
             option(value hidden selected=busqueda?null:"" disabled)
             option(value="" selected=busqueda=="Todos"?"":null) Todas las publicaciones
             option(value="Buscado" selected=busqueda=="Buscado"?"":null) Buscados
