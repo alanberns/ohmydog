@@ -124,7 +124,7 @@ module.exports = {
         var mensaje = "Hola, "+nombreEmisor+" quiere contactarse con vos, su email es: "+
         emailEmisor+" por tu anuncio en OhMyDog: Cruza de: "+perro.nombre;
         console.log(mensaje);
-        //mailer.sendMail(email_contacto,"Quieren contactarte",mensaje)
+        mailer.sendMail(email_contacto,"Quieren contactarte",mensaje)
         res.render('exito', {
             title: "Éxito",
             message: "Contacto realizado",

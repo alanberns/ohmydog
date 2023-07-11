@@ -1,6 +1,7 @@
 const db = require('../models/reencuentrosDB');
 const db_clientes = require('../models/clienteDB');
 const validaciones = require('../helpers/validaciones');
+const mailer = require('../../mail');
 const fs = require('fs');
 const NotFoundError = require('../helpers/errors/NotFoundError');
 
@@ -215,7 +216,7 @@ module.exports = {
             ": " + publicacion.sexo + ", " + publicacion.zona + " el " + publicacion.fecha.toISOString().slice(0,10);
             console.log(mensaje);
             console.log(email_contacto)
-            //mailer.sendMail(email_contacto,"Quieren contactarte",mensaje);
+            mailer.sendMail(email_contacto,"Quieren contactarte",mensaje);
             res.render('exito', {
                 title: "Éxito",
                 message: "Contacto realizado",
