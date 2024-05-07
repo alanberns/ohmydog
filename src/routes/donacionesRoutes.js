@@ -12,5 +12,8 @@ router.post('/nuevo', permisos.esAdmin, donacionesController.registrarPost);
 router.get('/donar/:id', permisos.esCliente, donacionesController.donarGet);
 router.post('/donar/:id', permisos.esCliente, donacionesController.donarPost);
 router.post('/donar/:id/confirmarDonacion', permisos.esCliente, donacionesController.confirmarDonacion);
+router.get('/historial/:id', permisos.esAdmin, donacionesController.historialCampaña);
+router.get('/misDonaciones', permisos.esCliente, donacionesController.misDonaciones);
+router.post('/', permisos.isAuth, donacionesController.buscar);
 
 module.exports = router;

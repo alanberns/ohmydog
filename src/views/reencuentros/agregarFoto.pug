@@ -12,7 +12,7 @@ div(style="position: relative; min-height: 100vh;")
       include ../partials/info.pug
     
       div(class="")
-        form(method="post" action="/perros/"+perroId+"/agregarFoto" id="formulario" enctype="multipart/form-data")
+        form(method="post" action="/reencuentros/agregarFoto/"+publicacionId, id="formulario" enctype="multipart/form-data")
           div(class="mb-3")
             label(for="perroId" class="form-label")
             input(type="hidden" class="form-control" name="perroId" id="perroId")
@@ -22,8 +22,8 @@ div(style="position: relative; min-height: 100vh;")
           input(type="submit" class="btn btn-info" value="Añadir foto") 
     
         br
-        a(href="/perros/ver/"+perroId)
-          button(type="button" class="btn btn-info") Cancelar
+        a(href="/reencuentros")
+          button(type="button" class="btn btn-info") No añadir foto
     
     script(src="/js/validarExtensionFoto.js") 
   include ../partials/footer.pug

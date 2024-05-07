@@ -1,53 +1,56 @@
 include ../partials/head.pug
-include ../partials/header.pug
-div(class="container-fluid")
-  //- aca va la pagina hasta footer. inicia con 1 tab
-  h1= message
-
-  br
-  br
-
-  include ../partials/info.pug
-
-  div(class="")
-    if(perro.link_foto)
-      img(src=perro.link_foto width="100vw")
-    form(action="#")
-      div(class="mb-3")
-        label(for="nya" class="form-label") 
-          b Nombre y apellido del dueño
-        input(type="hidden" class="form-control" name="nya" id="nya" value=perro.cliente.nombre+" "+perro.cliente.apellido)
-        input(type="text" class="form-control" id="nya" disabled value=perro.cliente.nombre+" "+perro.cliente.apellido)
-      div(class="mb-3")
-        label(for="nombre" class="form-label") 
-          b Nombre del perro
-        input(type="hidden" class="form-control" name="nombre" id="nombre" value=perro.nombre)
-        input(type="text" class="form-control" id="nombre" disabled value=perro.nombre)
-      div(class="mb-3")
-        label(for="raza" class="form-label") 
-          b Raza
-        input(type="hidden" class="form-control" name="raza" id="raza" value=perro.raza)
-        input(type="text" class="form-control" id="raza" disabled value=perro.raza)
-      div(class="mb-3")
-        label(for="color" class="form-label") 
-          b Color
-        input(type="hidden" class="form-control" name="color" id="color" value=perro.color)
-        input(type="text" class="form-control" id="color" disabled value=perro.color)
-      div(class="mb-3")
-        label(for="observaciones" class="form-label") 
-          b Observaciones
-        input(type="hidden" class="form-control" name="observaciones" id="observaciones" value=perro.observaciones)
-        input(type="text" class="form-control" id="observaciones" disabled value=perro.observaciones)
-      div(class="mb-3")
-        label(for="fecha_nacimiento" class="form-label") 
-          b Fecha de nacimiento
-        input(type="hidden" class="form-control" name="fecha_nacimiento" id="fecha_nacimiento" value=perro.fecha_nacimiento.toISOString().slice(0,10))
-        input(type="date" class="form-control" id="fecha_nacimiento" disabled value=perro.fecha_nacimiento.toISOString().slice(0,10))
-
-    br
+div(style="position: relative; min-height: 100vh;")
+  div(style="padding-bottom: calc(1.25rem + 0.3125rem * 2 + 1rem)")
+    - var selected_nav_link = "mi-cuenta";
+    include ../partials/header.pug
     div(class="container-fluid")
-      a(href="/usuario/misMascotas")
-        button(type="button" class="btn btn-info") Volver a mis mascotas
-
-
-include ../partials/footer.pug
+      //- aca va la pagina hasta footer. inicia con 1 tab
+      h1= message
+    
+      br
+      br
+    
+      include ../partials/info.pug
+    
+      div(class="")
+        if(perro.link_foto)
+          img(src=perro.link_foto width="100" class="mb-3")
+        form(action="#" class="flex-form-wrap")
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="text" id="nya" disabled value=perro.cliente.nombre+" "+perro.cliente.apellido)
+            div(class="input_border_focus")
+            div(class="input_placeholder") Nombre y apellido del dueño
+            input(type="hidden" class="form-control" name="nya" id="nya" value=perro.cliente.nombre+" "+perro.cliente.apellido)
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="text" id="nombre" disabled value=perro.nombre)
+            div(class="input_border_focus")
+            div(class="input_placeholder") Nombre del perro
+            input(type="hidden" class="form-control" name="nombre" id="nombre" value=perro.nombre)
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="text" id="raza" disabled value=perro.raza)
+            div(class="input_border_focus")
+            div(class="input_placeholder") Raza
+            input(type="hidden" class="form-control" name="raza" id="raza" value=perro.raza)
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="text" id="color" disabled value=perro.color)
+            div(class="input_border_focus")
+            div(class="input_placeholder") Color
+            input(type="hidden" class="form-control" name="color" id="color" value=perro.color)
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="text" id="observaciones" disabled value=perro.observaciones)
+            div(class="input_border_focus")
+            div(class="input_placeholder") Observaciones
+            input(type="hidden" class="form-control" name="observaciones" id="observaciones" value=perro.observaciones)
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="date" id="fecha_nacimiento" disabled value=perro.fecha_nacimiento.toISOString().slice(0,10))
+            div(class="input_border_focus")
+            div(class="input_placeholder") Fecha de nacimiento
+            input(type="hidden" class="form-control" name="fecha_nacimiento" id="fecha_nacimiento" value=perro.fecha_nacimiento.toISOString().slice(0,10))
+    
+        br
+        div(class="container-fluid")
+          a(href="/usuario/misMascotas")
+            button(type="button" class="btn btn-info") Volver a mis mascotas
+    
+    
+  include ../partials/footer.pug

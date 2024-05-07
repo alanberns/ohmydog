@@ -1,37 +1,39 @@
 include ../partials/head.pug
-include ../partials/header.pug
-div(class="container-fluid")
-  //- aca va la pagina hasta footer. inicia con 1 tab
-  h1= message
-
-  br
-  br
-
-  include ../partials/info.pug
-
-  div(class="")
-    form(method="post" action="/donaciones/nuevo" id="formulario")
-      div(class="mb-3")
-        label(for="nombre" class="form-label")
-          b Nombre de la campaña de donación *
-        input(type="text" class="form-control" name="nombre" id="nombre" placeholder="Solo puede ingresar letras" minlegth=1, maxlength=255 required value=donacion.nombre
-                oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un nombre válido')")
-      div(class="mb-3")
-        label(for="monto" class="form-label")
-          b Monto a alcanzar *
-        input(type="number" class="form-control" name="monto" id="monto" placeholder="Ingrese un monto entero positivo" min=1 required value=donacion.monto
-                oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('El monto debe ser positivo')")
-      div(class="mb-3")
-        label(for="fecha_fin" class="form-label")
-          b Fecha de finalización *
-        input(type="date" class="form-control" name="fecha_fin" id="fecha_fin" min=mañana required value=donacion.fecha_fin
-                oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('La fecha debe ser posterior a hoy')")
-      
-      input(type="submit" class="btn btn-info" value="Publicar") 
-
-    br
-    a(href="/donaciones")
-      button(type="button" class="btn btn-info") Cancelar
-
-script(src="/js/validacionNuevaDonacion.js") 
-include ../partials/footer.pug
+div(style="position: relative; min-height: 100vh;")
+  div(style="padding-bottom: calc(1.25rem + 0.3125rem * 2 + 1rem)")
+    include ../partials/header.pug
+    div(class="container-fluid")
+      //- aca va la pagina hasta footer. inicia con 1 tab
+      h1= message
+    
+      br
+      br
+    
+      include ../partials/info.pug
+    
+      div(class="")
+        form(method="post" action="/donaciones/nuevo" id="formulario" class="flex-form-wrap")
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="text" class="form-control" name="nombre" id="nombre" placeholder="Solo puede ingresar letras" minlegth=1, maxlength=255 required value=donacion.nombre onchange="this.setAttribute('value', this.value);"
+                    oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un nombre válido')")
+            div(class="input_border_focus")
+            div(class="input_placeholder") Nombre de la campaña de donación *
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="number" class="form-control" name="monto" id="monto" placeholder="Ingrese un monto entero positivo" min=1 required value=donacion.monto onchange="this.setAttribute('value', this.value);"
+                    oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('El monto debe ser positivo')")
+            div(class="input_border_focus")
+            div(class="input_placeholder") Monto a alcanzar *
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="date" class="form-control" name="fecha_fin" id="fecha_fin" min=mañana required value=donacion.fecha_fin onchange="this.setAttribute('value', this.value);"
+                    oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('La fecha debe ser posterior a hoy')")
+            div(class="input_border_focus")
+            div(class="input_placeholder") Fecha de finalización *
+          
+          input(type="submit" class="btn btn-info" value="Publicar" style="margin: 0 40%;") 
+    
+        br
+        a(href="/donaciones")
+          button(type="button" class="btn btn-info") Cancelar
+    
+    script(src="/js/validacionNuevaDonacion.js") 
+  include ../partials/footer.pug

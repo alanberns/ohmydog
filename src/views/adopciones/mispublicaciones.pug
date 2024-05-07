@@ -1,45 +1,47 @@
 include ../partials/head.pug
-include ../partials/header.pug
-div(class="container-fluid")
-  //- aca va la pagina hasta footer. inicia con 1 tab
-  h1= message
-
-  br
-  br
-
-  include ../partials/info.pug
-
-  table(class="table table-striped table-info table-hover")
-    thead 
-      tr 
-        th Nombre
-        th Raza
-        th Origen
-        th Ver detalles
-        th Confirmar adopción
-    tbody 
-    if(adopciones)
-      each adopcion in adopciones
-        tr  
-          td #{adopcion.nombre}
-          td #{adopcion.raza}
-          td #{adopcion.origen}
-          td 
-            a(href="/adopciones/ver/"+adopcion.id)
-              button(type="button" class="btn btn-info") Ver 
-          td 
-            if(adopcion.estado == "Activo")
-              a(href="/adopciones/confirmar/"+adopcion.id)
-                button(type="button" class="btn btn-info") Confirmar
-            else 
-              a
-                button(type="button" disabled class="btn btn-info") Adoptado
-    else 
-      tr 
-        td
-        td
-        td No se encontraron adopciones
-        td 
-        td
-
-include ../partials/footer.pug
+div(style="position: relative; min-height: 100vh;")
+  div(style="padding-bottom: calc(1.25rem + 0.3125rem * 2 + 1rem)")
+    include ../partials/header.pug
+    div(class="container-fluid")
+      //- aca va la pagina hasta footer. inicia con 1 tab
+      h1= message
+    
+      br
+      br
+    
+      include ../partials/info.pug
+    
+      table(class="table table-striped table-info table-hover")
+        thead 
+          tr 
+            th Nombre
+            th Raza
+            th Origen
+            th Ver detalles
+            th Confirmar adopción
+        tbody 
+        if(adopciones)
+          each adopcion in adopciones
+            tr  
+              td #{adopcion.nombre}
+              td #{adopcion.raza}
+              td #{adopcion.origen}
+              td 
+                a(href="/adopciones/ver/"+adopcion.id)
+                  button(type="button" class="btn btn-info") Ver 
+              td 
+                if(adopcion.estado == "Activo")
+                  a(href="/adopciones/confirmar/"+adopcion.id)
+                    button(type="button" class="btn btn-info") Confirmar
+                else 
+                  a
+                    button(type="button" disabled class="btn btn-info") Adoptado
+        else 
+          tr 
+            td
+            td
+            td No se encontraron adopciones
+            td 
+            td
+    
+  include ../partials/footer.pug

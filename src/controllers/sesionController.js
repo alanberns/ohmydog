@@ -1,10 +1,11 @@
 const db = require('../models/sesionDB');
+const indexController = require('../controllers/indexController');
 
 module.exports = {
     iniciar: async (req,res) => {
         res.render('sesion/iniciar', {
-            title: 'OhMyDog | Iniciar Sesión',
-            message: 'Iniciar Sesión',
+            title: 'Iniciar sesión',
+            message: 'Iniciar sesión',
             datos: req.query
         });
     },
@@ -18,10 +19,11 @@ module.exports = {
             req.session.nombre = sesion.nombre;
             req.session.apellido = sesion.apellido;
             req.session.email = sesion.email;
-            res.render('index', {
+            /*res.render('index', {
                 title: 'OhMyDog',
                 message: 'Inicio'
-            });
+            });*/
+            indexController.index(req, res);
         }else{
             sesion = await db.intentoAdmin(req.body);
             if(sesion.length == 1){
@@ -31,18 +33,19 @@ module.exports = {
                 req.session.nombre = sesion.nombre;
                 req.session.apellido = sesion.apellido;
                 req.session.email = sesion.email;
-                res.render('index', {
+                /*res.render('index', {
                     title: 'OhMyDog',
                     message: 'Inicio'
-                });
+                });*/
+                indexController.index(req, res);
             }else{
                 req.session.nivel = 0;
                 req.session.usuario = null;
                 req.session.nombre = null;
                 req.session.apellido = null;
                 res.render('sesion/iniciar', {
-                    title: 'OhMyDog',
-                    message: 'Iniciar Sesion',
+                    title: 'Iniciar sesión',
+                    message: 'Iniciar sesión',
                     datos: req.body,
                     error: "Email y/o contraseña incorrecto"
                 });

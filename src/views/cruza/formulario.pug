@@ -1,0 +1,44 @@
+include ../partials/head.pug
+div(style="position: relative; min-height: 100vh;")
+  div(style="padding-bottom: calc(1.25rem + 0.3125rem * 2 + 1rem)")
+    include ../partials/header.pug
+    div(class="container-fluid")
+      //- aca va la pagina hasta footer. inicia con 1 tab
+      h1= message
+    
+      br
+      br
+    
+      include ../partials/info.pug
+    
+      div(class="")
+        form(method="post" action="/cruza/cruzar/ok" id="formulario" class="flex-form-wrap")
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="text" class="form-control" id="nombre" disabled value=perro.nombre?perro.nombre:"" onchange="this.setAttribute('value', this.value);")
+            div(class="input_border_focus")
+            div(class="input_placeholder") Nombre de la mascota
+          div(class="left-input input mb-3 flex-form-item")
+            select(class="form-select" aria-label="Default select example", name="sexo" required value=perro.sexo?perro.sexo:""
+                  onclick="if(this.opened){this.opened=false;this.blur();}else{this.opened=true;}" onblur="this.opened=false;" onchange="this.setAttribute('value', this.value);")
+              option(value hidden selected=perro.sexo?null:"" disabled)
+              option(value="Macho" selected=perro.sexo=="Macho"?"":null) Macho
+              option(value="Hembra" selected=perro.sexo=="Hembra"?"":null) Hembra
+            div(class="input_border_focus")
+            div(class="input_placeholder") Sexo *
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="text" class="form-control" name="celo" id="celo" minlength=1, maxlenght=255 value="" onchange="this.setAttribute('value', this.value);")
+            div(class="input_border_focus")
+            div(class="input_placeholder") Período de celo (en el caso de ser Hembra)
+          div(class="mb-3")
+            label(for="id" class="form-label")
+            input(type="hidden" class="form-control" name="id" id="id" required value=perro.id )
+        
+    
+          input(type="submit" class="btn btn-info" value="Aceptar") 
+    
+        br
+        a(href="/cruza")
+          button(type="button" class="btn btn-info") Cancelar
+    
+    script(src="/js/validacionNuevaAdopcion.js") 
+  include ../partials/footer.pug

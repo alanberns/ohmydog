@@ -1,60 +1,65 @@
 include ../partials/head.pug
-include ../partials/header.pug
-div(class="container-fluid")
-  //- aca va la pagina hasta footer. inicia con 1 tab
-  h1= message
-
-  br
-  br
-
-  include ../partials/info.pug
-  if sesion.nivel == 1
-    div(class="container")
-      a(href="/adopciones/nuevo")
-        button(type="button" class="btn btn-info") Publicar adopcion
-      span 
-      a(href="/adopciones/misPublicaciones")
-        button(type="button" class="btn btn-info") Mis publicaciones
-
-
-  br
-  br
-  
-  form(class="d-flex" role="search" method="post" action="/adopciones/" id="formulario")
-    select(class="form-select" aria-label="Default select example", name="estado")
-      if(estado == "Activo")
-        option(selected value="Activo") En adopción
-        option(value="Adoptado") Adopciones concretadas
-      else 
-        option(value="Activo") En adopción
-        option(selected value="Adoptado") Adopciones concretadas
-    input(class="btn btn-info" type="submit" value="Buscar") 
-  
-  br
-  br
-
-  table(class="table table-striped table-info table-hover")
-    thead 
-      tr 
-        th Nombre
-        th Raza
-        th Origen
-        th Ver detalles
-    tbody 
-    if(adopciones)
-      each adopcion in adopciones
-        tr  
-          td #{adopcion.nombre}
-          td #{adopcion.raza}
-          td #{adopcion.origen}
-          td 
-            a(href="/adopciones/ver/"+adopcion.id)
-              button(type="button" class="btn btn-info") Ver 
-    else 
-      tr 
-        td
-        td No se encontraron adopciones
-        td 
-        td
-
-include ../partials/footer.pug
+div(style="position: relative; min-height: 100vh;")
+  div(style="padding-bottom: calc(1.25rem + 0.3125rem * 2 + 1rem)")
+    - var selected_nav_link = "publicaciones";
+    include ../partials/header.pug
+    div(class="container-fluid")
+      //- aca va la pagina hasta footer. inicia con 1 tab
+      h1= message
+    
+      br
+      br
+    
+      include ../partials/info.pug
+      if sesion.nivel == 1
+        div(class="container")
+          a(class="me-2" href="/adopciones/nuevo")
+            button(type="button" class="btn btn-info") Publicar adopción
+          a(href="/adopciones/misPublicaciones")
+            button(type="button" class="btn btn-info") Mis publicaciones
+    
+    
+      br
+      br
+      
+      form(class="d-flex" role="search" method="post" action="/adopciones/" id="formulario" style="justify-content: center; align-items: center;")
+        div(class="left-input input me-2")
+          select(name="estado" value=estado=="Activo"?"Activo":"Adoptado" style="width: 15rem;" onclick="if(this.opened){this.opened=false;this.blur();}else{this.opened=true;}" onblur="this.opened=false;" onchange="this.setAttribute('value', this.value);")
+            if(estado == "Activo")
+              option(selected value="Activo") En adopción
+              option(value="Adoptado") Adopciones concretadas
+            else 
+              option(value="Activo") En adopción
+              option(selected value="Adoptado") Adopciones concretadas
+          div(class="input_border_focus")
+          div(class="input_placeholder") Filtrar por:
+        input(class="btn btn-info" type="submit" value="Buscar") 
+      
+      br
+      br
+    
+      table(class="table table-striped table-info table-hover")
+        thead 
+          tr 
+            th Nombre
+            th Raza
+            th Origen
+            th Ver detalles
+        tbody 
+        if(adopciones)
+          each adopcion in adopciones
+            tr  
+              td #{adopcion.nombre}
+              td #{adopcion.raza}
+              td #{adopcion.origen}
+              td 
+                a(href="/adopciones/ver/"+adopcion.id)
+                  button(type="button" class="btn btn-info") Ver 
+        else 
+          tr 
+            td
+            td No se encontraron adopciones
+            td 
+            td
+    
+  include ../partials/footer.pug

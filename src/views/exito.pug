@@ -1,19 +1,22 @@
 include partials/head.pug
-include partials/header.pug
-div(class="container-fluid")
-  //- aca va la pagina hasta footer. inicia con 1 tab
-  h1= message
-
-  br
-  br
-
-  include partials/info.pug
-  a(href="/")
-    button(type="button" class="btn btn-info") Volver al inicio
-
-  br
-  br
-
-  img(src="/logos/Logo1.png", alt="Logo OhMyDog" width="200vw" height="200vh")
-
-include partials/footer.pug
+div(style="position: relative; min-height: 100vh;")
+  div(style="padding-bottom: calc(1.25rem + 0.3125rem * 2 + 1rem)")
+    include partials/header.pug
+    div(class="container-fluid")
+      //- aca va la pagina hasta footer. inicia con 1 tab
+      h1= message
+    
+      br
+      br
+    
+      include partials/info.pug
+      a(href="/")
+        button(type="button" class="btn btn-info") Volver al inicio
+    
+      br
+      br
+    
+      div(class="logo-container")
+        img(src="/logos/Logo1.svg", alt="Logo OhMyDog" width="230" height="188")
+    
+  include partials/footer.pug

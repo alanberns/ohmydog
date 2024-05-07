@@ -1,0 +1,73 @@
+include ../partials/head.pug
+div(style="position: relative; min-height: 100vh;")
+  div(style="padding-bottom: calc(1.25rem + 0.3125rem * 2 + 1rem)")
+    include ../partials/header.pug
+    div(class="container-fluid")
+      //- aca va la pagina hasta footer. inicia con 1 tab
+      h1= message
+    
+      br
+      br
+    
+      include ../partials/info.pug
+    
+      div(class="")
+        if(publicacion.link_foto)
+          img(src=publicacion.link_foto width="100" class="mb-3")
+        form(action="#" class="flex-form-wrap")
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="text" id="tipo" disabled value=publicacion.tipo?publicacion.tipo:"-")
+            div(class="input_border_focus")
+            div(class="input_placeholder") Tipo de publicacion
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="text" id="estado" disabled value=publicacion.estado)
+            div(class="input_border_focus")
+            div(class="input_placeholder") Estado de la busqueda
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="text" id="zona" disabled value=publicacion.zona)
+            div(class="input_border_focus")
+            div(class="input_placeholder") Zona
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="date" id="fecha" disabled value=publicacion.fecha.toISOString().slice(0,10))
+            div(class="input_border_focus")
+            div(class="input_placeholder") Fecha
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="text" id="caracteristicas" disabled value=publicacion.caracteristicas?publicacion.caracteristicas:"-")
+            div(class="input_border_focus")
+            div(class="input_placeholder") Caraterísticas
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="text" id="comportamiento" disabled value=publicacion.comportamiento?publicacion.comportamiento:"-")
+            div(class="input_border_focus")
+            div(class="input_placeholder") Comportamiento 
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="text" id="edad" disabled value=publicacion.edad?publicacion.edad:"-")
+            div(class="input_border_focus")
+            div(class="input_placeholder") Edad 
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="text" id="sexo" disabled value=publicacion.sexo?publicacion.sexo:"-")
+            div(class="input_border_focus")
+            div(class="input_placeholder") Sexo 
+    
+        if !esPropia
+          br
+          div(class="container-fluid")
+            form(action="/reencuentros/contactar" method="post" id="contacto") 
+              h4 ¡Contactate!
+              if !sesion.nombre
+                div(class="left-input input mb-3 flex-form-item" style="margin: auto;")
+                  input(type="text" name="nombre" id="nombre" placeholder="Solo puede ingresar letras" required value=nombre?nombre:"" onchange="this.setAttribute('value', this.value);")
+                  div(class="input_border_focus")
+                  div(class="input_placeholder") Nombre
+                div(class="left-input input mb-3 flex-form-item" style="margin: auto;")
+                  input(type="email" name="email" id="email" placeholder="nombre@mail.com" required value=email?email:"" onchange="this.setAttribute('value', this.value);")
+                  div(class="input_border_focus")
+                  div(class="input_placeholder") Email
+                label(for="id" class="form-label") 
+              input(type="hidden" class="form-control" name="id" id="id" required value=publicacion.id)
+              input(type="submit" class="btn btn-info" value="Contactarme")  
+        br
+        a(href="/reencuentros")
+          button(type="button" class="btn btn-info") Atrás
+    
+    
+  include ../partials/footer.pug

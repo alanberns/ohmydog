@@ -1,0 +1,47 @@
+include ../partials/head.pug
+include ../partials/header.pug
+div(class="container-fluid")
+  //- aca va la pagina hasta footer. inicia con 1 tab
+  h1= message
+
+  br
+  br
+
+  include ../partials/info.pug
+  
+  br
+  br
+
+  table(class="table table-striped table-info table-hover")
+    thead 
+      tr 
+        th Nombre perro
+        th Raza
+        th Sexo 
+        th Período de celo
+        th Contactar
+    tbody 
+    if(perros.length > 0)
+      each perro in perros
+        tr  
+          td #{perro.nombre}
+          td #{perro.raza}
+          td #{perro.cruza.sexo}
+          td #{perro.cruza.periodo_celo}
+          td 
+            form(action="/cruza/contactar/" method="post")
+              input(type="hidden" name="perroId" value=perro.id)
+              input(type="submit" class="btn btn-info" value="Contactar") 
+    else 
+      tr 
+        td
+        td
+        td No se encontraron perros compatibles
+        td
+        td
+
+  a(href="/cruza")
+    
+    button(type="button", class="btn btn-info") Volver
+
+include ../partials/footer.pug

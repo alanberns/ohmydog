@@ -1,0 +1,61 @@
+include ../partials/head.pug
+div(style="position: relative; min-height: 100vh;")
+  div(style="padding-bottom: calc(1.25rem + 0.3125rem * 2 + 1rem)")
+    include ../partials/header.pug
+    div(class="container-fluid")
+      //- aca va la pagina hasta footer. inicia con 1 tab
+      h1= message
+    
+      br
+      br
+    
+      include ../partials/info.pug
+
+      div(class="")
+        form(method="post" action="/reencuentros/nuevo" id="formulario", class="flex-form-wrap")
+          div(class="left-input input mb-3 flex-form-item")
+            select(name="tipo" required value=publicacion.tipo?publicacion.tipo:"" onclick="if(this.opened){this.opened=false;this.blur();}else{this.opened=true;}" onblur="this.opened=false;" onchange="this.setAttribute('value', this.value);")
+                option(value hidden selected=publicacion.tipo?null:"" disabled)
+                option(value="Buscado" selected=publicacion.tipo=="Buscado"?"":null) Busco a un perro perdido
+                option(value="Encontrado" selected=publicacion.tipo=="Encontrado"?"":null) Encontré a un perro perdido
+            div(class="input_border_focus")
+            div(class="input_placeholder") Tipo de publicación de busqueda *
+          div(class="left-input input mb-3 flex-form-item")
+            select(name="zona" required value=publicacion.zona?publicacion.zona:"" onclick="if(this.opened){this.opened=false;this.blur();}else{this.opened=true;}" onblur="this.opened=false;" onchange="this.setAttribute('value', this.value);")
+                option(value hidden selected=publicacion.zona?null:"" disabled)
+                option(value="La Plata" selected=publicacion.zona=="La Plata"?"":null) La Plata
+                option(value="Villa Elisa" selected=publicacion.zona=="Villa Elisa"?"":null) Villa Elisa
+                option(value="Tolosa" selected=publicacion.zona=="Tolosa"?"":null) Tolosa
+                option(value="City Bell" selected=publicacion.zona=="City Bell"?"":null) City Bell
+            div(class="input_border_focus")
+            div(class="input_placeholder") Zona *
+          div(class="left-input input mb-3 flex-form-item")
+            select(name="sexo" required value=publicacion.sexo?publicacion.sexo:"" onclick="if(this.opened){this.opened=false;this.blur();}else{this.opened=true;}" onblur="this.opened=false;" onchange="this.setAttribute('value', this.value);")
+                option(value hidden selected=publicacion.sexo?null:"" disabled)
+                option(value="Hembra" selected=publicacion.sexo=="Hembra"?"":null) Hembra
+                option(value="Macho" selected=publicacion.sexo=="Macho"?"":null) Macho
+            div(class="input_border_focus")
+            div(class="input_placeholder") Sexo *
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="text" class="form-control" name="edad" id="edad" maxlength=255 value=publicacion.edad pattern="[a-zA-Z0-9ñÑ ]{1,255}" onchange="this.setAttribute('value', this.value);"
+                    oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese una edad válida')" placeholder="Solo puede ingresar letras y números")
+            div(class="input_border_focus")
+            div(class="input_placeholder") Edad 
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="text" class="form-control" name="caracteristicas" id="caracteristicas" maxlength=255 value=publicacion.caracteristicas pattern="[a-zA-Z0-9ñÑ ]{1,255}" onchange="this.setAttribute('value', this.value);"
+                    oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un texto de características válido')" placeholder="Solo puede ingresar letras y números")
+            div(class="input_border_focus")
+            div(class="input_placeholder") Caracteristicas
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="text" class="form-control" name="comportamiento" id="comportamiento" maxlength=255 value=publicacion.comportamiento pattern="[a-zA-Z0-9ñÑ ]{1,255}" onchange="this.setAttribute('value', this.value);"
+                    oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un texto de comportamiento válido')" placeholder="Solo puede ingresar letras y números")
+            div(class="input_border_focus")
+            div(class="input_placeholder") Comportamiento 
+            
+          input(type="submit" class="btn btn-info" value="Publicar" style="margin: 0 40%;") 
+    
+        br
+        a(href="/reencuentros")
+          button(type="button" class="btn btn-info") Cancelar
+          
+  include ../partials/footer.pug

@@ -1,0 +1,50 @@
+include ../partials/head.pug
+include ../partials/header.pug
+div(class="container-fluid")
+  //- aca va la pagina hasta footer. inicia con 1 tab
+  h1= message
+
+  br
+  br
+
+  include ../partials/info.pug
+  
+  br
+  br
+  h4 Mis mascotas
+
+  table(class="table table-striped table-info table-hover")
+    thead 
+      tr 
+        th Nombre perro
+        th Raza
+        th Disponible para cruza 
+        th Ver perros para cruzar
+    tbody 
+    if(cliente.perros.length > 0)
+      each perro in cliente.perros
+        tr  
+          td #{perro.nombre}
+          td #{perro.raza}
+          if perro.cruza
+            td 
+              a
+                button(type="button" class="btn btn-info" disabled ) Cancelar cruza
+            td 
+              a(href="/cruza/buscar/"+perro.id)
+                button(type="button" class="btn btn-info") Buscar
+          else 
+            td 
+              a(href="/cruza/cruzar/"+perro.id)
+                button(type="button" class="btn btn-info") Iniciar cruza
+            td 
+              a
+                button(type="button" class="btn btn-info" disabled) Buscar
+    else 
+      tr 
+        td
+        td No se encontraron mascotas
+        td
+        td
+
+include ../partials/footer.pug

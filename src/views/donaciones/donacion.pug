@@ -1,54 +1,58 @@
 include ../partials/head.pug
-include ../partials/header.pug
-div(class="container-fluid")
-  //- aca va la pagina hasta footer. inicia con 1 tab
-  h1= message
-
-  br
-  br
-
-  include ../partials/info.pug
-
-  div(class="")
-    form(action="/donaciones/donar/"+donacion.id+"/confirmarDonacion" method="post")
-      div(class="mb-3")
-        label(for="nombre" class="form-label")
-          b Nombre de la campaña de donación
-        input(type="text" class="form-control" id="nombre" required disabled value=donacion.nombre)
-        input(type="hidden" class="form-control" name="nombre" id="nombre" value=donacion.nombre)
-      div(class="mb-3")
-        label(for="monto" class="form-label")
-          b Monto a alcanzar
-        input(type="number" class="form-control"  id="monto" required disabled value=donacion.monto)
-      div(class="mb-3")
-        label(for="monto_actual" class="form-label")
-          b Monto conseguido
-        input(type="number" class="form-control" name="monto_actual" id="monto_actual" required disabled value=donacion.monto_actual)
-      div(class="mb-3")
-        label(for="fecha_fin" class="form-label")
-          b Fecha de finalización
-        input(type="date" class="form-control" name="fecha_fin" id="fecha_fin" required disabled value=donacion.fecha_fin.toISOString().slice(0,10))
-      div(class="mb-3")
-        label(for="fecha_inicio" class="form-label")
-          b Fecha de inicio
-        input(type="date" class="form-control" name="fecha_inicio" id="fecha_inicio" required disabled value=donacion.fecha_inicio.toISOString().slice(0,10))
-      div(class="mb-3")
-        label(for="id" class="form-label") 
-        input(type="hidden" class="form-control" name="id" id="id" value=donacion.id)
-      div(class="mb-3")
-        label(for="monto_donacion" class="form-label")
-          b Monto a donar *
-        select(class="form-select" aria-label="Default select example", name="monto_donacion" required)
-          option(value="100") 100
-          option(value="500") 500
-          option(value="1000") 1000
-          option(value="2000") 2000
-          option(value="4000") 4000
-      input(type="submit" class="btn btn-info" value="Donar")
-
-    br
+div(style="position: relative; min-height: 100vh;")
+  div(style="padding-bottom: calc(1.25rem + 0.3125rem * 2 + 1rem)")
+    include ../partials/header.pug
     div(class="container-fluid")
-      a(href="/donaciones")
-        button(type="button" class="btn btn-info") Atrás
-
-include ../partials/footer.pug
+      //- aca va la pagina hasta footer. inicia con 1 tab
+      h1= message
+    
+      br
+      br
+    
+      include ../partials/info.pug
+    
+      div(class="")
+        form(action="/donaciones/donar/"+donacion.id+"/confirmarDonacion" method="post" class="flex-form-wrap")
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="text" class="form-control" id="nombre" required disabled value=donacion.nombre)
+            input(type="hidden" class="form-control" name="nombre" id="nombre" value=donacion.nombre)
+            div(class="input_border_focus")
+            div(class="input_placeholder")  Nombre de la campaña de donación
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="number" class="form-control"  id="monto" required disabled value=donacion.monto)
+            div(class="input_border_focus")
+            div(class="input_placeholder")  Monto a alcanzar
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="number" class="form-control" name="monto_actual" id="monto_actual" required disabled value=donacion.monto_actual)
+            div(class="input_border_focus")
+            div(class="input_placeholder")  Monto conseguido
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="date" class="form-control" name="fecha_fin" id="fecha_fin" required disabled value=donacion.fecha_fin.toISOString().slice(0,10))
+            div(class="input_border_focus")
+            div(class="input_placeholder")  Fecha de finalización
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="date" class="form-control" name="fecha_inicio" id="fecha_inicio" required disabled value=donacion.fecha_inicio.toISOString().slice(0,10))
+            div(class="input_border_focus")
+            div(class="input_placeholder")  Fecha de inicio
+          div(class="mb-3")
+            label(for="id" class="form-label") 
+            input(type="hidden" class="form-control" name="id" id="id" value=donacion.id)
+          div(class="left-input input mb-3 flex-form-item")
+            select(class="form-select" aria-label="Default select example", name="monto_donacion" required value=monto_donacion?monto_donacion:""
+                  onclick="if(this.opened){this.opened=false;this.blur();}else{this.opened=true;}" onblur="this.opened=false;" onchange="this.setAttribute('value', this.value);")
+              option(value hidden selected=monto_donacion?null:"" disabled)
+              option(value="100" selected=monto_donacion=="100"?"":null) 100
+              option(value="500" selected=monto_donacion=="500"?"":null) 500
+              option(value="1000" selected=monto_donacion=="1000"?"":null) 1000
+              option(value="2000" selected=monto_donacion=="2000"?"":null) 2000
+              option(value="4000" selected=monto_donacion=="4000"?"":null) 4000
+            div(class="input_border_focus")
+            div(class="input_placeholder")  Monto a donar *
+          input(type="submit" class="btn btn-info" value="Donar" style="margin: 0 40%;")
+    
+        br
+        div(class="container-fluid")
+          a(href="/donaciones")
+            button(type="button" class="btn btn-info") Atrás
+  
+  include ../partials/footer.pug

@@ -1,55 +1,57 @@
 include ../partials/head.pug
-include ../partials/header.pug
-div(class="container-fluid")
-  //- aca va la pagina hasta footer. inicia con 1 tab
-  h1= message
-
-  br
-  br
-
-  include ../partials/info.pug
-
-  div(class="")
-    form(method="post" action="/perros/"+perro.id+"/modificar" id="formulario")
-      div(class="mb-3")
-        label(for="nombre" class="form-label")
-          b Nombre *
-        input(type="text" class="form-control" name="nombre" id="nombre" placeholder="Solo puede ingresar letras" maxlength=255, minlength=1, required value=perro.nombre
-                oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un nombre válido')")
-      div(class="mb-3")
-        label(for="raza" class="form-label")
-          b Raza *
-        input(type="text" class="form-control" name="raza" id="raza" placeholder="Solo puede ingresar letras" maxlength=255, minlength=1, required value=perro.raza
-                oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese una raza válida')")
-      div(class="mb-3")
-        label(for="color" class="form-label")
-          b Color *
-        input(type="text" class="form-control" name="color" id="color" placeholder="Solo puede ingresar letras" maxlength=255, minlength=1, required value=perro.color
-                oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un color válido')")
-      div(class="mb-3")
-        label(for="observaciones" class="form-label")
-          b Observaciones *
-        input(type="text" class="form-control" name="observaciones" id="observaciones" placeholder="Solo puede ingresar letras" maxlength=255, minlength=1, required value=perro.observaciones
-                oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un texto de observaciones válido')")
-      div(class="mb-3")
-        label(for="fecha_nacimiento" class="form-label")
-          b Fecha de nacimiento *
-        input(type="date" class="form-control" name="fecha_nacimiento" id="fecha_nacimiento", max=hoy required value=perro.fecha_nacimiento
-                oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('No puede ingresar fechas futuras')")
-      div(class="mb-3")
-        label(for="clienteId" class="form-label") 
-        input(type="hidden" class="form-control" name="clienteId" id="clienteId", value=perro.clienteId)
-      div(class="mb-3")
-        label(for="id" class="form-label") 
-        input(type="hidden" class="form-control" name="id" id="id", value=perro.id)
-      input(type="submit" class="btn btn-info" value="Modificar") 
-
-    
-    br
+div(style="position: relative; min-height: 100vh;")
+  div(style="padding-bottom: calc(1.25rem + 0.3125rem * 2 + 1rem)")
+    include ../partials/header.pug
     div(class="container-fluid")
-      a(href="/perros")
-        button(type="button" class="btn btn-info") Cancelar 
-
-
-
-include ../partials/footer.pug
+      //- aca va la pagina hasta footer. inicia con 1 tab
+      h1= message
+    
+      br
+      br
+    
+      include ../partials/info.pug
+    
+      div(class="")
+        form(method="post" action="/perros/"+perro.id+"/modificar" id="formulario" class="flex-form-wrap")
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="text" name="nombre" id="nombre" placeholder="Solo puede ingresar letras" maxlength=255, minlength=1, required value=perro.nombre?perro.nombre:""
+                    oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un nombre válido')" onchange="this.setAttribute('value', this.value);")
+            div(class="input_border_focus")
+            div(class="input_placeholder") Nombre *
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="text" name="raza" id="raza" placeholder="Solo puede ingresar letras" maxlength=255, minlength=1, required value=perro.raza?perro.raza:""
+                    oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese una raza válida')" onchange="this.setAttribute('value', this.value);")
+            div(class="input_border_focus")
+            div(class="input_placeholder") Raza *
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="text" name="color" id="color" placeholder="Solo puede ingresar letras" maxlength=255, minlength=1, required value=perro.color?perro.raza:""
+                    oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un color válido')" onchange="this.setAttribute('value', this.value);")
+            div(class="input_border_focus")
+            div(class="input_placeholder") Color *
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="text" name="observaciones" id="observaciones" placeholder="Solo puede ingresar letras" maxlength=255, minlength=1, required value=perro.observaciones?perro.observaciones:""
+                    oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('Ingrese un texto de observaciones válido')" onchange="this.setAttribute('value', this.value);")
+            div(class="input_border_focus")
+            div(class="input_placeholder") Observaciones *
+          div(class="left-input input mb-3 flex-form-item")
+            input(type="date" name="fecha_nacimiento" id="fecha_nacimiento", max=hoy required value=perro.fecha_nacimiento?perro.fecha_nacimiento:""
+                    oninput="this.setCustomValidity('')", oninvalid="this.setCustomValidity('No puede ingresar fechas futuras')" onchange="this.setAttribute('value', this.value);")
+            div(class="input_border_focus")
+            div(class="input_placeholder") Fecha de nacimiento *
+          div(class="mb-3")
+            label(for="clienteId" class="form-label") 
+            input(type="hidden" class="form-control" name="clienteId" id="clienteId", value=perro.clienteId)
+          div(class="mb-3")
+            label(for="id" class="form-label") 
+            input(type="hidden" class="form-control" name="id" id="id", value=perro.id)
+          input(type="submit" class="btn btn-info" value="Modificar" style="margin: 0 45%") 
+    
+        
+        br
+        div(class="container-fluid")
+          a(href="/perros")
+            button(type="button" class="btn btn-info") Cancelar
+    
+    
+    
+  include ../partials/footer.pug

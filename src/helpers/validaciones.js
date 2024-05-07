@@ -85,16 +85,32 @@ module.exports = {
     validarNuevaAdopcion: function(adopcion){
     // Expresiones regulares
     var regexNombre = /^[a-zA-Z ]{1,255}$/;
-    var regexEdad = /^[a-zA-Z0-9ñ ]{1,255}$/;
+    var regexEdad = /^[a-zA-Z0-9ñÑ ]{1,255}$/;
+    
+    var rangoLongitud = {min: 1, max: 255};
+    function cumpleLongitud(valor) {
+        return valor.length >= rangoLongitud.min && valor.length <= rangoLongitud.max;
+    }
+    function esLetra(c, permitirNumeros) {
+        return c == " " || c.toLowerCase() != c.toUpperCase() || permitirNumeros && !isNaN(c);
+    }
+    function contieneSoloLetras(texto, permitirNumeros) {
+        for (var i = 0; i < texto.length; i++) {
+            if (!esLetra(texto[i], permitirNumeros)) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     var validez = "valido";
-    if(!regexNombre.test(adopcion.origen)) validez = "Ingrese un origen válido.";
-    else if(!regexNombre.test(adopcion.nombre)) validez = "Ingrese un nombre válido.";
-    else if(!regexNombre.test(adopcion.raza)) validez = "Ingrese una raza válida.";
-    else if(!regexNombre.test(adopcion.color)) validez = "Ingrese un color válido.";
+    if(!cumpleLongitud(adopcion.origen) || !contieneSoloLetras(adopcion.origen)) validez = "Ingrese un origen válido.";
+    else if(!cumpleLongitud(adopcion.nombre) || !contieneSoloLetras(adopcion.nombre)) validez = "Ingrese un nombre válido.";
+    else if(!cumpleLongitud(adopcion.raza) || !contieneSoloLetras(adopcion.raza)) validez = "Ingrese una raza válida.";
+    else if(!cumpleLongitud(adopcion.color) || !contieneSoloLetras(adopcion.color)) validez = "Ingrese un color válido.";
     else if(!regexEdad.test(adopcion.edad)) validez = "Ingrese una edad válida.";
     else if(!regexNombre.test(adopcion.sexo)) validez = "Ingrese una sexo válida.";
-    else if(!regexNombre.test(adopcion.observaciones)) validez = "Ingrese un texto de observaciones válido.";
+    else if(!cumpleLongitud(adopcion.observaciones) || !contieneSoloLetras(adopcion.observaciones, true)) validez = "Ingrese un texto de observaciones válido.";
 
     return validez;
     },
@@ -151,6 +167,23 @@ module.exports = {
         else if(!regexCodigoTarjeta.test(tarjeta.codigo)) validez = "Ingrese un código de seguridad válido";
         else if(!regexNumTarjeta.test(tarjeta.numero_tarjeta)) validez = "Ingrese un número de tarjeta válido";
         else if(!tarjeta.vencimiento > mesActual) validez = "La fecha debe ser igual o posterior al mes actual";
+
+        return validez;
+    },
+
+    validarPublicacionReencuentro: function(publicacion){
+        // Expresiones regulares
+        var regexTexto = /^[a-zA-Z0-9ñÑ ]{0,255}$/;
+        var regexEmail = /^[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}$/;
+        var regexTelefono = /^[0-9]{10}$/;
+
+        var validez = "valido";
+        
+        if(!regexTexto.test(publicacion.caracteristicas)) validez = "Ingrese un texto de características válido.";
+        else if(!regexTexto.test(publicacion.comportamiento)) validez = "Ingrese un texto de comportamiento válido.";
+        else if(!regexTexto.test(publicacion.edad)) validez = "Ingrese una edad válida.";
+        else if (publicacion.email) {if(!regexEmail.test(publicacion.email)) validez = "Ingrese un email válido.";}
+        else if (publicacion.telefono) {if(!regexTelefono.test(publicacion.telefono)) validez = "Ingrese un telefono válido.";}
 
         return validez;
     }

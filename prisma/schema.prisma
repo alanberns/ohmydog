@@ -8,37 +8,39 @@ datasource db {
 }
 
 model clientes {
-  id         Int                        @id @default(autoincrement())
-  nombre     String                     @db.VarChar(255)
-  apellido   String                     @db.VarChar(255)
-  dni        Int                        @unique
-  telefono   String?                    @db.VarChar(255)
-  email      String                     @unique @db.VarChar(255)
-  password   String                     @db.VarChar(255)
-  descuento  Int
-  perros     perros[]
-  adopciones publicacion_adopciones[]
-  donaciones donaciones[]
+  id                          Int                        @id @default(autoincrement())
+  nombre                      String                     @db.VarChar(255)
+  apellido                    String                     @db.VarChar(255)
+  dni                         Int                        @unique
+  telefono                    String?                    @db.VarChar(255)
+  email                       String                     @unique @db.VarChar(255)
+  password                    String                     @db.VarChar(255)
+  descuento                   Int
+  perros                      perros[]
+  adopciones                  publicacion_adopciones[]
+  donaciones                  donaciones[]
+  publicaciones_reencuentros  publicacion_reencuentros[]
 }
 
 model administradores {
-  id       Int    @id @default(autoincrement())
-  nombre   String @db.VarChar(255)
-  apellido String @db.VarChar(255)
-  email    String @unique @db.VarChar(255)
-  password String @db.VarChar(255)
+  id       Int                    @id @default(autoincrement())
+  nombre   String                 @db.VarChar(255)
+  apellido String                 @db.VarChar(255)
+  email    String                 @unique @db.VarChar(255)
+  password String                 @db.VarChar(255)
 }
 
 model perros {
-  id               Int       @id @default(autoincrement())
-  nombre           String    @db.VarChar(255)
-  raza             String    @db.VarChar(255)
-  color            String    @db.VarChar(255)
-  fecha_nacimiento DateTime  @db.Timestamp(6)
-  observaciones    String    @db.VarChar(255)
-  link_foto        String?   @db.VarChar(255)
+  id               Int                    @id @default(autoincrement())
+  nombre           String                 @db.VarChar(255)
+  raza             String                 @db.VarChar(255)
+  color            String                 @db.VarChar(255)
+  fecha_nacimiento DateTime               @db.Timestamp(6)
+  observaciones    String                 @db.VarChar(255)
+  link_foto        String?                @db.VarChar(255)
   clienteId        Int?
-  cliente          clientes? @relation(fields: [clienteId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  cliente          clientes?              @relation(fields: [clienteId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  cruza            publicacion_cruzas?
 }
 
 model publicacion_servicios {
@@ -84,4 +86,27 @@ model donaciones{
   cliente                 clientes? @relation(fields: [clienteId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   publicacion_donacionId  Int?
   publicacion_donacion    publicacion_donaciones? @relation(fields: [publicacion_donacionId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model publicacion_cruzas{
+  id                      Int       @id @default(autoincrement())
+  periodo_celo            String?   @db.VarChar(255)
+  sexo                    String    @db.VarChar(255)
+  perroId                 Int?      @unique
+  perro                   perros?   @relation(fields: [perroId], references: [id])  
+}
+
+model publicacion_reencuentros{
+  id                      Int       @id @default(autoincrement())
+  tipo                    String?   @db.VarChar(255)
+  estado                  String?   @db.VarChar(255)
+  clienteId               Int?
+  cliente                 clientes? @relation(fields: [clienteId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  link_foto               String?   @db.VarChar(255)
+  zona                    String?   @db.VarChar(255)
+  fecha                   DateTime  @db.Timestamp(6)
+  sexo                    String?   @db.VarChar(255)
+  edad                    String?   @db.VarChar(255)
+  caracteristicas         String?   @db.VarChar(255)
+  comportamiento          String?   @db.VarChar(255)
 }

@@ -26,7 +26,7 @@ module.exports = {
         }
         res.render('clientes/index', { 
             title: 'Clientes',
-            message: 'Inicio clientes',
+            message: 'Clientes',
             clientes: clientes,
             error: error,
             info: info
@@ -137,7 +137,7 @@ module.exports = {
         if (result != "válido"){
             res.render('clientes/index', {
                 title: 'Clientes', 
-                message: 'Inicio clientes',
+                message: 'Clientes',
                 clientes: null,
                 error: result
             })
@@ -152,7 +152,7 @@ module.exports = {
         //3 render basico
         res.render('clientes/index', {
             title: 'Clientes', 
-            message: 'Inicio clientes',
+            message: 'Clientes',
             clientes: clientes,
             info: "Resultados de la búsqueda",
             nombre: nombre,
