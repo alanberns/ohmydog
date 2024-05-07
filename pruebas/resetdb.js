@@ -95,7 +95,7 @@ async function main(){
     var datosCliente1 = {
         nombre: "Lionel",
         apellido: "Messi",
-        email: "alan_berns@yahoo.com.ar",
+        email: "test2@test.com",
         dni: 23888555,
         telefono: "2217770099",
         password: "12345",
