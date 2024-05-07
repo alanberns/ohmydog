@@ -5,13 +5,14 @@ La aplicación permite gestionar la información de los clientes, turnos y publi
 Está construida bajo la arquitectura MVC.
 
 ## Requisitos técnicos:
--Node.js 20.11.1
--npm 10.2.4
+* Node.js 20.11.1
+* npm 10.2.4
 
 ## Instalación:
-git clone https://github.com/alanberns/ohmydog.git
-cd ohmydog
-npm install
-npm start
+* git clone https://github.com/alanberns/ohmydog.git
+* cd ohmydog
+* npm install
+* npm start
 
-npm resetdb - datos de prueba
+* npm resetdb - datos de prueba: pruebas/resetdb.js
+
