@@ -4,11 +4,11 @@ Sistema web para administrar una veterinaria.
 La aplicación permite gestionar la información de los clientes, turnos y publicaciones. Pueden acceder los administradores y los clientes.
 Está construida bajo la arquitectura MVC.
 
-##Requisitos técnicos:
+## Requisitos técnicos:
 -Node.js 20.11.1
 -npm 10.2.4
 
-##Instalación:
+## Instalación:
 git clone https://github.com/alanberns/ohmydog.git
 cd ohmydog
 npm install
