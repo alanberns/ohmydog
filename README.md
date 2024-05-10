@@ -7,15 +7,43 @@ Está construida bajo la arquitectura MVC.
 ## Requisitos técnicos:
 * Node.js 20.11.1
 * npm 10.2.4
-* PostgreSQL
-* Definir archivo ".env" con las variables "DATABASE_URL" y "PORT"
-* Envío de emails: Definir en archivo ".env": "USER", "PASSWORD", "ID_CLIENTE", "SECRET_CLIENTE", "REFRESH_TOKEN" hecho con Google OAuth2.
+* Postgresql
+* Docker y docker-compose como deseable [Instalación aquí](https://docs.docker.com/compose/install/)
 
-## Instalación:
-* git clone https://github.com/alanberns/ohmydog.git
-* cd ohmydog
-* npm install
-* npm start
+## Instalación local:
+### Sin Docker-Compose
+* ```git clone https://github.com/alanberns/ohmydog.git```
+* ```cd ohmydog```
+* ```cp .env.example .env```
+* ```npm install```
+* Levantar una db Postgresql o con ```docker run --name ohmydog-postgres -e POSTGRES_PASSWORD=1234 -p 5432:5432 -d postgres```
+* ```npx prisma migrate dev --name init```
+* ```node pruebas/resetdb.js```
+* ```npm start```
+  
+La app levanta en el puerto 3000.
 
-* npm resetdb - datos de prueba: pruebas/resetdb.js
+Postgres
+ - db: postgres
+ - user: postgres
+ - pass: 1234
+
+### Con Docker-Compose
+dentro del direcotorio raiz: ```docker-compose up -d```
+
+Para eliminar todos los contenedoras: ```docker-compose down```
+
+La app levanta el puerto 3000.
+
+Postress 
+- db: ohmydog
+- user: admin
+- pass: 1234
+
+
+### ADMIN DEL SISTEMA:
+user: ohmydogis2@gmail.com
+
+pass: 12345
+
 
